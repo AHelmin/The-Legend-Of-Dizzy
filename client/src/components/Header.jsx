@@ -19,7 +19,7 @@ export default function Header(){
         <div className="col-8">
           <h1>
             <a href="/" style={{ textDecoration: "none" }}>
-              Note Taker App
+              Welcome to the Legend of Dizzy Game
             </a>
           </h1>
         </div>

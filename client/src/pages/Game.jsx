@@ -1,6 +1,10 @@
-import "../assets/css/mazing.css"
+import { useEffect, useState } from 'react'
+import useVerifyUser from '../hooks/useVerifyUser'
 
-export default function Game() {
+import "/node_modules/bootstrap/dist/css/bootstrap.min.css"
+
+
+export default function Home() {
 
   
 

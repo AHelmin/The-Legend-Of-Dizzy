@@ -1,0 +1,30 @@
+.legend-of-dizzy-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.legend-of-dizzy {
+  margin: 0; /* Remove default margin */
+}
+
+.header-container {
+  height: 100%; /* Set the height to 100% to fill the entire height of the Navbar */
+  display: flex;
+  align-items: center; /* Vertically center the content */
+}
+
+.press-start {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: larger;
+}
+
+
+.hyrule {
+  font-family: "HyruleSerif";
+  font-weight: 400;
+  font-style: normal;
+  font-size: xx-large;
+}

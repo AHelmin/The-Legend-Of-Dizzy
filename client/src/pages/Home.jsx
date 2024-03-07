@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '../components/Header';
 import zeldadog from '../assets/images/zeldadog.jpg';
+import '../output.css';
+import '../assets/css/header.css'
 
 const Home = () => {
   return (
@@ -11,12 +13,12 @@ const Home = () => {
         <img
           src={zeldadog}
           alt="Centered Image"
-          className="mx-auto rounded-lg"
+          className="mx-auto h-auto max-w-lg transition-all duration-300 rounded-lg cursor-pointer filter grayscale hover:grayscale-0 homepage-image"
         />
 
         <div className="mt-4">
-          <h1 className="text-4xl font-bold">Welcome to The Legend of Dizzy</h1>
-          <p className="text-lg mt-2">
+          <h1 className="text-4xl font-bold hyrule text-yellow-600">Welcome to The Legend of Dizzy</h1>
+          <p className="text-lg mt-2 press-start text-white">
             Explore a world of adventure and challenges in this legendary game.
           </p>
         </div>

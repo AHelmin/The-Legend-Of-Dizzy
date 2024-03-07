@@ -15,10 +15,8 @@ export default function Game() {
   return (
     <>
       <h1>The Legend of Dizzy</h1>
-
-      <div id="maze_container"></div>
       <div>
-      <iframe src={GAME_URL} width={540} height={600}></iframe>
+      <iframe src={GAME_URL} width={800} height={800}></iframe>
     </div>
     
     </>

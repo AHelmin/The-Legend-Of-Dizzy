@@ -6,21 +6,16 @@ function ButtonLink({ to, children }) {
   return <Link to={to}><button>{children}</button></Link>;
 }
 
-import "/node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 
 export default function Game() {
 
-  
 
   return (
     <>
-      <div>
-        Game window goes here
-      </div>
-      <button>Restart</button>
-      {/* High score page? */}
-      <ButtonLink to="/high">High Scores</ButtonLink>
+      <h1>The Legend of Dizzy</h1>
+
+      <div id="maze_container"></div>
     
     </>
   )

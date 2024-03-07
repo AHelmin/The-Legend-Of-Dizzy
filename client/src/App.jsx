@@ -1,10 +1,11 @@
 import { useEffect } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Cookie from "js-cookie"
-import AppProvider from "./providers/AppProvider"
+// import AppProvider from "./providers/AppProvider"
 import Header from "./components/Header"
-import { } from "./pages"
-import "/node_modules/bootstrap/dist/css/bootstrap.min.css"
+import { Home, Game, Auth } from "./pages"
+// import "/node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "./output.css"
 
 export default function App() {
 
@@ -17,8 +18,7 @@ export default function App() {
   },[])
 
   return (
-    <AppProvider>
-      <Header />
+  <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,7 +26,7 @@ export default function App() {
           <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>
-    </AppProvider>
+      </>
   )
 }
 

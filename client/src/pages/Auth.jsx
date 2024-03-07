@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react" 
+import '../output.css';
+import Header from '../components/Header';
 
 
 export default function Auth(){
@@ -64,11 +66,12 @@ export default function Auth(){
   }
 
   return (
-    <div>
-      <div className="container">
+    <div className="text-white press-start">
+      <Header/>
+      <div className="container flex">
         <div className="row">
           
-          <div className="col-6 p-5">
+          <div className="w-1/2 p-5 signup">
             <div>
               <form className="form" onSubmit={submitSignup}>
                 <div className="form-group mb-3">
@@ -83,12 +86,12 @@ export default function Auth(){
                   <label className="form-label" htmlFor="password">Password</label>
                   <input type="password" className="form-control" name="password" value={signupData?.password || ""} onChange={handleSignupChange} />
                 </div>
-                <button type="submit" className="btn btn-primary">Signup</button>
+                <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Signup</button>
               </form>
             </div>
           </div>
 
-          <div className="col-6 p-5">
+          <div className="w-1/2 p-5 login">
             <div>
               <form className="form" onSubmit={submitLogin}>
                 <div className="mb-3">
@@ -99,7 +102,7 @@ export default function Auth(){
                   <label className="form-label" htmlFor="password">Password</label>
                   <input type="password" className="form-control" name="password" value={loginData?.password || ""} onChange={handleLoginChange} />
                 </div>
-                <button type="submit" className="btn btn-primary">Login</button>
+                <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Login</button>
               </form>
             </div>
           </div>

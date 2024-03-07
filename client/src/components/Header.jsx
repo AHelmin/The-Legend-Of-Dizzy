@@ -14,7 +14,7 @@ const Header = () => {
           </Nav.Link>
         </Nav>
         <div className="flex items-center legend-of-dizzy-container">
-          <p className="text-white legend-of-dizzy hyrule">The Legend of Dizzy</p>
+          <p className="legend-of-dizzy hyrule text-yellow-600">The Legend of Dizzy</p>
         </div>
         <Nav>
           <Nav.Link as={Link} to="/auth" className="text-white ml-auto">

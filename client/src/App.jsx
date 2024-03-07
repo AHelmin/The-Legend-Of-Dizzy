@@ -9,13 +9,13 @@ import "./output.css"
 
 export default function App() {
 
-  function verifyUser(){
+  function verifyUser() {
     const cookie = Cookie.get("auth_cookie")
   }
 
   useEffect(() => {
     verifyUser()
-  },[])
+  }, [])
 
   return (
   <>

@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
-import Header from '../components/Header'
+import useVerifyUser from '../hooks/useVerifyUser'
+
 
 
 export default function Game() {
 
-  
 
   return (
     <>
-      <Header/>
+      <h1>The Legend of Dizzy</h1>
+
+      <div id="maze_container"></div>
+    
     </>
   )
 }

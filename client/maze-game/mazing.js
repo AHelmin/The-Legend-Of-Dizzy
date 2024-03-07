@@ -50,7 +50,7 @@ var Mazing = function(id) {
   mazeOutputDiv.appendChild(this.mazeMessage);
 
   mazeOutputDiv.style.width = this.mazeContainer.scrollWidth + "px";
-  this.setMessage("first find the key");
+  this.setMessage("Rescue Dizzy!");
 
   this.mazeContainer.insertAdjacentElement("afterend", mazeOutputDiv);
 
@@ -91,7 +91,7 @@ Mazing.prototype.heroTakeKey = function() {
   this.heroHasKey = true;
   this.heroScore += 20;
   this.mazeScore.classList.add("has-key");
-  this.setMessage("you now have the key!");
+  this.setMessage("You have Dizzy, now go through the door!");
 };
 
 Mazing.prototype.gameOver = function(text) {
@@ -105,7 +105,7 @@ Mazing.prototype.heroWins = function() {
   this.mazeScore.classList.remove("has-key");
   this.maze[this.heroPos].classList.remove("door");
   this.heroScore += 50;
-  this.gameOver("you finished !!!");
+  this.gameOver("You rescued Dizzy!!!");
 };
 
 Mazing.prototype.tryMoveHero = function(pos) {

@@ -28,6 +28,7 @@
 }
 #maze div div.door.exit::after {
   content: "\1F6AA";
+  font-size: 200%;
 }
 #maze div div.nubbin::after {
   content: "\1F33C";
@@ -46,9 +47,11 @@
 }
 #maze div.hero::after {
   content: "\1F6B6" !important;
+  font-size: 200%;
 }
 #maze.face-right div.hero::after {
   transform: scale(-1, 1);
+  font-size: 200%;
 }
 #maze div div.wall, #maze div div.nubbin.wall, #maze div div.door.exit {
   background-color: #454545;
@@ -68,7 +71,8 @@
   content: "\1F40D";
 }
 #maze div div.key::after {
-  content: "\1F511";
+  content: "\1F415";
+  font-size: 200%;
 }
 
 #maze div div:nth-child(odd) {
@@ -116,7 +120,7 @@
   content: "Score: ";
 }
 #maze_score.has-key::after {
-  content: "\00a0\1F511";
+  content: "\00a0\1F415";
 }
 #maze_message {
   flex: 3;

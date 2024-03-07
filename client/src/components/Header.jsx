@@ -1,46 +1,29 @@
-import { useState, useEffect } from "react"
-import Cookie from "js-cookie" 
-import useVerifyUser from "../hooks/useVerifyUser"
-import { useAppCtx } from "../providers/AppProvider"
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import '../output.css';
+import '../assets/css/header.css'
 
-export default function Header(){
-  
-  const { isLoggedIn, logout } = useVerifyUser()
-  const { welcomeMsg } = useAppCtx()
-
-  // useEffect( () => {
-  //   setUserLoggedIn( verifyUser() )
-  // },[])
-
-
+const Header = () => {
   return (
-    <header className="container mb-5 py-2">
-      <div className="row">
-        <div className="col-8">
-          <h1>
-            <a href="/" style={{ textDecoration: "none" }}>
-              Welcome to the Legend of Dizzy Game
-            </a>
-          </h1>
+    <Navbar className="bg-green-800" style={{ height: '80px' }}>
+      <div className="w-full flex justify-between items-center header-container px-8 press-start">
+        <Nav className="mr-auto">
+          <Nav.Link as={Link} to="/game" className="text-white">
+            Play!
+          </Nav.Link>
+        </Nav>
+        <div className="flex items-center legend-of-dizzy-container">
+          <p className="text-white legend-of-dizzy hyrule">The Legend of Dizzy</p>
         </div>
-
-        <div className="col-4">
-          
-          { isLoggedIn === true ? (
-            <p className="mt-3">
-              { welcomeMsg } &nbsp;
-              <span onClick={logout}>Logout</span>
-            </p>
-          ) : (
-            <p className="mt-3">
-              <a href="/auth">
-                Login or signup please!
-              </a>
-            </p>
-          )}
-
-        </div>
+        <Nav>
+          <Nav.Link as={Link} to="/auth" className="text-white ml-auto">
+            Login
+          </Nav.Link>
+        </Nav>
       </div>
-    </header>
-  )
-}
+    </Navbar>
+  );
+};
+
+export default Header;

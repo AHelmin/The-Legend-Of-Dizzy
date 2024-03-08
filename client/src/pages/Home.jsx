@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
+// import UserHighScore from '../components/UserHighScore';
 import zeldadog from '../assets/images/zeldadog.jpg';
 import '../output.css';
 import '../assets/css/header.css'
+
 
 const Home = () => {
   return (
@@ -23,7 +25,9 @@ const Home = () => {
           </p>
         </div>
       </div>
+      {/* <UserHighScore/> */}
     </div>
+
   );
 };
 

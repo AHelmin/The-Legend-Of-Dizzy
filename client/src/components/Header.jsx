@@ -25,7 +25,8 @@ const Header = () => {
     <Navbar className="bg-green-800" style={{ height: '80px' }}>
       <div className="w-full flex justify-between items-center header-container px-8 press-start">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/game" className="text-white">
+          {/* Conditionally set the 'to' prop based on isAuthenticated */}
+          <Nav.Link as={Link} to={isAuthenticated ? "/game" : "/auth"} className="text-white">
             Play!
           </Nav.Link>
         </Nav>

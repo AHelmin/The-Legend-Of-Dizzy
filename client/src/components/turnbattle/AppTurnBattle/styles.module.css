@@ -1,12 +1,5 @@
 .main {
-  background: linear-gradient(
-    90deg,
-    rgba(24, 161, 203, 1) 0%,
-    rgba(255, 255, 255, 1) 35%,
-    rgba(255, 255, 255, 1) 65%,
-    rgba(253, 172, 0, 1) 100%
-  );
-
+  background: bg-slate-800;
   width: 100vw;
   height: 100vh;
   display: flex;

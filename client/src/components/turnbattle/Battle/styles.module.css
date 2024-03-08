@@ -21,8 +21,7 @@
 }
 .gameHeader {
   font-size: 48px;
-  color: #fdac00;
-  text-shadow: 0px 0px 5px #7f0000;
+  color: white;
   font-family: 'Press Start 2P', cursive;
 }
 .summary {

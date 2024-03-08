@@ -1,6 +1,8 @@
 import { useEffect } from "react"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Cookie from "js-cookie"
+import 'regenerator-runtime/runtime';
+import Matterjs from './components/matter';
 // import AppProvider from "./providers/AppProvider"
 import Header from "./components/Header"
 import { Home, Game, Auth } from "./pages"

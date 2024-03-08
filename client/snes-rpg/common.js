@@ -115,16 +115,20 @@ music.volume = 0.2;
 music.loop = true;
 
 function playMusic() {
+    if (!music.currentTime) {
     music.play();
+    }
 }
 
 
-function pauseMusic() {
+function pauseMusic(muteButton) {
     if (!music.paused) {
         music.pause();
+        muteButton.textContent = "▶️ Music"
     }
     else if (music.paused) {
         music.play();
+        muteButton.textContent = "⏸️ Music"
     }
 }
 
@@ -136,7 +140,7 @@ function pauseMusic() {
 window.onload = function () {
   let muteButton = document.getElementById("mute");
   muteButton.addEventListener("click", function () {
-    pauseMusic();
+    pauseMusic(muteButton);
   });
   var context = document.getElementById("demo").getContext("2d");
   Game.run(context);

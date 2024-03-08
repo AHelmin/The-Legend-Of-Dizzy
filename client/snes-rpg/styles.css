@@ -1,0 +1,21 @@
+body {
+    font-family: 'Source Code Pro', 'Courier', monospace;
+    background-color: black;
+    color: white;
+    margin: 0;
+    justify-content: center;
+}
+
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.main-header {
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.5em;
+}

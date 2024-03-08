@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import zeldadog from '../assets/images/zeldadog.jpg';
 import '../output.css';
 import '../assets/css/header.css'
+import {useTypedMessage} from '../hooks'
 
 
 const Home = () => {
@@ -26,8 +27,9 @@ const Home = () => {
         </div>
       </div>
       {/* <UserHighScore/> */}
+    
+    <div className="press-start text-white">{useTypedMessage("sdfksdalfkajsdlkfjsalfjaslkfjaslkdslfkjsdlkfjslkdfjlksadjflksjfklasjflkasjdflkasdjfklasdjflaksjfalsk")}</div>
     </div>
-
   );
 };
 

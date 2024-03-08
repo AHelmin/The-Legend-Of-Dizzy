@@ -3,7 +3,6 @@ body {
     background-color: black;
     color: white;
     margin: 0;
-    justify-content: center;
 }
 
 
@@ -13,9 +12,18 @@ body {
 }
 
 .main-header {
-    text-align: center;
+    text-align: end;
 }
 
 .subtitle {
     font-size: 1.5em;
+}
+
+#mute {
+    margin: 0.5rem;
+}
+
+#instructions {
+    text-align: center;
+    margin-top: 1rem;
 }

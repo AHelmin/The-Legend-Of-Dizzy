@@ -115,17 +115,35 @@ music.volume = 0.2;
 music.loop = true;
 
 function playMusic() {
+    if (!music.currentTime) {
     music.play();
+    }
 }
+
+
+function pauseMusic(muteButton) {
+    if (!music.paused) {
+        music.pause();
+        muteButton.textContent = "▶️ Music"
+    }
+    else if (music.paused) {
+        music.play();
+        muteButton.textContent = "⏸️ Music"
+    }
+}
+
 
 //
 // start up function
 // 
 
 window.onload = function () {
-
-    var context = document.getElementById('demo').getContext('2d');
-    Game.run(context);
+  let muteButton = document.getElementById("mute");
+  muteButton.addEventListener("click", function () {
+    pauseMusic(muteButton);
+  });
+  var context = document.getElementById("demo").getContext("2d");
+  Game.run(context);
 };
 
 window.onfocus = function () {

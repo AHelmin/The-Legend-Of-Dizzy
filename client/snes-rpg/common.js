@@ -118,14 +118,28 @@ function playMusic() {
     music.play();
 }
 
+
+function pauseMusic() {
+    if (!music.paused) {
+        music.pause();
+    }
+    else if (music.paused) {
+        music.play();
+    }
+}
+
+
 //
 // start up function
 // 
 
 window.onload = function () {
-
-    var context = document.getElementById('demo').getContext('2d');
-    Game.run(context);
+  let muteButton = document.getElementById("mute");
+  muteButton.addEventListener("click", function () {
+    pauseMusic();
+  });
+  var context = document.getElementById("demo").getContext("2d");
+  Game.run(context);
 };
 
 window.onfocus = function () {

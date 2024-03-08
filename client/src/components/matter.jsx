@@ -73,7 +73,7 @@ export default function Matterjs() {
             const arrowOptions = {
                 render: {
                     sprite: {
-                        texture: '../../src/assets/sprites/arrow_cropped.png',
+                        texture: '../src/assets/images/sprites/arrow_cropped.png',
                         xScale: 1,
                         yScale: 1
                     }
@@ -87,7 +87,7 @@ export default function Matterjs() {
             const characterOptions = {
                 render: {
                     sprite: {
-                        texture: '../../src/assets/sprites/character_resized.png',
+                        texture: '../src/assets/images/sprites/character_resized.png',
                         xScale: 1,
                         yScale: 1
                     }
@@ -101,7 +101,7 @@ export default function Matterjs() {
             const polygonOptions = {
                 render: {
                     sprite: {
-                        texture: '../../src/assets/sprites/enemy.png',
+                        texture: '../src/assets/images/sprites/enemy.png',
                         xScale: 1.3,
                         yScale: 1.3
                     }

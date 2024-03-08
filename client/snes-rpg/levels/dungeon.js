@@ -210,7 +210,9 @@ Hero.prototype._collide = function (dirx, diry) {
   }
 };
 
-Hero.prototype._door = function (dirx, diry) {
+let openedDoor = false;
+
+Hero.prototype._door = async function (dirx, diry) {
   var row, col;
   // -1 in right and bottom is because image ranges from 0..63
   // and not up to 64
@@ -219,15 +221,26 @@ Hero.prototype._door = function (dirx, diry) {
   var top = this.y - this.height / 2;
   var bottom = this.y + this.height / 2 - 1;
 
-  // check for collisions on sprite sides
+  // check for door on sprite sides
   var door =
-      this.map.isDoorAtXY(left, top) ||
-      this.map.isDoorAtXY(right, top) ||
-      this.map.isDoorAtXY(right, bottom) ||
-      this.map.isDoorAtXY(left, bottom);
-  if (!door) { return; }
-
-  else {window.location.href = "/level2"}
+    this.map.isDoorAtXY(left, top) ||
+    this.map.isDoorAtXY(right, top) ||
+    this.map.isDoorAtXY(right, bottom) ||
+    this.map.isDoorAtXY(left, bottom);
+  if (!door) {
+    openedDoor = false;
+    return;
+  } else {
+    if (!openedDoor) {
+      const sound = new Audio((src = "../assets/doorOpen.mp3"));
+      sound.volume = 0.2;
+      sound.play();
+      openedDoor = true;
+      sound.addEventListener("ended", (event) => {
+          window.location.href = "/game";
+      })
+    }
+  }
 };
 
 Game.load = function () {
@@ -245,6 +258,7 @@ Game.init = function () {
   this.hero = new Hero(map, 160, 700);
   this.camera = new Camera(map, 800, 600);
   this.camera.follow(this.hero);
+  window.focus();
 };
 
 Game.update = function (delta) {

@@ -1,5 +1,3 @@
-import playSoundEffect from "../../src/hooks/playSoundEffect";
-
 var map = {
     cols: 36,
     rows: 28,
@@ -63,6 +61,7 @@ var map = {
         54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65,
         116, 4, 4, 0, 0, 3, 4, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 4, 3, 4, 3, 3, 4, 3, 3, 4, 3, 18
     ]],
+    music: "../assets/openingtheme.mp3",
     getTile: function (layer, col, row) {
         return this.layers[layer][row * map.cols + col];
     },
@@ -159,8 +158,6 @@ function Hero(map, x, y) {
 
 Hero.SPEED = 256; // pixels per second
 
-let testDoor = false;
-
 Hero.prototype.move = function (delta, dirx, diry) {
     // move hero
     this.x += dirx * Hero.SPEED * delta;
@@ -214,7 +211,9 @@ Hero.prototype._collide = function (dirx, diry) {
     }
 };
 
-Hero.prototype._door = function (dirx, diry) {
+let openedDoor = false;
+
+Hero.prototype._door = async function (dirx, diry) {
   var row, col;
   // -1 in right and bottom is because image ranges from 0..63
   // and not up to 64
@@ -230,16 +229,17 @@ Hero.prototype._door = function (dirx, diry) {
     this.map.isDoorAtXY(right, bottom) ||
     this.map.isDoorAtXY(left, bottom);
   if (!door) {
-    testDoor = false;
+    openedDoor = false;
     return;
   } else {
-    if (!testDoor) {
+    if (!openedDoor) {
       const sound = new Audio((src = "../assets/doorOpen.mp3"));
       sound.volume = 0.2;
-      if (!sound.currentTime) {
-        sound.play();
-      }
-      testDoor = true;
+      sound.play();
+      openedDoor = true;
+      sound.addEventListener("ended", (event) => {
+          window.location.href = "/level2";
+      })
     }
   }
 };

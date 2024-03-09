@@ -1,5 +1,7 @@
 import React, { PureComponent, useEffect, useRef } from 'react'
 import Matter from 'matter-js'
+import backgroundImageSrc from '../assets/images/backgrounds/castle.jpg'
+// import '../../node_modules/matter-js/build/matter.min.js'
 
 export default function Matterjs() {
 
@@ -21,14 +23,22 @@ export default function Matterjs() {
 
             // create a renderer
             let render = Render.create({
-                element: sceneRef.current,
+                element: document.querySelector('.App'),
                 engine: engine,
+
                 options: {
                     width: 1800,
                     height: 800,
-                    wireframes: false
+                    wireframes: false,
+                    background: ''
                 }
             });
+
+            // Set the background image on the canvas
+            // if (render && render.canvas) {
+            //     render.canvas.style.backgroundImage = `url(${backgroundImageSrc})`;
+            //     render.canvas.style.backgroundSize = 'cover';
+            // }
 
             //define bitfields
             const defaultCategory = 0x0001
@@ -36,11 +46,23 @@ export default function Matterjs() {
             const arrowCategory = 0x0004
             const selectDiv = document.querySelector('.App')
 
+            const floorOptions = {
+                isStatic: true,
+                render: {
+                    sprite: {
+                        texture: '../src/assets/images/sprites/tiled_stone_wall.png',
+                        xScale: 1,
+                        yScale: 1
+                    }
+                }
+            }
+
             // create two boxes and a ground
             //     let boxA = Bodies.rectangle(400, 200, 80, 80);
             //    let boxB = Bodies.rectangle(450, 50, 80, 80);
             let ground = Bodies.rectangle(1200, 500, 300, 20, { isStatic: true });
-            let floor = Bodies.rectangle(900, 700, 1800, 20, { isStatic: true })
+            let floor = Bodies.rectangle(900, 700, 1800, 50, floorOptions)
+
 
             let mouse = Matter.Mouse.create(render.canvas)
             let mouseConstraint = Matter.MouseConstraint.create(engine, {
@@ -81,7 +103,8 @@ export default function Matterjs() {
                 collisionFilter: {
                     category: arrowCategory,
                     mask: defaultCategory
-                }
+                },
+
             }
 
             const characterOptions = {
@@ -111,21 +134,23 @@ export default function Matterjs() {
 
             let character = Bodies.rectangle(300, 600, 100, 200, characterOptions)
             Matter.Body.setInertia(character, Infinity)
-            let arrow = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
-            let arrow2 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
-            let arrow3 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
-            let arrow4 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
-            let arrow5 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
+            let arrow = Bodies.rectangle(350, 600, 100, 20, arrowOptions)
+            Matter.Body.setInertia(arrow, Infinity)
+            console.log(arrow)
+            // let arrow2 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
+            // let arrow3 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
+            // let arrow4 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
+            // let arrow5 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
 
             // let shoot = (projectile, force) => {
             //     Matter.Body.applyForce(projectile, projectile.position, force);
             // };
 
-            let arrows = [arrow, arrow2, arrow3, arrow4, arrow5]
-            let currentArrow = 0
-            arrows.forEach(arrow => {
-                arrow.isShot = false;
-            })
+            // let arrows = [arrow, arrow2, arrow3, arrow4, arrow5]
+            // let currentArrow = 0
+            // arrows.forEach(arrow => {
+            //     arrow.isShot = false;
+            // })
 
             // Click event to select the arrow
             // selectDiv.addEventListener('click', (e) => {
@@ -133,49 +158,61 @@ export default function Matterjs() {
             // })
 
             Matter.Events.on(engine, 'beforeUpdate', () => {
-                arrows.forEach(arrow => {
-                    if (!arrow.isShot) {
-                        Matter.Body.setPosition(arrow, {
-                            x: character.position.x,
-                            y: character.position.y - 30
-                        })
-                    }
-                })
+                if (!arrow.isShot) {
+                    Matter.Body.setPosition(arrow, {
+                        x: character.position.x,
+                        y: character.position.y - 30
+                    })
+                }
             })
 
-            
+            let shootingArrow = arrow; // Assuming 'arrow' is your single arrow object
+            let initialX = character.position.x
+            let initialY = character.position.y - 30
 
             selectDiv.addEventListener('click', (e) => {
-                let shootingArrow = arrows[currentArrow];
-                console.log("Shooting Arrow: ", currentArrow, shootingArrow);
-                // Ensure the arrow has not been shot already
-                if (!shootingArrow.isShot) {
-                    
-                    const arrowPosition = shootingArrow.position
 
-                    // Calculate the angle between the arrow and the click position
-                    const dx = e.clientX - arrowPosition.x;
-                    const dy = e.clientY - arrowPosition.y;
-                    const angle = Math.atan2(dy, dx);
-                    // Calculate force based on shooting angle
-                    let forceMagnitude = 0.10 * shootingArrow.mass;
+                if (!shootingArrow.isShot) {
+                    const angle = 5.8
+                    // Determine the force magnitude and calculate the force vector
+                    let forceMagnitude = 0.11 * shootingArrow.mass;
                     let forceVector = {
                         x: forceMagnitude * Math.cos(angle),
                         y: forceMagnitude * Math.sin(angle)
                     };
-                    console.log("Force Vector: ", forceVector);
+
                     // Apply the force to shoot the arrow
-                    Matter.Body.applyForce(shootingArrow, arrowPosition, forceVector);
+                    Matter.Body.applyForce(shootingArrow, shootingArrow.position, forceVector);
+
 
                     // Mark the arrow as shot
                     shootingArrow.isShot = true;
-                }
 
-                // Move to the next arrow in the array
-                currentArrow = (currentArrow + 1) % arrows.length;
+                    // Reset the arrow after a delay or when a certain condition is met
+                    setTimeout(() => {
+                        // Reset position
+                        Matter.Body.setPosition(shootingArrow, { x: initialX, y: initialY });
+                        // Reset velocity
+                        Matter.Body.setVelocity(shootingArrow, { x: 0, y: 0 });
+                        // Reset the isShot flag
+                        shootingArrow.isShot = false;
+                    }, 2000); // Adjust the timeout duration as needed
+                }
             });
+            Matter.Events.on(engine, 'beforeUpdate', () => {
+                // Update initial positions to the current position of the character
+                initialX = character.position.x;
+                initialY = character.position.y;
+                if (!shootingArrow.isShot) {
+                    Matter.Body.setPosition(shootingArrow, {
+                        x: initialX,
+                        y: initialY - 30
+                    });
+                }
+            })
 
             selectDiv.addEventListener('keydown', (e) => {
+
                 if (e.code === 'Space') {
                     e.preventDefault()
                     Matter.Body.applyForce(character, character.position, { x: 0, y: -0.8 })
@@ -186,7 +223,9 @@ export default function Matterjs() {
                 } else {
                     return
                 }
+
             })
+
 
             // selectDiv.addEventListener('keydown', (e) => {
             //     e.preventDefault()
@@ -229,7 +268,7 @@ export default function Matterjs() {
             // })
 
             // add all of the bodies to the world
-            Composite.add(engine.world, [stack, arrow, arrow2, arrow3, arrow4, arrow5, ground, mouseConstraint, character, floor]);
+            Composite.add(engine.world, [stack, arrow, ground, mouseConstraint, character, floor]);
 
 
             // // run the renderer
@@ -251,14 +290,14 @@ export default function Matterjs() {
                 render.canvas = null;
                 render.context = null;
                 render.textures = {};
-                selectDiv.removeEventListener('click',  (e) => {
+                selectDiv.removeEventListener('click', (e) => {
                     let shootingArrow = arrows[currentArrow];
                     console.log("Shooting Arrow: ", currentArrow, shootingArrow);
                     // Ensure the arrow has not been shot already
                     if (!shootingArrow.isShot) {
-                        
+
                         const arrowPosition = shootingArrow.position
-    
+
                         // Calculate the angle between the arrow and the click position
                         const dx = e.clientX - arrowPosition.x;
                         const dy = e.clientY - arrowPosition.y;
@@ -272,11 +311,11 @@ export default function Matterjs() {
                         console.log("Force Vector: ", forceVector);
                         // Apply the force to shoot the arrow
                         Matter.Body.applyForce(shootingArrow, arrowPosition, forceVector);
-    
+
                         // Mark the arrow as shot
                         shootingArrow.isShot = true;
                     }
-    
+
                     // Move to the next arrow in the array
                     currentArrow = (currentArrow + 1) % arrows.length;
                 });
@@ -285,11 +324,11 @@ export default function Matterjs() {
     }, [])
 
     return (
-
-        <div className='App' tabIndex='0' ref={sceneRef}>
-
+        <div className='background-container'>
+            <div className='App' tabIndex='0' ref={sceneRef}>
+                <canvas></canvas>
+            </div>
         </div>
-
     )
 }
 

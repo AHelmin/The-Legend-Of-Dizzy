@@ -28,7 +28,7 @@ const Home = () => {
       </div>
       {/* <UserHighScore/> */}
     
-    <div className="press-start text-white">{useTypedMessage("sdfksdalfkajsdlkfjsalfjaslkfjaslkdslfkjsdlkfjslkdfjlksadjflksjfklasjflkasjdflkasdjfklasdjflaksjfalsk")}</div>
+    <div className="press-start text center text-white">{useTypedMessage("")}</div>
     </div>
   );
 };

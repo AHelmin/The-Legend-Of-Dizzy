@@ -13,9 +13,9 @@ export default function Game() {
     <>
       <Header />
       <div>
-        <iframe src={GAME_URL} width={900} height={700}></iframe>
+        <iframe src={GAME_URL} width="100%" height="700px"></iframe>
       </div>
-    <AppTurnBattle/>
+    <AppTurnBattle />
     <Matterjs />
     </>
   );

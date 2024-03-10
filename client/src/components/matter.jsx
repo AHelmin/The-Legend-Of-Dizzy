@@ -1,11 +1,20 @@
-import React, { PureComponent, useEffect, useRef } from 'react'
+import React, { PureComponent, useEffect, useRef, useState } from 'react'
 import Matter from 'matter-js'
-import backgroundImageSrc from '../assets/images/backgrounds/castle.jpg'
-// import '../../node_modules/matter-js/build/matter.min.js'
+import Shoot from '../assets/sounds/shoot.ogg'
+import Ouch from '../assets/sounds/gruntsound.wav'
 
 export default function Matterjs() {
 
     const sceneRef = useRef(null)
+
+    const playerStartHealth = 100
+    const villainStartHealth = 100
+    const [playerHealth, setPlayerHealth] = useState(playerStartHealth);
+    const [villainHealth, setVillainHealth] = useState(villainStartHealth);
+
+    useEffect(() => {
+        console.log(villainHealth);
+    }, [villainHealth]);
 
     useEffect(() => {
 
@@ -30,7 +39,7 @@ export default function Matterjs() {
                     width: 1800,
                     height: 800,
                     wireframes: false,
-                    background: ''
+                    background: 'black'
                 }
             });
 
@@ -44,6 +53,9 @@ export default function Matterjs() {
             const defaultCategory = 0x0001
             const characterCategory = 0x0002
             const arrowCategory = 0x0004
+            const villainCategory = 0x0008
+            const villainArrowCategory = 0x0016
+
             const selectDiv = document.querySelector('.App')
 
             const floorOptions = {
@@ -69,28 +81,10 @@ export default function Matterjs() {
                 mouse: mouse,
 
                 collisionFilter: {
-                    mask: defaultCategory | arrowCategory
+                    mask: defaultCategory
                 }
             });
             render.mouse = mouse;
-
-
-
-            // const floorOptions = {
-            //     isStatic: true,
-            //     render: {
-            //         sprite: {
-            //             texture: 'path',
-            //             xScale: 1, sprite scale on x-axis
-            //             yScale: 1 sprite scale on y-axis
-            //         }
-            //     }
-            // }
-            //place a brick sprite every 20 pixels from x=0 to x=WIDTH
-            // for(let a=1; a<WIDTH+2; a=a+20) {
-            // x, y, width, height, options
-            //     Composite.add(engine.world, Bodies.rectangle(a, 400, 25, 25, wallOptions))
-            // }
 
             const arrowOptions = {
                 render: {
@@ -102,9 +96,22 @@ export default function Matterjs() {
                 },
                 collisionFilter: {
                     category: arrowCategory,
-                    mask: defaultCategory
+                    mask: defaultCategory | villainCategory
                 },
+            }
 
+            const villainArrowOptions = {
+                render: {
+                    sprite: {
+                        texture: '../src/assets/images/sprites/arrow_rotated.png',
+                        xScale: 1,
+                        yScale: 1
+                    }
+                },
+                collisionFilter: {
+                    category: villainArrowCategory,
+                    mask: defaultCategory | characterCategory
+                },
             }
 
             const characterOptions = {
@@ -117,7 +124,21 @@ export default function Matterjs() {
                 },
                 collisionFilter: {
                     category: characterCategory,
-                    mask: defaultCategory
+                    mask: defaultCategory | villainCategory | villainArrowCategory
+                },
+            }
+
+            const villainOptions = {
+                render: {
+                    sprite: {
+                        texture: '../src/assets/images/sprites/character_resized.png',
+                        xScale: 1,
+                        yScale: 1
+                    }
+                },
+                collisionFilter: {
+                    category: villainCategory,
+                    mask: defaultCategory | arrowCategory | characterCategory
                 },
             }
 
@@ -131,47 +152,47 @@ export default function Matterjs() {
                 }
             }
 
-
-            let character = Bodies.rectangle(300, 600, 100, 200, characterOptions)
+            let villain = Bodies.rectangle(1000, 600, 50, 200, villainOptions)
+            let character = Bodies.rectangle(300, 600, 50, 200, characterOptions)
             Matter.Body.setInertia(character, Infinity)
             let arrow = Bodies.rectangle(350, 600, 100, 20, arrowOptions)
+            let villainArrow = Bodies.rectangle(1000, 600, 50, 200, villainArrowOptions)
             Matter.Body.setInertia(arrow, Infinity)
+            Matter.Body.setInertia(villain, Infinity)
+            Matter.Body.setInertia(villainArrow, Infinity)
             console.log(arrow)
-            // let arrow2 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
-            // let arrow3 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
-            // let arrow4 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
-            // let arrow5 = Bodies.rectangle(300, 600, 100, 20, arrowOptions)
 
-            // let shoot = (projectile, force) => {
-            //     Matter.Body.applyForce(projectile, projectile.position, force);
-            // };
+            //setup arrow position for firing logic
+            let shootingArrow = arrow;
+            let villainShootingArrow = villainArrow
+            let initialX = character.position.x
+            let initialY = character.position.y - 30
+            let villainInitialX = villain.position.x
+            let villainInitialY = villain.position.y - 30
 
-            // let arrows = [arrow, arrow2, arrow3, arrow4, arrow5]
-            // let currentArrow = 0
-            // arrows.forEach(arrow => {
-            //     arrow.isShot = false;
-            // })
-
-            // Click event to select the arrow
-            // selectDiv.addEventListener('click', (e) => {
-            //     selectedArrow = selectedArrow === arrow ? arrow2 : (selectedArrow === arrow2 ? arrow3 : (selectedArrow === arrow3 ? arrow4 : (selectedArrow === arrow4 ? arrow5 : arrow)))
-            // })
-
+            //make villain arrow always be at the villain location
             Matter.Events.on(engine, 'beforeUpdate', () => {
-                if (!arrow.isShot) {
-                    Matter.Body.setPosition(arrow, {
-                        x: character.position.x,
-                        y: character.position.y - 30
+                if (!villainShootingArrow.isShot) {
+                    Matter.Body.setPosition(villainShootingArrow, {
+                        x: villain.position.x,
+                        y: villain.position.y - 30
                     })
                 }
             })
 
-            let shootingArrow = arrow; // Assuming 'arrow' is your single arrow object
-            let initialX = character.position.x
-            let initialY = character.position.y - 30
+            //make character arrow always be at the character location
+            Matter.Events.on(engine, 'beforeUpdate', () => {
+                if (!shootingArrow.isShot) {
+                    Matter.Body.setPosition(shootingArrow, {
+                        x: character.position.x,
+                        y: character.position.y - 30
+                    });
+                }
+            })
 
+            //add listener for click to shoot arrow
             selectDiv.addEventListener('click', (e) => {
-
+                const shootSound = new Audio(Shoot)
                 if (!shootingArrow.isShot) {
                     const angle = 5.8
                     // Determine the force magnitude and calculate the force vector
@@ -183,7 +204,7 @@ export default function Matterjs() {
 
                     // Apply the force to shoot the arrow
                     Matter.Body.applyForce(shootingArrow, shootingArrow.position, forceVector);
-
+                    shootSound.play();
 
                     // Mark the arrow as shot
                     shootingArrow.isShot = true;
@@ -191,64 +212,92 @@ export default function Matterjs() {
                     // Reset the arrow after a delay or when a certain condition is met
                     setTimeout(() => {
                         // Reset position
-                        Matter.Body.setPosition(shootingArrow, { x: initialX, y: initialY });
+                        Matter.Body.setPosition(shootingArrow, { x: character.position.x, y: character.position.y - 30 });
                         // Reset velocity
                         Matter.Body.setVelocity(shootingArrow, { x: 0, y: 0 });
                         // Reset the isShot flag
                         shootingArrow.isShot = false;
-                    }, 2000); // Adjust the timeout duration as needed
+                    }, 2000);
                 }
             });
-            Matter.Events.on(engine, 'beforeUpdate', () => {
-                // Update initial positions to the current position of the character
-                initialX = character.position.x;
-                initialY = character.position.y;
-                if (!shootingArrow.isShot) {
-                    Matter.Body.setPosition(shootingArrow, {
-                        x: initialX,
-                        y: initialY - 30
-                    });
+
+            function villainShoot() {
+                const shootSound = new Audio(Shoot)
+                if (!villainShootingArrow.isShot) {
+                    const angle = 3.2
+                    // Determine the force magnitude and calculate the force vector
+                    let forceMagnitude = 0.08 * villainShootingArrow.mass;
+                    let forceVector = {
+                        x: forceMagnitude * Math.cos(angle),
+                        y: forceMagnitude * Math.sin(angle)
+                    };
+
+                    // Apply the force to shoot the arrow
+                    Matter.Body.applyForce(villainShootingArrow, villainShootingArrow.position, forceVector);
+                    shootSound.play();
+
+                    // Mark the arrow as shot
+                    villainShootingArrow.isShot = true;
+
+                    // Reset the arrow after a delay or when a certain condition is met
+                    setTimeout(() => {
+                        if (villainShootingArrow.isShot) {
+                            // Reset position
+                            Matter.Body.setPosition(villainShootingArrow, { x: villain.position.x, y: villain.position.y - 30 });
+                            // Reset velocity
+                            Matter.Body.setVelocity(villainShootingArrow, { x: 0, y: 0 });
+                            // Reset the isShot flag
+                            villainShootingArrow.isShot = false;
+                        }
+                        villainShoot()
+                    }, 5000);
                 }
+            };
+          villainShoot()
+
+            //listen for collision between arrow and villain
+            Matter.Events.on(engine, 'collisionStart', event => {
+                const ouchSound = new Audio(Ouch)
+                const pairs = event.pairs
+                pairs.forEach(pair => {
+                    if ((pair.bodyA === arrow && pair.bodyB === villain && Math.abs(character.position.x - arrow.position.x) > 15) || (pair.bodyA === villain && pair.bodyB === arrow && Math.abs(character.position.x - arrow.position.x) > 15)) {
+                        console.log('Arrow collided with villain')
+                        setVillainHealth(h => (h - 25 > 0 ? h - 25 : 0))
+                        ouchSound.play()
+                    }
+                })
+            })
+
+            //listen for collision between villainArrow and character
+            Matter.Events.on(engine, 'collisionStart', event => {
+                const ouchSound = new Audio(Ouch)
+                const pairs = event.pairs
+                pairs.forEach(pair => {
+                    if ((pair.bodyA === villainArrow && pair.bodyB === character) || (pair.bodyA === character && pair.bodyB === villainArrow)) {
+                        console.log('Arrow collided with villain')
+                        setVillainHealth(h => (h - 25 > 0 ? h - 25 : 0))
+                        ouchSound.play()
+                    }
+                })
             })
 
             selectDiv.addEventListener('keydown', (e) => {
-
-                if (e.code === 'Space') {
+                if (e.code === 'KeyD' || e.code === 'ArrowRight') {
                     e.preventDefault()
-                    Matter.Body.applyForce(character, character.position, { x: 0, y: -0.8 })
-                } else if (e.code === 'KeyD' || e.code === 'ArrowRight') {
                     Matter.Body.setVelocity(character, { x: 5, y: character.velocity.y })
                 } else if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
+                    e.preventDefault()
                     Matter.Body.setVelocity(character, { x: -5, y: character.velocity.y })
-                } else {
+                } else if (Math.abs(character.position.y - floor.position.y) < 155) {
+                    if (e.code === 'Space') {
+                        e.preventDefault()
+                        Matter.Body.applyForce(character, character.position, { x: 0, y: -0.5 })
+                    }
+                }
+                else {
                     return
                 }
-
             })
-
-
-            // selectDiv.addEventListener('keydown', (e) => {
-            //     e.preventDefault()
-            //     if (e.code === 'd') {
-            //         Matter.Body.setVelocity(character, { x: 5, y: character.velocity.y })
-            //     }
-            // })
-
-
-            // let sling = Matter.Constraint.create({
-            //     bodyA: character,
-            //     pointA: { x: 49, y: -20 },
-            //     bodyB: arrow5,
-
-            //     stiffness: 0.10,
-            //     length: 0.1
-            // });
-
-            // let bow = Matter.Constraint.create({
-            //     pointA: sling,
-            //     bodyB: character,
-            //     stiffness: 1
-            // });
 
             let stack = Matter.Composites.stack(1100, 270, 4, 4, 0, 0, function (x, y) {
                 return Bodies.polygon(x, y, 8, 30, polygonOptions)
@@ -268,7 +317,7 @@ export default function Matterjs() {
             // })
 
             // add all of the bodies to the world
-            Composite.add(engine.world, [stack, arrow, ground, mouseConstraint, character, floor]);
+            Composite.add(engine.world, [stack, arrow, ground, mouseConstraint, character, floor, villainArrow, villain]);
 
 
             // // run the renderer

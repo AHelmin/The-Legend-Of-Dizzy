@@ -12,7 +12,7 @@
   .background-container {
     width: 1800px; /* Set the width as needed */
     height: 800px; /* Set the height as needed */
-    background-image: url('../src/assets/images/backgrounds/castle.jpg'); /* Set your image path */
+    /* background-image: url('../src/assets/images/backgrounds/castle.jpg'); Set your image path */
     background-size: cover;
     background-repeat: no-repeat;
     position: relative; /* Needed if you want to position elements inside it absolutely */

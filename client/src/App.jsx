@@ -5,7 +5,7 @@ import 'regenerator-runtime/runtime';
 import Matterjs from './components/matter';
 // import AppProvider from "./providers/AppProvider"
 import Header from "./components/Header"
-import { Home, Game, Auth } from "./pages"
+import { Home, Game, Level2, Auth } from "./pages"
 // import "/node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "./output.css"
 
@@ -25,6 +25,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/game" element={<Game />} />
+          <Route path="/level2" element={<Level2 />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<Home />} />
         </Routes>

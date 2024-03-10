@@ -38,6 +38,7 @@ Keyboard.LEFT = 37;
 Keyboard.RIGHT = 39;
 Keyboard.UP = 38;
 Keyboard.DOWN = 40;
+Keyboard.SPACE = 32;
 
 Keyboard._keys = {};
 
@@ -110,6 +111,7 @@ Game.init = function () {};
 Game.update = function (delta) {};
 Game.render = function () {};
 
+// this mp3 taken from https://opengameart.org/content/town-theme-rpg
 const music = new Audio((src = "../assets/openingtheme.mp3"));
 music.volume = 0.2;
 music.loop = true;

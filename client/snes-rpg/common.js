@@ -79,6 +79,8 @@ Keyboard.isDown = function (keyCode) {
 
 var Game = {};
 
+Game.load = function () {};
+
 Game.run = function (context) {
     this.ctx = context;
     this._previousElapsed = 0;
@@ -109,6 +111,7 @@ Game.tick = function (elapsed) {
 Game.init = function () {};
 Game.update = function (delta) {};
 Game.render = function () {};
+
 
 const music = new Audio((src = "../assets/openingtheme.mp3"));
 music.volume = 0.2;

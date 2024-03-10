@@ -76,6 +76,18 @@ var map = {
             return res || isSolid;
         }.bind(this), false);
     },
+    isDoorAtXY: function (x, y) {
+        var col = Math.floor(x / this.tsize);
+        var row = Math.floor(y / this.tsize);
+  
+        // loop through all layers and return TRUE if any tile is a door
+        return this.layers.reduce(function (res, layer, index) {
+            var tile = this.getTile(index, col, row);
+            var doorTiles = [29]
+            var isDoor = doorTiles.includes(tile);
+            return res || isDoor;
+        }.bind(this), false);
+    },
     getCol: function (x) {
         return Math.floor(x / this.tsize);
     },
@@ -153,6 +165,9 @@ Hero.prototype.move = function (delta, dirx, diry) {
     // check if we walked into a non-walkable tile
     this._collide(dirx, diry);
 
+    // check if we walked through a door
+    this._door(dirx, diry);
+
     // clamp values
     var maxX = this.map.cols * this.map.tsize;
     var maxY = this.map.rows * this.map.tsize;
@@ -193,6 +208,39 @@ Hero.prototype._collide = function (dirx, diry) {
         col = this.map.getCol(left);
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
+};
+
+let openedDoor = false;
+
+Hero.prototype._door = async function (dirx, diry) {
+  var row, col;
+  // -1 in right and bottom is because image ranges from 0..63
+  // and not up to 64
+  var left = this.x - this.width / 2;
+  var right = this.x + this.width / 2 - 1;
+  var top = this.y - this.height / 2;
+  var bottom = this.y + this.height / 2 - 1;
+
+  // check for door on sprite sides
+  var door =
+    this.map.isDoorAtXY(left, top) ||
+    this.map.isDoorAtXY(right, top) ||
+    this.map.isDoorAtXY(right, bottom) ||
+    this.map.isDoorAtXY(left, bottom);
+  if (!door) {
+    openedDoor = false;
+    return;
+  } else {
+    if (!openedDoor) {
+      const sound = new Audio((src = "../assets/doorOpen.mp3"));
+      sound.volume = 0.2;
+      sound.play();
+      openedDoor = true;
+      sound.addEventListener("ended", (event) => {
+          window.location.href = "/level2";
+      })
+    }
+  }
 };
 
 Game.load = function () {

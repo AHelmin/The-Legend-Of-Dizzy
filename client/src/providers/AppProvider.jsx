@@ -14,10 +14,10 @@ export default function AppProvider({ children }){
     Take a look at the Header component to see how this value is pulled in.
   */
 
-  const [ sampleAppData, setSampleAppData ] = useState({ welcomeMsg: "Welcome!" })
+  const [ levelName, setlevelName] = useState({currentLevel: "start"});
 
   return (
-    <AppContext.Provider value={sampleAppData}>
+    <AppContext.Provider value={levelName}>
       { children }
     </AppContext.Provider>
   )

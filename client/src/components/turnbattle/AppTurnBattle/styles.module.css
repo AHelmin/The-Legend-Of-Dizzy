@@ -1,5 +1,7 @@
 .main {
-  background: bg-slate-800;
+  background: slate-800;
+
+
   width: 100vw;
   height: 100vh;
   display: flex;

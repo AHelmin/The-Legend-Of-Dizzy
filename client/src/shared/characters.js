@@ -1,17 +1,17 @@
 
 export const playerStats = {
-  level: 40,
+  level: 44,
   maxHealth: 100,
   name: 'Katy',
   img: './src/assets/images/Katy.jpg',
 
   magic: 32,
-  attack: 70,
+  attack: 50,
   defense: 30,
   magicDefense: 30,
 };
 export const opponentStats = {
-  level: 40,
+  level: 44,
   name: 'Gary',
   maxHealth: 100,
   img: './src/assets/images/Gary.png',

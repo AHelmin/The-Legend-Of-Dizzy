@@ -11,6 +11,7 @@ import Matterjs from '../components/matter'
 export default function Game() {
   return (
     <>
+    <Header />
       <div>
         <iframe src={GAME_URL} width={900} height={700}></iframe>
       </div>

@@ -20,10 +20,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
-  highscores: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Highscores'
-  }]
+  highscores: [Number]
 },{
   timestamps: true
 })

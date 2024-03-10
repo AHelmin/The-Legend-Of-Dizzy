@@ -15,7 +15,7 @@ import { useAppCtx } from "../providers/AppProvider";
 export default function Game() {
 
   const [gameUrl, setGameUrl] = useState("../../snes-rpg/levels/open-field.html");
-  const [stageName, setStageName] = useState("intro");
+  const [stageName, setStageName] = useState("start");
 
   // const { currentLevel } =useAppCtx();
 

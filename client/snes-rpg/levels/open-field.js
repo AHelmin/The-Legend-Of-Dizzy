@@ -61,6 +61,7 @@ var map = {
         54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65,
         116, 4, 4, 0, 0, 3, 4, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 4, 3, 4, 3, 3, 4, 3, 3, 4, 3, 18
     ]],
+    music: "../assets/openingtheme.mp3",
     getTile: function (layer, col, row) {
         return this.layers[layer][row * map.cols + col];
     },
@@ -79,7 +80,7 @@ var map = {
     isDoorAtXY: function (x, y) {
         var col = Math.floor(x / this.tsize);
         var row = Math.floor(y / this.tsize);
-  
+
         // loop through all layers and return TRUE if any tile is a door
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
@@ -252,7 +253,7 @@ Game.load = function () {
 
 Game.init = function () {
     Keyboard.listenForEvents(
-        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]);
+        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN, Keyboard.SPACE]);
     this.tileAtlas = Loader.getImage('tiles');
 
     this.hero = new Hero(map, 160, 700);
@@ -268,6 +269,7 @@ Game.update = function (delta) {
     else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
     else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
     else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
+    else if (Keyboard.isDown(Keyboard.SPACE)) {console.log("pew pew!")}
 
     this.hero.move(delta, dirx, diry);
     this.camera.update();

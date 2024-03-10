@@ -237,7 +237,7 @@ Hero.prototype._door = async function (dirx, diry) {
       sound.play();
       openedDoor = true;
       sound.addEventListener("ended", (event) => {
-          window.location.href = "/level2";
+          window.location.href = "/game";
       })
     }
   }

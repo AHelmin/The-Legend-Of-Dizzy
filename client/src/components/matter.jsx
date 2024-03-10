@@ -12,9 +12,9 @@ export default function Matterjs() {
     const [playerHealth, setPlayerHealth] = useState(playerStartHealth);
     const [villainHealth, setVillainHealth] = useState(villainStartHealth);
 
-    useEffect(() => {
-        console.log(villainHealth);
-    }, [villainHealth]);
+    // useEffect(() => {
+    //     console.log(villainHealth);
+    // }, [villainHealth]);
 
     useEffect(() => {
 
@@ -42,12 +42,6 @@ export default function Matterjs() {
                     background: 'black'
                 }
             });
-
-            // Set the background image on the canvas
-            // if (render && render.canvas) {
-            //     render.canvas.style.backgroundImage = `url(${backgroundImageSrc})`;
-            //     render.canvas.style.backgroundSize = 'cover';
-            // }
 
             //define bitfields
             const defaultCategory = 0x0001
@@ -152,7 +146,7 @@ export default function Matterjs() {
                 }
             }
 
-            let villain = Bodies.rectangle(1000, 600, 50, 200, villainOptions)
+            let villain = Bodies.rectangle(1500, 600, 50, 200, villainOptions)
             let character = Bodies.rectangle(300, 600, 50, 200, characterOptions)
             Matter.Body.setInertia(character, Infinity)
             let arrow = Bodies.rectangle(350, 600, 100, 20, arrowOptions)
@@ -221,12 +215,15 @@ export default function Matterjs() {
                 }
             });
 
-            function villainShoot() {
+           
+            function villainShoot(villainHP) {
+                // villainHP = villainHealth
+                console.log(villainHP)
                 const shootSound = new Audio(Shoot)
                 if (!villainShootingArrow.isShot) {
                     const angle = 3.2
                     // Determine the force magnitude and calculate the force vector
-                    let forceMagnitude = 0.08 * villainShootingArrow.mass;
+                    let forceMagnitude = 0.11 * villainShootingArrow.mass;
                     let forceVector = {
                         x: forceMagnitude * Math.cos(angle),
                         y: forceMagnitude * Math.sin(angle)
@@ -249,11 +246,18 @@ export default function Matterjs() {
                             // Reset the isShot flag
                             villainShootingArrow.isShot = false;
                         }
-                        villainShoot()
+                        if (villainHP > 0) {
+                            villainShoot(villainHealth)
+                        }
                     }, 5000);
+                } else {
+                    return
                 }
+
             };
-          villainShoot()
+    
+
+            setTimeout(() => villainShoot(villainHealth), 5000)
 
             //listen for collision between arrow and villain
             Matter.Events.on(engine, 'collisionStart', event => {

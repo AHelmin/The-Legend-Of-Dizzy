@@ -3,11 +3,16 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 
 
-export default function Timer() {
+export default function Timer({ onEnd }) {
 
     const [seconds, setSeconds] = useState(10)
 
     useEffect(() => {
+
+        if(seconds === 0) {
+            onEnd();
+            return
+        }
         
         const interval = setInterval(() => {
             setSeconds(secs => {
@@ -20,7 +25,7 @@ export default function Timer() {
         })
     }, 1000)
         return () => clearInterval(interval);
-    }, [])
+    }, [seconds, onEnd])
 
     return (
         <div className={styles.timer}>

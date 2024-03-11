@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+
+import {ChangeScore} from "../../src/components/ChangeScore";
+
 var map = {
     cols: 36,
     rows: 28,
@@ -61,6 +65,7 @@ var map = {
         54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65,
         116, 4, 4, 0, 0, 3, 4, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 4, 3, 4, 3, 3, 4, 3, 3, 4, 3, 18
     ]],
+    music: "../assets/openingtheme.mp3",
     getTile: function (layer, col, row) {
         return this.layers[layer][row * map.cols + col];
     },
@@ -74,6 +79,18 @@ var map = {
             var solidTiles = [3, 4, 88, 89, 90, 98, 99, 100, 180, 38, 54, 116, 18, 33, 49, 65, 117, 118, 232, 233, 248, 249, 206, 222]
             var isSolid = solidTiles.includes(tile);
             return res || isSolid;
+        }.bind(this), false);
+    },
+    isDoorAtXY: function (x, y) {
+        var col = Math.floor(x / this.tsize);
+        var row = Math.floor(y / this.tsize);
+
+        // loop through all layers and return TRUE if any tile is a door
+        return this.layers.reduce(function (res, layer, index) {
+            var tile = this.getTile(index, col, row);
+            var doorTiles = [29]
+            var isDoor = doorTiles.includes(tile);
+            return res || isDoor;
         }.bind(this), false);
     },
     getCol: function (x) {
@@ -153,6 +170,9 @@ Hero.prototype.move = function (delta, dirx, diry) {
     // check if we walked into a non-walkable tile
     this._collide(dirx, diry);
 
+    // check if we walked through a door
+    this._door(dirx, diry);
+
     // clamp values
     var maxX = this.map.cols * this.map.tsize;
     var maxY = this.map.rows * this.map.tsize;
@@ -195,6 +215,40 @@ Hero.prototype._collide = function (dirx, diry) {
     }
 };
 
+let openedDoor = false;
+
+Hero.prototype._door = async function (dirx, diry) {
+  var row, col;
+  // -1 in right and bottom is because image ranges from 0..63
+  // and not up to 64
+  var left = this.x - this.width / 2;
+  var right = this.x + this.width / 2 - 1;
+  var top = this.y - this.height / 2;
+  var bottom = this.y + this.height / 2 - 1;
+
+  // check for door on sprite sides
+  var door =
+    this.map.isDoorAtXY(left, top) ||
+    this.map.isDoorAtXY(right, top) ||
+    this.map.isDoorAtXY(right, bottom) ||
+    this.map.isDoorAtXY(left, bottom);
+  if (!door) {
+    openedDoor = false;
+    return;
+  } else {
+    if (!openedDoor) {
+      const sound = new Audio((src = "../assets/doorOpen.mp3"));
+      sound.volume = 0.2;
+      sound.play();
+      openedDoor = true;
+      sound.addEventListener("ended", (event) => {
+          document.location.replace("/snes-rpg/levels/dungeon.html")
+          let currentScore = ChangeScore(10);
+      })
+    }
+  }
+};
+
 Game.load = function () {
     return [
         Loader.loadImage('tiles', '../assets/mountain_landscape.png'),
@@ -204,7 +258,7 @@ Game.load = function () {
 
 Game.init = function () {
     Keyboard.listenForEvents(
-        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]);
+        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN, Keyboard.SPACE]);
     this.tileAtlas = Loader.getImage('tiles');
 
     this.hero = new Hero(map, 160, 700);
@@ -220,6 +274,7 @@ Game.update = function (delta) {
     else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
     else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
     else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
+    else if (Keyboard.isDown(Keyboard.SPACE)) {console.log("pew pew!")}
 
     this.hero.move(delta, dirx, diry);
     this.camera.update();

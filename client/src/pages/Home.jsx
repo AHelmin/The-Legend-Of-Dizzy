@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
-// import UserHighScore from '../components/UserHighScore';
+import UserHighScore from '../components/UserHighScore';
 import zeldadog from '../assets/images/zeldadog.jpg';
 import '../output.css';
 import '../assets/css/header.css'
@@ -22,13 +22,12 @@ const Home = () => {
         <div className="mt-4">
           <h1 className="text-4xl font-bold hyrule text-yellow-600">Welcome to The Legend of Dizzy</h1>
           <p className="text-lg mt-2 press-start text-white">
-            Explore a world of adventure and challenges in this legendary game.
+          {useTypedMessage('Explore a world of adventure and challenges in this legendary game.')}
           </p>
         </div>
       </div>
-      {/* <UserHighScore/> */}
+      <UserHighScore/>
     
-    <div className="press-start text center text-white">{useTypedMessage("")}</div>
     </div>
   );
 };

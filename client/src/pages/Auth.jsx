@@ -1,42 +1,46 @@
-import React, { useState, useEffect } from "react" 
-import '../output.css';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Header from '../components/Header';
+import { useNavigate } from "react-router-dom"
 
+export default function Auth() {
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-export default function Auth(){
+  const [signupData, setSignupData] = useState({});
+  const [loginData, setLoginData] = useState({});
+  const [formMessage, setFormMessage] = React.useState("");
 
-  const [ signupData, setSignupData ] = useState({})
-  const [ loginData, setLoginData ] = useState({})
-
-  const [ formMessage, setFormMessage ] = React.useState("")
-
-  async function submitSignup(e){
-    e.preventDefault()
+  async function submitSignup(e) {
+    e.preventDefault();
     try {
-      console.log(signupData)
       const query = await fetch("/api/user", {
         method: "POST",
         body: JSON.stringify(signupData),
         headers: {
           'Content-Type': 'application/json'
         }
-      }).catch( err => {
+      }).catch(err => {
         setFormMessage("Sorry, we couldn't sign you up. Get a life.")
-      })
- 
-      const result = await query.json()
-      if( result.status === "error" ){
+      });
+
+      const result = await query.json();
+      if (result.status === "error") {
         setFormMessage("Sorry, we couldn't sign you up. Get a life.")
       } else {
-        window.location.href = "/"
+        // Dispatch email after successful response
+        dispatch({ type: 'SET_EMAIL', payload: result.email });
+
+        navigate("/");
       }
-    } catch(err) {
+    } catch (err) {
       setFormMessage("Sorry, we couldn't sign you up. Get a life.")
     }
   }
 
-  async function submitLogin(e){
-    e.preventDefault()
+  async function submitLogin(e) {
+    e.preventDefault();
     try {
       const query = await fetch("/api/user/login", {
         method: "POST",
@@ -46,24 +50,27 @@ export default function Auth(){
         }
       })
       const result = await query.json()
-      if( result.status === "error" ){
+      if (result.status === "error") {
         setFormMessage("We could not log you in with these credentials.")
       } else {
-        window.location.href = "/"
+        // Dispatch email after successful response
+        dispatch({ type: 'SET_EMAIL', payload: result.payload._doc.email });
+
+        navigate("/");
       }
-    } catch( err ) {
+    } catch (err) {
       setFormMessage("We could not log you in with these credentials.")
     }
   }
 
-  function handleSignupChange(e){
-    setFormMessage()
-    setSignupData({...signupData, [e.target.name]: e.target.value})
+  function handleSignupChange(e) {
+    setFormMessage();
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
   }
-  
-  function handleLoginChange(e){
-    setFormMessage()
-    setLoginData({...loginData, [e.target.name]: e.target.value})
+
+  function handleLoginChange(e) {
+    setFormMessage();
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
 
   return (

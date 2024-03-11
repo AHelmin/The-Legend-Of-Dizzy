@@ -1,47 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import jwt from 'jsonwebtoken';
-import Cookies from 'js-cookie';
-
+// UserHighScore.jsx
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import '../output.css';
+import '../assets/css/header.css';
 
 const UserHighScore = () => {
-  const [userHighScores, setUserHighScores] = useState(null);
+  const userEmail = useSelector((state) => state.email);
+  const [userData, setUserData] = useState({ name: '', highscores: [] });
 
   useEffect(() => {
-    
-    const token = Cookies.get('auth_cookie');
-
-    if (token) {
-      // Decode the token to get the user ID
+    const fetchUserHighScores = async () => {
       try {
-        const decodedToken = jwt.verify(token, JWT_SECRET); 
-        const userId = decodedToken._id; //is this right??????
-
-        // Fetch user data based on the user ID
-        fetch(`/api/user/${userId}`)
-          .then(response => response.json())
-          .then(userData => {
-            setUserHighScores(userData.highscores);
-          })
-          .catch(error => console.error('Error fetching user data:', error));
+        const response = await fetch(`/api/user/email/${userEmail}`);
+        const data = await response.json();
+        
+        // Check if there are highscores in the response
+        if (data.highscores && data.highscores.length > 0) {
+          // Sort highscores in descending order
+          const sortedHighscores = data.highscores.sort((a, b) => b - a);
+          setUserData({ name: data.name, highscores: sortedHighscores });
+        }
       } catch (error) {
-        console.error('Error decoding the token:', error);
+        console.error('Error fetching user highscores:', error);
       }
-    }
-  }, []);
+    };
 
-  // Render nothing if there are no high scores or no cookie
-  if (!userHighScores) {
-    return null;
-  }
+    if (userEmail) {
+      fetchUserHighScores();
+    }
+  }, [userEmail]);
 
   return (
     <div>
-      <h2>User High Scores</h2>
-      <ul>
-        {userHighScores.map((score, index) => (
-          <li key={index}>{score}</li>
-        ))}
-      </ul>
+      {userData.highscores.length > 0 && (
+        <div className="text-center mt-100">
+          <h2 className="hyrule text-yellow-600">{userData.name}'s High Scores</h2>
+          <ul className="press-start text-white">
+            {userData.highscores.map((score, index) => (
+              <li key={index}>{score}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

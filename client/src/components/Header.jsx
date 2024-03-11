@@ -5,13 +5,20 @@ import Cookies from 'js-cookie';
 import '../output.css';
 // import '../assets/css/header.css';
 
+
+
+
 const Header = () => {
+
+
+ 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Function to handle logout
   const handleLogout = () => {
     Cookies.remove('auth_cookie');
     setIsAuthenticated(false);
+    window.location.href = '/';
   };
 
   useEffect(() => {

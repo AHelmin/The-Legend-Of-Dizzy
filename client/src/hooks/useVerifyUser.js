@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import Cookie from "js-cookie";
 
 /* 
-
   Writing your own React hook:
 
   React hooks are just one or more functions that can be imported to any component

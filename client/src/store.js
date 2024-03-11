@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 
 // Initial state
 const initialState = {
-  email: '', score: 0,
+  email: '', battlescore: 0,
 };
 
 // Reducer
@@ -10,8 +10,8 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_EMAIL':
       return { ...state, email: action.payload };
-      case 'SET_SCORE':
-      return { ...state, score: action.payload };
+      case 'SET_BATTLESCORE':
+      return { ...state, battlescore: action.payload };
     default:
       return state;
   }

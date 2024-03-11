@@ -10,7 +10,8 @@ const {
   createUser,
   updateUserById,
   deleteUserById,
-  handleLogin
+  handleLogin,
+  getUserByEmail
 } = require("../../controllers/user.controller")
 
 // tokens are encrypted non-invasive data about the user 
@@ -90,5 +91,23 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ status: "error", payload: err.message })
   }
 })
+
+router.get("/email/:email", async (req, res) => {
+  try {
+    const user = await getUserByEmail(req.params.email);
+
+    console.log('User data:', user);
+
+    if (user) {
+      const { name, highscores } = user;
+      res.status(200).json({ status: "success", name, highscores });
+    } else {
+      res.status(404).json({ status: "error", message: "User not found" });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ status: "error", message: err.message });
+  }
+});
 
 module.exports = router;

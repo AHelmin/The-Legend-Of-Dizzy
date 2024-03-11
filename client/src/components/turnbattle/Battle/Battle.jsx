@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import { useAIOpponent, useBattleSequence } from '../../../hooks';
 import { opponentStats, playerStats, wait } from '../../../shared';
 import { BattleMenu, PlayerSummary, BattleAnnouncer } from '..';
+import { useDispatch } from 'react-redux';
 
 export const Battle = ({ onGameEnd }) => {
   const [sequence, setSequence] = useState({});
+  const dispatch = useDispatch();
 
   const {
     turn,
@@ -33,6 +35,13 @@ export const Battle = ({ onGameEnd }) => {
       })();
     }
   }, [playerHealth, opponentHealth, onGameEnd]);
+
+ 
+
+  useEffect(()=> {
+  dispatch({ type: 'SET_BATTLESCORE', payload: playerHealth });
+  console.log(playerHealth)
+  }),[playerHealth]
 
   return (
     <>
@@ -100,6 +109,7 @@ export const Battle = ({ onGameEnd }) => {
           )}
         </div>
       </div>
+      
     </>
   );
 };

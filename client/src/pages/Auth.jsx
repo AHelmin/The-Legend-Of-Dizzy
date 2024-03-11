@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Header from '../components/Header';
+import { useNavigate } from "react-router-dom"
 
 export default function Auth() {
+  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [signupData, setSignupData] = useState({});
@@ -29,7 +32,7 @@ export default function Auth() {
         // Dispatch email after successful response
         dispatch({ type: 'SET_EMAIL', payload: result.email });
 
-        window.location.href = '/';
+        navigate("/");
       }
     } catch (err) {
       setFormMessage("Sorry, we couldn't sign you up. Get a life.")
@@ -51,9 +54,9 @@ export default function Auth() {
         setFormMessage("We could not log you in with these credentials.")
       } else {
         // Dispatch email after successful response
-        dispatch({ type: 'SET_EMAIL', payload: result.email });
+        dispatch({ type: 'SET_EMAIL', payload: result.payload._doc.email });
 
-        window.location.href = '/';
+        navigate("/");
       }
     } catch (err) {
       setFormMessage("We could not log you in with these credentials.")
@@ -63,13 +66,11 @@ export default function Auth() {
   function handleSignupChange(e) {
     setFormMessage();
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
-    dispatch({ type: 'SET_EMAIL', payload: e.target.value });
   }
 
   function handleLoginChange(e) {
     setFormMessage();
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
-    dispatch({ type: 'SET_EMAIL', payload: e.target.value });
   }
 
   return (

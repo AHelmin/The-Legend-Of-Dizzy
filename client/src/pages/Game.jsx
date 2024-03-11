@@ -3,12 +3,15 @@ import useVerifyUser from "../hooks/useVerifyUser";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 // const GAME_URL = "../../snes-rpg/levels/open-field.html";
-import { AppTurnBattle, StartMenu } from "../components/turnbattle";
-import { OpenField } from "../../snes-rpg/levels/OpenField";
+// import { AppTurnBattle} from "../components/turnbattle";
+// import { OpenField } from "../../snes-rpg/levels/OpenField";
 import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
+// import Matterjs from '../components/matter'
+// import { IntroPage } from "../components/IntroPage";
+// import { GameOver } from "../components/GameOver";
+import { useSelector } from 'react-redux';
 
-import { useAppCtx } from "../providers/AppProvider";
 
 
 
@@ -16,31 +19,41 @@ export default function Game() {
 
   const [gameUrl, setGameUrl] = useState("../../snes-rpg/levels/open-field.html");
   const [stageName, setStageName] = useState("start");
+  const [currentScore, setCurrentScore] = useState(0)
 
-  // const { currentLevel } =useAppCtx();
-
+  const scoreNow = useSelector((state) => state.rpgscore);
 
 
   return (
     <>
-    <h5>{stageName}</h5>
+    <h5>{stageName} {scoreNow}</h5>
       <div>
+      {/* {stageName === "start" && (
+          <AppTurnBattle setStageName={setStageName} onStartClick={() => setStageName("game1") } />
+        )} */}
+        
         {stageName === "start" && (
-          <StartMenu onStartClick={() => setStageName("intro") } />
+          <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} onStartClick={() => setStageName("game2") } />
+        )}
+        
+        {/* {stageName === "game1" && (
+          <Matterjs onStartClick={() => setStageName("game2") } />
         )}
 
-        {/* {stageName === "intro" && (
-          <OpenField onLevel2={gameUrl => {
-            setGameUrl(gameUrl);
-            setStageName("level2");
-          }} />
+        {stageName === "game2" && (
+          <AppTurnBattle setCurrentScore={setCurrentScore} onStartClick={() => setStageName("game3") } />
+        )}
+
+        {stageName === "game3" && (
+          <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} stageName={stageName} setStageName={setStageName} currentScore={currentScore} setCurrentScore={setCurrentScore}/>
+          )}
+
+        {stageName === "gameOver" && (
+          <GameOver onStartClick={() => setStageName("game3") } />
         )} */}
 
-        {stageName === "intro" && (
-          <Canvas gameUrl={gameUrl}/>
-          )}
+
       </div>
-    <AppTurnBattle/>
     <TargetPractice />
     </>
   );

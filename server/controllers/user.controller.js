@@ -74,6 +74,15 @@ async function handleLogin(email, pw){
   return modifiedUser
 }
 
+async function getUserByEmail(email){
+  try {
+    return await User.findOne({email: email});
+  } catch(err){
+    console.log(err.message)
+    throw new Error(err)
+  }
+}
+
 
 module.exports = {
   getAllUsers,
@@ -81,5 +90,6 @@ module.exports = {
   createUser,
   updateUserById,
   deleteUserById,
-  handleLogin
+  handleLogin,
+  getUserByEmail
 }

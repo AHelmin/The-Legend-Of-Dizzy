@@ -5,6 +5,7 @@ const initialState = {
   email: "",
   battlescore: 0,
   rpgscore: 0,
+  shooterScore: 0,
 };
 
 // Reducer
@@ -16,6 +17,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, battlescore: action.payload };
       case "SET_RPGSCORE":
         return { ...state, rpgscore: action.payload };
+        case "SET_SHOOTERSCORE":
+          return { ...state, shooterScore: action.payload};
 
     default:
       return state;

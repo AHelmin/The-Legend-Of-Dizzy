@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { ShooterStart, ShooterEnd, Shooter } from '../../targetpractice';
+import { ShooterStart, ShooterEnd, Shooter, Timer } from '../../targetpractice';
 
 
 export default function TargetPractice() {
@@ -8,10 +8,18 @@ export default function TargetPractice() {
   const [mode, setMode] = useState('start');
 
   useEffect(() => {
+    console.log(score)
+  }, [score])
+
+  useEffect(() => {
     if (mode === 'shoot') {
       setScore(0);
     }
   }, [mode]);
+
+  function handletimer() {
+    setMode('gameOver')
+  }
 
   return (
     // <div className={styles.main}>
@@ -21,15 +29,17 @@ export default function TargetPractice() {
       )}
 
       {mode === 'shoot' && (
-        <Shooter
-          onGameEnd={score => {
-            setScore(score);
-            setMode('gameOver');
-          }}
-        />
+        <>
+          <Shooter
+            onScoreUpdate={shootingScore => {
+              setScore(shootingScore);
+            }}
+          />
+          <Timer duration={45} onEnd={handletimer} />
+        </>
       )}
 
-      {mode === 'gameOver' && !!winner && (
+      {mode === 'gameOver' && (
         <ShooterEnd score={score} onStartClick={() => setMode('battle')} />
       )}
     </div>

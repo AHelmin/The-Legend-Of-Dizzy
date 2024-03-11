@@ -21,7 +21,7 @@ export default function Game() {
   const [stageName, setStageName] = useState("start");
   const [currentScore, setCurrentScore] = useState(0)
 
-  const scoreNow = useSelector((state) => state.rpgscore);
+  const scoreNow = useSelector((state) => state.shooterScore);
 
 
   return (

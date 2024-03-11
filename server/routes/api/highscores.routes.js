@@ -36,8 +36,9 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const payload = await createHighscores(req.body)
-    const token = createToken(payload._id)
-    res.status(200).cookie("auth_cookie", token).json({ status: "success", payload })
+    
+    // const token = createToken(payload._id)
+    // res.status(200).cookie("auth_cookie", token).json({ status: "success", payload })
   }catch(err){
     console.log(err.message)
     res.status(500).json({ status: "error", payload: err.message })

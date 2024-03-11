@@ -3,14 +3,16 @@ import { createStore } from "redux";
 // Initial state
 const initialState = {
   email: '',
-  battlescore: 0,
-  rpgscore: 0,
-  shooterScore: 0,
+  battlescore: 900,
+  rpgscore: 200,
+  shooterScore: 11,
 };
 
 // Reducer
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SET_NAME":
+      return { ...state, name: action.payload };
     case "SET_EMAIL":
       return { ...state, email: action.payload };
     case "SET_BATTLESCORE":

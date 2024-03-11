@@ -31,6 +31,7 @@ export default function Auth() {
       } else {
         // Dispatch email after successful response
         dispatch({ type: 'SET_EMAIL', payload: signupData.email });
+        dispatch({ type: 'SET_NAME', payload: signupData.name });
 
         navigate("/");
       }
@@ -54,7 +55,8 @@ export default function Auth() {
         setFormMessage("We could not log you in with these credentials.")
       } else {
         // Dispatch email after successful response
-        dispatch({ type: 'SET_EMAIL', payload: loginData.email });
+        dispatch({ type: 'SET_EMAIL', payload: result.payload._doc.email });
+        dispatch({ type: 'SET_NAME', payload: result.payload._doc.name });
 
         navigate("/");
       }

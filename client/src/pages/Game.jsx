@@ -32,9 +32,9 @@ export default function Game() {
           <AppTurnBattle setStageName={setStageName} onStartClick={() => setStageName("game1") } />
         )} */}
         
-        {stageName === "start" && (
+        {/* {stageName === "start" && (
           <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} onStartClick={() => setStageName("game2") } />
-        )}
+        )} */}
         
         {/* {stageName === "game1" && (
           <Matterjs onStartClick={() => setStageName("game2") } />

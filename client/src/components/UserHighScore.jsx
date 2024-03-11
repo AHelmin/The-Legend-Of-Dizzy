@@ -6,7 +6,7 @@ import '../assets/css/header.css';
 
 const UserHighScore = () => {
   const userEmail = useSelector((state) => state.email);
-  const [userData, setUserData] = useState({ name: '', highscores: [] });
+  const [userData, setUserData] = useState({ name: '', scores: [] });
 
   useEffect(() => {
     const fetchUserHighScores = async () => {
@@ -15,10 +15,10 @@ const UserHighScore = () => {
         const data = await response.json();
         
         // Check if there are highscores in the response
-        if (data.highscores && data.highscores.length > 0) {
+        if (data.scores && data.scores.length > 0) {
           // Sort highscores in descending order
-          const sortedHighscores = data.highscores.sort((a, b) => b - a);
-          setUserData({ name: data.name, highscores: sortedHighscores });
+          const sortedHighscores = data.scores.sort((a, b) => b - a);
+          setUserData({ name: data.name, scores: sortedHighscores });
         }
       } catch (error) {
         console.error('Error fetching user highscores:', error);
@@ -32,11 +32,11 @@ const UserHighScore = () => {
 
   return (
     <div>
-      {userData.highscores.length > 0 && (
+      {userData.scores.length > 0 && (
         <div className="text-center mt-100">
           <h2 className="hyrule text-yellow-600">{userData.name}'s High Scores</h2>
           <ul className="press-start text-white">
-            {userData.highscores.map((score, index) => (
+            {userData.scores.map((score, index) => (
               <li key={index}>{score}</li>
             ))}
           </ul>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import '../output.css';
 import '../assets/css/header.css'
-import {useTypedMessage} from '../hooks'
+import { useTypedMessage } from '../hooks'
 import { useSelector } from 'react-redux';
 
 
@@ -11,22 +11,39 @@ import { useSelector } from 'react-redux';
 const Contact = () => {
 
   const userEmail = useSelector((state) => state.email);
-  
+  console.log(userEmail)
   const [ message, setMessage ] = useState({ email: userEmail, message: '' })
 
-  const submitMessage = () => {
-
+  const submitMessage = async (e) => {
+    e.preventDefault();
+    try {
+      const query = await fetch('/api/message', {
+        method: 'POST',
+        body: JSON.stringify(message),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await query.json()
+      if(result.status === 'error') {
+        setFormMessage('We could not process your message')
+      } else {
+        setFormMessage('Thank you for your message.')
+        setMessage({ email: userEmail, message: ''})
+      }
+    } catch(err) {
+      setFormMessage('Sorry, something went wrong.')
+    }
   }
 
   const handleMessageChange = (e) => {
-    setMessage( { ...message, [e.target.name]: e.target.value})
+    setMessage({ ...message, [e.target.name]: e.target.value })
   }
 
   return (
-   
+
     <div className="text-white press-start">
     <Header/>
-    <p>{userEmail}</p>
     <div className="container flex">
       <div className="row">
         <div className="w-1/2 p-5 message">
@@ -52,11 +69,10 @@ const Contact = () => {
           <div className="col-12">
             { formMessage }
           </div>
-        </div> */}
-      )
+        )}
     </div>
 
-  </div>
+    </div>
   );
 };
 

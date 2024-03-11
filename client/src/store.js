@@ -3,9 +3,10 @@ import { createStore } from "redux";
 // Initial state
 const initialState = {
   email: '',
-  battlescore: 900,
-  rpgscore: 200,
-  shooterScore: 11,
+  battlescore: 0,
+  rpgscore: 0,
+  shooterScore: 0,
+  stagename: "start"
 };
 
 // Reducer
@@ -21,6 +22,8 @@ const rootReducer = (state = initialState, action) => {
         return { ...state, rpgscore: action.payload };
         case "SET_SHOOTERSCORE":
           return { ...state, shooterScore: action.payload};
+          case "SET_STAGENAME":
+          return { ...state, stagename: action.payload};
 
     default:
       return state;

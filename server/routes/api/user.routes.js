@@ -99,8 +99,8 @@ router.get("/email/:email", async (req, res) => {
     console.log('User data:', user);
 
     if (user) {
-      const { name, highscores } = user;
-      res.status(200).json({ status: "success", name, highscores });
+      const { name, scores } = user;
+      res.status(200).json({ status: "success", name, scores });
     } else {
       res.status(404).json({ status: "error", message: "User not found" });
     }

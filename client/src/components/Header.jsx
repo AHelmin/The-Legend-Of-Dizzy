@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 
 const Header = () => {
   const userEmail = useSelector((state) => state.email);
+  const userName = useSelector((state) => state.name);
 
  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,6 +34,7 @@ const Header = () => {
   return (
     <>
     <p>{userEmail}</p>
+    <p>{userName}</p>
     <Navbar className="bg-green-800 flex w-full" style={{ height: "15%" }}>
       <div className="w-full flex flex-wrap justify-between items-center header-container px-8 press-start">
         <Nav className="mr-auto">

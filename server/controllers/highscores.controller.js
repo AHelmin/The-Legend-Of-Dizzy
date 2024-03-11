@@ -23,7 +23,7 @@ async function getHighscoresById(id) {
 
 
 async function createHighscores(data) {
-    const highscoresData = { ...data, password: hash }
+    const highscoresData = data
     try {
         return await Highscores.create(highscoresData);
     } catch (err) {

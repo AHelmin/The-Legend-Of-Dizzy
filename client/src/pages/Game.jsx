@@ -28,9 +28,9 @@ export default function Game() {
     <>
     <h5>{stageName} {scoreNow}</h5>
       <div>
-      {/* {stageName === "start" && (
+      {stageName === "start" && (
           <GameOver setStageName={setStageName} onStartClick={() => setStageName("game1") } />
-        )} */}
+        )}
         
         {/* {stageName === "start" && (
           <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} onStartClick={() => setStageName("game2") } />

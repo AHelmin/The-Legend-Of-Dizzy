@@ -2,7 +2,7 @@ import { createStore } from "redux";
 
 // Initial state
 const initialState = {
-  email: "",
+  email: '',
   battlescore: 0,
   rpgscore: 0,
   shooterScore: 0,

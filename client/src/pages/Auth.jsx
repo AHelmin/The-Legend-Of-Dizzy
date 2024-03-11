@@ -30,7 +30,7 @@ export default function Auth() {
         setFormMessage("Sorry, we couldn't sign you up. Get a life.")
       } else {
         // Dispatch email after successful response
-        dispatch({ type: 'SET_EMAIL', payload: result.email });
+        dispatch({ type: 'SET_EMAIL', payload: signupData.email });
 
         navigate("/");
       }
@@ -54,7 +54,7 @@ export default function Auth() {
         setFormMessage("We could not log you in with these credentials.")
       } else {
         // Dispatch email after successful response
-        dispatch({ type: 'SET_EMAIL', payload: result.payload._doc.email });
+        dispatch({ type: 'SET_EMAIL', payload: loginData.email });
 
         navigate("/");
       }

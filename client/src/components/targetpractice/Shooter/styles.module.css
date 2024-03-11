@@ -1,0 +1,14 @@
+.backgroundContainer {
+    width: 1800px; /* Set the width as needed */
+    height: 800px; /* Set the height as needed */
+    /* background-image: url('../src/assets/images/backgrounds/castle.jpg'); Set your image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative; /* Needed if you want to position elements inside it absolutely */
+}
+
+.App {
+    width: 100%;  /* Fill the container */
+    height: 100%; /* Fill the container */
+    position: relative; /* Set to absolute if you need to position it within the container */
+}

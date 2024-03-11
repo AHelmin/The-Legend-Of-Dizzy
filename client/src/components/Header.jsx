@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import '../output.css';
 // import '../assets/css/header.css';
+import { useSelector } from 'react-redux';
 
 
 
 
 const Header = () => {
-
+  const userEmail = useSelector((state) => state.email);
 
  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,6 +31,8 @@ const Header = () => {
   }, []); 
 
   return (
+    <>
+    <p>{userEmail}</p>
     <Navbar className="bg-green-800 flex w-full" style={{ height: "15%" }}>
       <div className="w-full flex flex-wrap justify-between items-center header-container px-8 press-start">
         <Nav className="mr-auto">
@@ -56,6 +59,7 @@ const Header = () => {
         </Nav>
       </div>
     </Navbar>
+    </>
   );
 };
 

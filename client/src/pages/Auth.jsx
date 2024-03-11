@@ -22,7 +22,7 @@ export default function Auth() {
           'Content-Type': 'application/json'
         }
       }).catch(err => {
-        setFormMessage("Sorry, we couldn't sign you up. Get a life.")
+        setFormMessage("Sorry1")
       });
 
       const result = await query.json();

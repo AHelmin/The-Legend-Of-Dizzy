@@ -1,51 +1,68 @@
-// UserHighScore.jsx
-//This needs to be re-written with model changes
-//Now it's going to have to get all highscores, display top 5 with name, change class if email matches userEmail
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import '../output.css';
 import '../assets/css/header.css';
 
 const UserHighScore = () => {
+  const [userTopScores, setUserTopScores] = useState([]);
+  const [globalTopScores, setGlobalTopScores] = useState([]);
+
   const userEmail = useSelector((state) => state.email);
-  const [userData, setUserData] = useState({ name: '', scores: [] });
+  const userName = useSelector((state) => state.name);
 
   useEffect(() => {
-    const fetchUserHighScores = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`/api/user/email/${userEmail}`);
+        const response = await fetch('/api/highscores');
         const data = await response.json();
-        
-        // Check if there are highscores in the response
-        if (data.scores && data.scores.length > 0) {
-          // Sort highscores in descending order
-          const sortedHighscores = data.scores.sort((a, b) => b - a);
-          setUserData({ name: data.name, scores: sortedHighscores });
-        }
+
+        // Extract userTopScores
+        const userScores = data.filter(item => item.email === userEmail);
+        const userTopScoresArray = userScores.map(item => item.score);
+        setUserTopScores(userTopScoresArray);
+
+        // Extract globalTopScores
+        const sortedGlobalScores = data.sort((a, b) => b.score - a.score);
+        const topGlobalScores = sortedGlobalScores.slice(0, 5);
+        setGlobalTopScores(topGlobalScores);
       } catch (error) {
-        console.error('Error fetching user highscores:', error);
+        console.error('Error fetching high scores:', error);
       }
     };
 
-    if (userEmail) {
-      fetchUserHighScores();
-    }
-  }, [userEmail]);
+  
+    
+
+    fetchData();
+  }, []); 
 
   return (
     <div>
-      {userData.scores.length > 0 && (
-        <div className="text-center mt-100">
-          <h2 className="hyrule text-yellow-600">{userData.name}'s High Scores</h2>
-          <ul className="press-start text-white">
-            {userData.scores.map((score, index) => (
-              <li key={index}>{score}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
+    {userTopScores.length > 0 && (
+      <div>
+        <h2>{userName}'s TOP SCORES</h2>
+        <ul>
+          {userTopScores.map((score, index) => (
+            <li key={index}>{score}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {globalTopScores.length > 0 && (
+      <div>
+        <h2>LEADERBOARD</h2>
+        <ul>
+          {globalTopScores.map((item, index) => (
+            <li key={index}>
+              {item.name}: {item.score}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
 };
 
 export default UserHighScore;

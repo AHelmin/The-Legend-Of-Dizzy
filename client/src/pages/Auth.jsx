@@ -84,15 +84,15 @@ export default function Auth() {
               <form className="form" onSubmit={submitSignup}>
                 <div className="form-group mb-3">
                   <label className="form-label" htmlFor="name">Name</label>
-                  <input type="text" className="form-control text-black" name="name" value={signupData?.name || ""} onChange={handleSignupChange} />
+                  <input type="text" className="form-control text-black" name="name" placeholder="Name" value={signupData?.name || ""} onChange={handleSignupChange} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="email">Email</label>
-                  <input type="text" className="form-control text-black" name="email" value={signupData?.email || ""} onChange={handleSignupChange} />
+                  <input type="text" className="form-control text-black" name="email" placeholder="Email" value={signupData?.email || ""} onChange={handleSignupChange} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="password">Password</label>
-                  <input type="password" className="form-control text-black" name="password" value={signupData?.password || ""} onChange={handleSignupChange} />
+                  <input type="password" className="form-control text-black" name="password" placeholder="Password" value={signupData?.password || ""} onChange={handleSignupChange} />
                 </div>
                 <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Signup</button>
               </form>
@@ -104,11 +104,11 @@ export default function Auth() {
               <form className="form" onSubmit={submitLogin}>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="email">Email</label>
-                  <input type="text" className="form-control text-black" name="email" value={loginData?.email || ""} onChange={handleLoginChange} />
+                  <input type="text" className="form-control text-black" name="email" placeholder="Email" value={loginData?.email || ""} onChange={handleLoginChange} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="password">Password</label>
-                  <input type="password" className="form-control text-black" name="password" value={loginData?.password || ""} onChange={handleLoginChange} />
+                  <input type="password" className="form-control text-black" name="password" placeholder="Password" value={loginData?.password || ""} onChange={handleLoginChange} />
                 </div>
                 <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Login</button>
               </form>

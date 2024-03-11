@@ -10,7 +10,7 @@ export default function Auth() {
 
   const [signupData, setSignupData] = useState({});
   const [loginData, setLoginData] = useState({});
-  const [formMessage, setFormMessage] = React.useState("");
+  const [formMessage, setFormMessage] = useState("");
 
   async function submitSignup(e) {
     e.preventDefault();

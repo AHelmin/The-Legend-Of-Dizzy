@@ -52,6 +52,7 @@ export const GameOver = () => {
         <p className="text-lg mt-2 press-start text-white">
           {useTypedMessage('Success!!  Katy and Dizzy are reunited.  GAME OVER!!!')}
           </p>
+          <p>{userName}'s Score{userFinalScore}</p>
           <div className="mt-4">
         <Link to="/home">
           <button className="btn btn-primary mr-2">Home</button>
@@ -65,14 +66,3 @@ export const GameOver = () => {
     );
   };
 
-  /*
-What this needs to do top to bottom:
-
-- Display finishing message
-
-
-- Provide button that links to a contact page
-
-- Provide a button to go Home
-
-  */

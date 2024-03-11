@@ -22,7 +22,7 @@ export default function Auth() {
           'Content-Type': 'application/json'
         }
       }).catch(err => {
-        setFormMessage("Sorry, we couldn't sign you up. Get a life.")
+        setFormMessage("Sorry1")
       });
 
       const result = await query.json();
@@ -30,7 +30,7 @@ export default function Auth() {
         setFormMessage("Sorry, we couldn't sign you up. Get a life.")
       } else {
         // Dispatch email after successful response
-        dispatch({ type: 'SET_EMAIL', payload: result.email });
+        dispatch({ type: 'SET_EMAIL', payload: signupData.email });
 
         navigate("/");
       }

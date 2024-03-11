@@ -19,6 +19,7 @@ const Header = () => {
     Cookies.remove('auth_cookie');
     setIsAuthenticated(false);
     window.location.href = '/';
+    localStorage.clear();
   };
 
   useEffect(() => {

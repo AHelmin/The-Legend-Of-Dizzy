@@ -2,11 +2,10 @@ import { createStore } from "redux";
 
 // Initial state
 const initialState = {
-  name: "",
-  email: "",
-  battlescore: 66,
-  rpgscore: 190,
-  shooterScore: 13,
+  email: '',
+  battlescore: 0,
+  rpgscore: 0,
+  shooterScore: 0,
 };
 
 // Reducer

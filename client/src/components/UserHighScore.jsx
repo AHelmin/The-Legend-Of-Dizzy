@@ -1,4 +1,6 @@
 // UserHighScore.jsx
+//This needs to be re-written with model changes
+//Now it's going to have to get all highscores, display top 5 with name, change class if email matches userEmail
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import '../output.css';

@@ -2,8 +2,9 @@ import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
 import { Battle, EndMenu, StartMenu } from '../../turnbattle';
 
-export const AppTurnBattle = () => {
+export const AppTurnBattle = (props) => {
   const [winner, setWinner] = useState();
+  const [battleScore, setBattleScore] = useState();
   const [mode, setMode] = useState('start');
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export const AppTurnBattle = () => {
 
       {mode === 'battle' && (
         <Battle
+        
           onGameEnd={winner => {
             setWinner(winner);
             setMode('gameOver');
@@ -28,7 +30,7 @@ export const AppTurnBattle = () => {
       )}
 
       {mode === 'gameOver' && !!winner && (
-        <EndMenu winner={winner} onStartClick={() => setMode('battle')} />
+        <EndMenu winner={winner} onStartClick={() => props.setStageName('game1')} />
       )}
     </div>
   );

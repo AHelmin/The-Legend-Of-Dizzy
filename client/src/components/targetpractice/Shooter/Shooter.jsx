@@ -1,20 +1,27 @@
-import React, { PureComponent, useEffect, useRef, useState } from 'react'
-import Matter from 'matter-js'
-import Shoot from '../assets/sounds/shoot.ogg'
-import Ouch from '../assets/sounds/gruntsound.wav'
 
-export default function Matterjs() {
+import styles from './styles.module.css'
+import React, { PureComponent, useEffect, useRef, useState } from 'react'
+import { Timer } from '../../targetpractice'
+import Matter from 'matter-js'
+import Shoot from '../../../assets/sounds/shoot.ogg'
+import Ouch from '../../../assets/sounds/gruntsound.wav'
+import Jonathon from '../../../assets/images/sprites/enemy.png'
+import Arrow from '../../../assets/images/sprites/arrow_cropped.png'
+import Floor from '../../../assets/images/sprites/tiled_stone_wall.png'
+import Character from '../../../assets/images/sprites/character_resized.png'
+
+export default function Shooter() {
 
     const sceneRef = useRef(null)
 
     const playerStartHealth = 100
     const villainStartHealth = 100
     const [playerHealth, setPlayerHealth] = useState(playerStartHealth);
-    const [villainHealth, setVillainHealth] = useState(villainStartHealth);
+    const [shootingScore, setShootingScore] = useState(0);
 
-    // useEffect(() => {
-    //     console.log(villainHealth)
-    // },[villainHealth])
+    useEffect(() => {
+        console.log(shootingScore)
+    }, [shootingScore])
 
     useEffect(() => {
 
@@ -31,12 +38,12 @@ export default function Matterjs() {
 
             // create a renderer
             let render = Render.create({
-                element: document.querySelector('.App'),
+                element: document.querySelector('#App'),
                 engine: engine,
 
                 options: {
-                    width: 1800,
-                    height: 800,
+                    width: 1920,
+                    height: 950,
                     wireframes: false,
                     background: 'black'
                 }
@@ -49,27 +56,21 @@ export default function Matterjs() {
             const villainCategory = 0x0008
             const villainArrowCategory = 0x0016
 
-            let villainHP = 100;
-
-            const selectDiv = document.querySelector('.App')
+            const selectDiv = document.querySelector("#App")
 
             const floorOptions = {
                 isStatic: true,
                 render: {
                     sprite: {
-                        texture: '../src/assets/images/sprites/tiled_stone_wall.png',
+                        texture: Floor,
                         xScale: 1,
                         yScale: 1
                     }
                 }
             }
 
-            // create two boxes and a ground
-            //     let boxA = Bodies.rectangle(400, 200, 80, 80);
-            //    let boxB = Bodies.rectangle(450, 50, 80, 80);
-            let ground = Bodies.rectangle(1200, 500, 300, 20, { isStatic: true });
-            let floor = Bodies.rectangle(900, 700, 1800, 50, floorOptions)
-
+            //create the floor
+            let floor = Bodies.rectangle(900, 900, 1800, 50, floorOptions)
 
             let mouse = Matter.Mouse.create(render.canvas)
             let mouseConstraint = Matter.MouseConstraint.create(engine, {
@@ -84,7 +85,7 @@ export default function Matterjs() {
             const arrowOptions = {
                 render: {
                     sprite: {
-                        texture: '../src/assets/images/sprites/arrow_cropped.png',
+                        texture: Arrow,
                         xScale: 1,
                         yScale: 1
                     }
@@ -95,24 +96,10 @@ export default function Matterjs() {
                 },
             }
 
-            const villainArrowOptions = {
-                render: {
-                    sprite: {
-                        texture: '../src/assets/images/sprites/arrow_rotated.png',
-                        xScale: 1,
-                        yScale: 1
-                    }
-                },
-                collisionFilter: {
-                    category: villainArrowCategory,
-                    mask: defaultCategory | characterCategory
-                },
-            }
-
             const characterOptions = {
                 render: {
                     sprite: {
-                        texture: '../src/assets/images/sprites/character_resized.png',
+                        texture: Character,
                         xScale: 1,
                         yScale: 1
                     }
@@ -140,40 +127,39 @@ export default function Matterjs() {
             const polygonOptions = {
                 render: {
                     sprite: {
-                        texture: '../src/assets/images/sprites/enemy.png',
+                        texture: Jonathon,
                         xScale: 1.3,
                         yScale: 1.3
                     }
                 }
             }
 
-            let villain = Bodies.rectangle(1500, 600, 50, 200, villainOptions)
-            let character = Bodies.rectangle(300, 600, 50, 200, characterOptions)
+            let target = Bodies.rectangle(1500, 600, 50, 200)
+            let character = Bodies.rectangle(300, 800, 50, 200, characterOptions)
             Matter.Body.setInertia(character, Infinity)
             let arrow = Bodies.rectangle(350, 600, 100, 20, arrowOptions)
-            let villainArrow = Bodies.rectangle(1000, 600, 50, 200, villainArrowOptions)
+            // let villainArrow = Bodies.rectangle(1000, 600, 50, 200, villainArrowOptions)
             Matter.Body.setInertia(arrow, Infinity)
-            Matter.Body.setInertia(villain, Infinity)
-            Matter.Body.setInertia(villainArrow, Infinity)
-            console.log(arrow)
+            // Matter.Body.setInertia(villain, Infinity)
+            // Matter.Body.setInertia(villainArrow, Infinity)
 
             //setup arrow position for firing logic
             let shootingArrow = arrow;
-            let villainShootingArrow = villainArrow
-            let initialX = character.position.x
-            let initialY = character.position.y - 30
-            let villainInitialX = villain.position.x
-            let villainInitialY = villain.position.y - 30
+            // let villainShootingArrow = villainArrow
+            // let initialX = character.position.x
+            // let initialY = character.position.y - 30
+            // let villainInitialX = villain.position.x
+            // let villainInitialY = villain.position.y - 30
 
             //make villain arrow always be at the villain location
-            Matter.Events.on(engine, 'beforeUpdate', () => {
-                if (!villainShootingArrow.isShot) {
-                    Matter.Body.setPosition(villainShootingArrow, {
-                        x: villain.position.x,
-                        y: villain.position.y - 30
-                    })
-                }
-            })
+            // Matter.Events.on(engine, 'beforeUpdate', () => {
+            //     if (!villainShootingArrow.isShot) {
+            //         Matter.Body.setPosition(villainShootingArrow, {
+            //             x: villain.position.x,
+            //             y: villain.position.y - 30
+            //         })
+            //     }
+            // })
 
             //make character arrow always be at the character location
             Matter.Events.on(engine, 'beforeUpdate', () => {
@@ -221,82 +207,9 @@ export default function Matterjs() {
                 const ouchSound = new Audio(Ouch)
                 const pairs = event.pairs
                 pairs.forEach(pair => {
-                    if ((pair.bodyA === arrow && pair.bodyB === villain && Math.abs(character.position.x - arrow.position.x) > 15) || (pair.bodyA === villain && pair.bodyB === arrow && Math.abs(character.position.x - arrow.position.x) > 15)) {
+                    if ((pair.bodyA === arrow && pair.bodyB === target && Math.abs(character.position.x - arrow.position.x) > 15) || (pair.bodyA === target && pair.bodyB === arrow && Math.abs(character.position.x - arrow.position.x) > 15)) {
                         console.log('Arrow collided with villain')
-                        setVillainHealth(h => (h - 25 > 0 ? h - 25 : 0))
-                        villainHP -= 25
-                        console.log(villainHP)
-                        ouchSound.play()
-                    }
-                })
-            })
-
-
-
-            let villainShootInterval;
-
-            const startVillainShooting = () => {
-                villainShootInterval = setInterval(() => {
-                    if (villainHP > 0) {
-                        villainShoot();
-                    } else {
-                        clearInterval(villainShootInterval);
-                    }
-                }, 5000);
-            };
-
-            // Start shooting after initial delay
-            setTimeout(() => startVillainShooting(), 5000);
-
-            function villainShoot() {
-                if (villainHP > 0) {
-                    if (!villainShootingArrow.isShot) {
-                        const shootSound = new Audio(Shoot)
-                        const angle = 3.2
-                        // Determine the force magnitude and calculate the force vector
-                        let forceMagnitude = 0.11 * villainShootingArrow.mass;
-                        let forceVector = {
-                            x: forceMagnitude * Math.cos(angle),
-                            y: forceMagnitude * Math.sin(angle)
-                        };
-
-                        // Apply the force to shoot the arrow
-                        Matter.Body.applyForce(villainShootingArrow, villainShootingArrow.position, forceVector);
-                        // if (villainHP > 0) {
-                        //     shootSound.play();
-                        // }
-                        // Mark the arrow as shot
-                        villainShootingArrow.isShot = true;
-
-                        // Reset the arrow after a delay or when a certain condition is met
-                        setTimeout(() => {
-                            if (villainShootingArrow.isShot) {
-                                // Reset position
-                                Matter.Body.setPosition(villainShootingArrow, { x: villain.position.x, y: villain.position.y - 30 });
-                                // Reset velocity
-                                Matter.Body.setVelocity(villainShootingArrow, { x: 0, y: 0 });
-                                // Reset the isShot flag
-                                villainShootingArrow.isShot = false;
-                            }
-                        }, 3000);
-                    }
-                }
-            };
-
-            // if (villainHP > 0) {
-            //     setTimeout(() => villainShoot(villainHP), 5000)
-            // }
-
-
-            //listen for collision between villainArrow and character
-            Matter.Events.on(engine, 'collisionStart', event => {
-                const ouchSound = new Audio(Ouch)
-                const pairs = event.pairs
-                pairs.forEach(pair => {
-                    if ((pair.bodyA === villainArrow && pair.bodyB === character) || (pair.bodyA === character && pair.bodyB === villainArrow)) {
-                        console.log('Arrow collided with villain')
-                        setCharacterHealth(h => (h - 25 > 0 ? h - 25 : 0))
-
+                        setShootingScore(newScore => newScore + 5)
                         ouchSound.play()
                     }
                 })
@@ -320,7 +233,7 @@ export default function Matterjs() {
                 }
             })
 
-            let stack = Matter.Composites.stack(1100, 270, 4, 4, 0, 0, function (x, y) {
+            let stack = Matter.Composites.stack(1100, 500, 4, 4, 0, 0, function (x, y) {
                 return Bodies.polygon(x, y, 8, 30, polygonOptions)
             });
 
@@ -338,7 +251,7 @@ export default function Matterjs() {
             // })
 
             // add all of the bodies to the world
-            Composite.add(engine.world, [arrow, mouseConstraint, character, floor, villainArrow, villain]);
+            Composite.add(engine.world, [stack, arrow, mouseConstraint, character, target, floor]);
 
 
             // // run the renderer
@@ -359,7 +272,7 @@ export default function Matterjs() {
                 render.canvas.remove();
                 render.canvas = null;
                 render.context = null;
-                clearInterval(villainShootInterval);
+               
                 render.textures = {};
                 selectDiv.removeEventListener('click', (e) => {
                     let shootingArrow = arrows[currentArrow];
@@ -395,8 +308,10 @@ export default function Matterjs() {
     }, [])
 
     return (
-        <div className='background-container'>
-            <div className='App' tabIndex='0' ref={sceneRef}>
+        <div className={styles.backgroundContainer}>
+            
+            <div className={styles.App} id='App' tabIndex='0' ref={sceneRef}>
+            <Timer />
                 <canvas></canvas>
             </div>
         </div>

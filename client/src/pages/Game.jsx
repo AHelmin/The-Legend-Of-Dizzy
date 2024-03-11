@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import { AppTurnBattle, StartMenu } from "../components/turnbattle";
 import { OpenField } from "../../snes-rpg/levels/OpenField";
 import Canvas from "../components/Canvas";
-import Matterjs from '../components/matter'
+import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
 
 import { useAppCtx } from "../providers/AppProvider";
 
@@ -41,7 +41,7 @@ export default function Game() {
           )}
       </div>
     <AppTurnBattle/>
-    <Matterjs />
+    <TargetPractice />
     </>
   );
 }

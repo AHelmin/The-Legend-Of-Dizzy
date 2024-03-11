@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const Contact = () => {
 
   const userEmail = useSelector((state) => state.email);
-  console.log(userEmail)
+  
   const [ message, setMessage ] = useState({ email: userEmail, message: '' })
 
   const submitMessage = () => {
@@ -26,6 +26,7 @@ const Contact = () => {
    
     <div className="text-white press-start">
     <Header/>
+    <p>{userEmail}</p>
     <div className="container flex">
       <div className="row">
         <div className="w-1/2 p-5 message">

@@ -15,54 +15,51 @@ const UserHighScore = () => {
       try {
         const response = await fetch('/api/highscores');
         const data = await response.json();
-
+        
         // Extract userTopScores
-        const userScores = data.filter(item => item.email === userEmail);
-        const userTopScoresArray = userScores.map(item => item.score);
+        const userScores = data.payload.filter(item => item.email === userEmail);
+        const sortedUserTopScores = userScores.sort((a, b) => b.score - a.score);
+        const userTopScoresArray = sortedUserTopScores.slice(0, 5).map(item => item.score);
         setUserTopScores(userTopScoresArray);
 
         // Extract globalTopScores
-        const sortedGlobalScores = data.sort((a, b) => b.score - a.score);
+        const sortedGlobalScores = data.payload.sort((a, b) => b.score - a.score);
         const topGlobalScores = sortedGlobalScores.slice(0, 5);
         setGlobalTopScores(topGlobalScores);
       } catch (error) {
         console.error('Error fetching high scores:', error);
       }
     };
-
-  
-    
-
     fetchData();
-  }, []); 
+  }, [userEmail]); 
 
   return (
     <div>
-    {userTopScores.length > 0 && (
-      <div>
-        <h2>{userName}'s TOP SCORES</h2>
-        <ul>
-          {userTopScores.map((score, index) => (
-            <li key={index}>{score}</li>
-          ))}
-        </ul>
-      </div>
-    )}
+      {userTopScores.length > 0 && (
+        <div className="text-center">
+          <h2 className="text-4xl font-bold hyrule text-yellow-600">{userName}'s TOP SCORES</h2>
+          <ul className="press-start text-white text-lg">
+            {userTopScores.map((score, index) => (
+              <li key={index}>{score}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-    {globalTopScores.length > 0 && (
-      <div>
-        <h2>LEADERBOARD</h2>
-        <ul>
-          {globalTopScores.map((item, index) => (
-            <li key={index}>
-              {item.name}: {item.score}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </div>
-);
+      {globalTopScores.length > 0 && (
+        <div  className="text-center">
+          <h2 className="text-4xl font-bold hyrule text-yellow-600">LEADERBOARD</h2>
+          <ul>
+            {globalTopScores.map((item, index) => (
+              <li  className="press-start text-white text-lg" key={index}>
+                {item.name}: {item.score}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default UserHighScore;

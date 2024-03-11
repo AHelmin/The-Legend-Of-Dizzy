@@ -3,9 +3,9 @@ import { createStore } from "redux";
 // Initial state
 const initialState = {
   email: '',
-  battlescore: 0,
-  rpgscore: 0,
-  shooterScore: 0,
+  battlescore: 900,
+  rpgscore: 200,
+  shooterScore: 11,
 };
 
 // Reducer

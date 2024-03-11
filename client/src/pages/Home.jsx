@@ -5,7 +5,7 @@ import zeldadog from '../assets/images/zeldadog.jpg';
 import '../output.css';
 import '../assets/css/header.css'
 import {useTypedMessage} from '../hooks'
-import Leaderboard from '../components/Leaderboard';
+
 
 
 const Home = () => {

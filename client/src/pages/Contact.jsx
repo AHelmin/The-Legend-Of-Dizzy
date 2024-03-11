@@ -32,6 +32,7 @@ const Contact = () => {
           <div>
             <form className="form" onSubmit={submitMessage}>
               <div className="mb-3">
+              <p>{userEmail}</p>
                 <label className="form-label" htmlFor="email">Email</label>
                 <input type="text" className="form-control text-black" name="email" placeholder="Email" value={message?.email || ""} onChange={handleMessageChange} />
               </div>
@@ -39,7 +40,7 @@ const Contact = () => {
                 <label className="form-label" htmlFor="password">Message</label>
                 <textarea type="text" className="form-control text-black" name="message" placeholder="Message" value={message?.message || ""} onChange={handleMessageChange} />
               </div>
-              <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Login</button>
+              <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Submit</button>
             </form>
           </div>
         </div>

@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+
+import {ChangeScore} from "../../src/components/ChangeScore";
+
 var map = {
     cols: 36,
     rows: 28,
@@ -238,7 +242,8 @@ Hero.prototype._door = async function (dirx, diry) {
       sound.play();
       openedDoor = true;
       sound.addEventListener("ended", (event) => {
-          window.location.href = "/level2";
+          document.location.replace("/snes-rpg/levels/dungeon.html")
+          let currentScore = ChangeScore(10);
       })
     }
   }

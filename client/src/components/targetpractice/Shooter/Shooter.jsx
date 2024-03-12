@@ -47,10 +47,9 @@ export default function Shooter({ onScoreUpdate }) {
                 canvas: canvas,
                 element: document.querySelector('#App'),
                 engine: engine,
-
                 options: {
-                    width: 1920,
-                    height: 900,
+                    width: window.innerWidth,
+                    height: window.innerHeight ,
                     wireframes: false,
                     background: Background
                 }
@@ -260,6 +259,27 @@ export default function Shooter({ onScoreUpdate }) {
             // // run the renderer
             Render.run(render);
 
+            //add event listener for window resize
+            window.addEventListener('resize', resizeHandler)
+            function resizeHandler() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                console.log(canvas.height)
+                console.log(canvas.width)
+                render.options.width = canvas.width
+                render.options.height = canvas.height
+
+                // Define the bounds
+                // const bounds = {
+                //     min: { x: 0, y: 0 },
+                //     max: { x: window.innerWidth, y: window.innerHeight }
+                // };
+
+                // Update the renderer view
+                // Render.lookAt(render.options, bounds);
+                console.log('resize')
+            }
+
             // create runner
             var runner = Runner.create();
 
@@ -285,7 +305,7 @@ export default function Shooter({ onScoreUpdate }) {
     return (
         // <div className={styles.backgroundContainer}>          
         <div className={styles.App} id='App' tabIndex='0' >
-            <canvas ref={sceneRef} />
+            <canvas className={styles.canvas} ref={sceneRef} />
         </div>
         // {/* </div> */}
     )

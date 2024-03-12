@@ -1,11 +1,13 @@
 .timer {
     position: absolute;
-    top: 5%;
+    top: 35%;
     left: 50%;
     transform: translateX(-50%);
     /* padding: 10px; */
     background-color: none;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     color: white;
+    background-color: black;
+    padding: .5rem;
     /* other styles */
   }

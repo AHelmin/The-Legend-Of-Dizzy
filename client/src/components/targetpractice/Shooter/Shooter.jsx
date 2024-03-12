@@ -26,6 +26,8 @@ export default function Shooter({ onScoreUpdate }) {
         onScoreUpdate(shootingScore)
     }, [shootingScore])
 
+   
+
     useEffect(() => {
 
         const canvas = sceneRef.current
@@ -45,15 +47,19 @@ export default function Shooter({ onScoreUpdate }) {
             // create a renderer
             let render = Render.create({
                 canvas: canvas,
-                element: document.querySelector('#App'),
+                element: selectDiv,
                 engine: engine,
                 options: {
-                    width: window.innerWidth,
-                    height: window.innerHeight ,
+                    width: 889,
+                    height: 500,
                     wireframes: false,
-                    background: Background
+                    background: Background,
+                    pixelRatio: window.devicePixelRatio
                 }
             });
+
+            const startingCanvasWidth = selectDiv.clientWidth
+            const startingCanvasHeight = selectDiv.clientHeight
 
             //define bitfields
             const defaultCategory = 0x0001
@@ -67,8 +73,8 @@ export default function Shooter({ onScoreUpdate }) {
                 render: {
                     sprite: {
                         texture: Floor,
-                        xScale: 1,
-                        yScale: 1
+                        xScale: .5,
+                        yScale: .5
                     }
                 }
             }
@@ -77,8 +83,8 @@ export default function Shooter({ onScoreUpdate }) {
                 render: {
                     sprite: {
                         texture: Wall,
-                        xScale: 1,
-                        yScale: 1
+                        xScale: .5,
+                        yScale: .55
                     }
                 }
             }
@@ -88,16 +94,16 @@ export default function Shooter({ onScoreUpdate }) {
                 render: {
                     sprite: {
                         texture: Wall,
-                        xScale: 1,
-                        yScale: 1
+                        xScale: .5,
+                        yScale: .55
                     }
                 }
             }
 
             //create the floor
-            let floor = Bodies.rectangle(900, 880, 1800, 50, floorOptions)
-            let leftWall = Bodies.rectangle(0, 450, 40, 900, leftWallOptions)
-            let rightWall = Bodies.rectangle(1920, 450, 40, 900, rightWallOptions)
+            let floor = Bodies.rectangle(417.19, 487.41,834.38, 23.15, floorOptions)
+            let leftWall = Bodies.rectangle(0, 228.33,18.54, 416.67, leftWallOptions)
+            let rightWall = Bodies.rectangle(890, 228.33,18.54, 416.67, rightWallOptions)
             let mouse = Matter.Mouse.create(render.canvas)
             let mouseConstraint = Matter.MouseConstraint.create(engine, {
                 mouse: mouse,
@@ -112,8 +118,8 @@ export default function Shooter({ onScoreUpdate }) {
                 render: {
                     sprite: {
                         texture: Arrow,
-                        xScale: 1,
-                        yScale: 1
+                        xScale: .5,
+                        yScale: .5
                     }
                 },
                 collisionFilter: {
@@ -126,8 +132,8 @@ export default function Shooter({ onScoreUpdate }) {
                 render: {
                     sprite: {
                         texture: Character,
-                        xScale: 0.6,
-                        yScale: 0.6
+                        xScale: 0.3,
+                        yScale: 0.3
                     }
                 },
                 collisionFilter: {
@@ -140,8 +146,8 @@ export default function Shooter({ onScoreUpdate }) {
                 render: {
                     sprite: {
                         texture: Target,
-                        xScale: 0.6,
-                        yScale: 0.6
+                        xScale: 0.3,
+                        yScale: 0.3
                     }
                 },
                 collisionFilter: {
@@ -155,17 +161,17 @@ export default function Shooter({ onScoreUpdate }) {
                 render: {
                     sprite: {
                         texture: Jonathon,
-                        xScale: 1.3,
-                        yScale: 1.3
+                        xScale: .6,
+                        yScale: .6
                     }
                 }
             }
 
-            let target = Bodies.rectangle(1500, 750, 50, 200, targetOptions)
-            let character = Bodies.rectangle(300, 800, 50, 200, characterOptions)
+            let target = Bodies.rectangle(695.31, 427.22,23.18, 92.59, targetOptions)
+            let character = Bodies.rectangle(139.06, 370.37,24.18, 82.59, characterOptions)
             Matter.Body.setInertia(character, Infinity)
             Matter.Body.setInertia(target, Infinity)
-            let arrow = Bodies.rectangle(350, 600, 100, 20, arrowOptions)
+            let arrow = Bodies.rectangle(162.24, 277.78,46.35, 9.26, arrowOptions)
             Matter.Body.setInertia(arrow, Infinity)
             Matter.Body.setAngularVelocity(arrow, 0);
 
@@ -177,7 +183,7 @@ export default function Shooter({ onScoreUpdate }) {
                 if (!shootingArrow.isShot) {
                     Matter.Body.setPosition(shootingArrow, {
                         x: character.position.x,
-                        y: character.position.y - 30
+                        y: character.position.y - 10
                     });
                 }
             })
@@ -185,14 +191,13 @@ export default function Shooter({ onScoreUpdate }) {
             //add listeners for touch and click
             selectDiv.addEventListener('click', shootArrow)
             selectDiv.addEventListener('touchstart', shootArrow)
-
             //add listener for click to shoot arrow
             function shootArrow(e) {
                 const shootSound = new Audio(Shoot)
                 if (!shootingArrow.isShot) {
-                    const angle = 6
+                    const angle = 5.7
                     // Determine the force magnitude and calculate the force vector
-                    let forceMagnitude = 0.11 * shootingArrow.mass;
+                    let forceMagnitude = 0.06 * shootingArrow.mass;
                     let forceVector = {
                         x: forceMagnitude * Math.cos(angle),
                         y: forceMagnitude * Math.sin(angle)
@@ -208,7 +213,7 @@ export default function Shooter({ onScoreUpdate }) {
                     // Reset the arrow after a delay or when a certain condition is met
                     setTimeout(() => {
                         // Reset position
-                        Matter.Body.setPosition(shootingArrow, { x: character.position.x, y: character.position.y - 30 });
+                        Matter.Body.setPosition(shootingArrow, { x: character.position.x, y: character.position.y - 10 });
                         // Reset velocity
                         Matter.Body.setVelocity(shootingArrow, { x: 0, y: 0 });
                         // Reset the isShot flag
@@ -232,14 +237,14 @@ export default function Shooter({ onScoreUpdate }) {
             selectDiv.addEventListener('keydown', (e) => {
                 if (e.code === 'KeyD' || e.code === 'ArrowRight') {
                     e.preventDefault()
-                    Matter.Body.setVelocity(character, { x: 5, y: character.velocity.y })
+                    Matter.Body.setVelocity(character, { x: 4, y: character.velocity.y })
                 } else if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
                     e.preventDefault()
-                    Matter.Body.setVelocity(character, { x: -5, y: character.velocity.y })
-                } else if (Math.abs(character.position.y - floor.position.y) < 155) {
+                    Matter.Body.setVelocity(character, { x: -4, y: character.velocity.y })
+                } else if (Math.abs(character.position.y - floor.position.y) < 105) {
                     if (e.code === 'Space') {
                         e.preventDefault()
-                        Matter.Body.applyForce(character, character.position, { x: 0, y: -0.5 })
+                        Matter.Body.applyForce(character, character.position, { x: 0, y: -0.08   })
                     }
                 }
                 else {
@@ -247,8 +252,8 @@ export default function Shooter({ onScoreUpdate }) {
                 }
             })
 
-            let stack = Matter.Composites.stack(1100, 500, 4, 4, 0, 0, function (x, y) {
-                return Bodies.polygon(x, y, 8, 30, polygonOptions)
+            let stack = Matter.Composites.stack(509.90, 231.48, 4, 4, 0, 0, function (x, y) {
+                return Bodies.polygon(x, y, 8, 15, polygonOptions)
             });
 
             // add all of the bodies to the world
@@ -257,24 +262,38 @@ export default function Shooter({ onScoreUpdate }) {
             // // run the renderer
             Render.run(render);
 
-            //add event listener for window resize
+            //add event listener for window and game object resize
             window.addEventListener('resize', resizeHandler)
             function resizeHandler() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                console.log(canvas.height)
-                console.log(canvas.width)
-                render.options.width = canvas.width
-                render.options.height = canvas.height
+                const scaleX = selectDiv.getBoundingClientRect().width / startingCanvasWidth
+                const scaleY = selectDiv.getBoundingClientRect().height / startingCanvasHeight
 
-                // Define the bounds
-                // const bounds = {
-                //     min: { x: 0, y: 0 },
-                //     max: { x: window.innerWidth, y: window.innerHeight }
-                // };
+                //update canvas size and renderer size
+                render.bounds.max.x = selectDiv.getBoundingClientRect().width;
+                render.bounds.max.y = selectDiv.getBoundingClientRect().height;
+                render.options.width = selectDiv.getBoundingClientRect().width;
+                render.options.height = selectDiv.getBoundingClientRect().height;
+                render.canvas.width = selectDiv.getBoundingClientRect().width;
+                render.canvas.height = selectDiv.getBoundingClientRect().height;
 
-                // Update the renderer view
-                // Render.lookAt(render.options, bounds);
+                // Resize and reposition game objects
+                Matter.Body.scale(floor, scaleX, scaleY);
+                Matter.Body.scale(leftWall, scaleX, scaleY);
+                Matter.Body.scale(rightWall, scaleX, scaleY);
+                Matter.Body.scale(character, scaleX, scaleY);
+                Matter.Body.scale(arrow, scaleX, scaleY);
+                Matter.Body.scale(target, scaleX, scaleY);
+                Matter.Bodies.scale(stack, scaleX, scaleY);
+
+                Matter.Body.setPosition(floor, { x: floor.position.x * scaleX, y: floor.position.y * scaleY });
+                Matter.Body.setPosition(leftWall, { x: leftWall.position.x * scaleX, y: leftWall.position.y * scaleY });
+                Matter.Body.setPosition(rightWall, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
+                Matter.Body.setPosition(character, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
+                Matter.Body.setPosition(arrow, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
+                Matter.Body.setPosition(target, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
+                Matter.Bodies.setPosition(stack, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
+
+                Matter.Render.setPixelRatio(render, window.devicePixelRatio);
                 console.log('resize')
             }
 

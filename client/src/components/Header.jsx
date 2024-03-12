@@ -3,13 +3,17 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import '../output.css';
-import '../assets/css/header.css';
+// import '../assets/css/header.css';
+import { useSelector } from 'react-redux';
 
 
 
 
 const Header = () => {
-
+  const userEmail = useSelector((state) => state.email);
+  const userName = useSelector((state) => state.name);
+  const stageName = useSelector((state) => state.stagename);
+  const shooterScore = useSelector((state) => state.shooterScore);
 
  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,6 +23,7 @@ const Header = () => {
     Cookies.remove('auth_cookie');
     setIsAuthenticated(false);
     window.location.href = '/';
+    localStorage.clear();
   };
 
   useEffect(() => {
@@ -29,16 +34,22 @@ const Header = () => {
   }, []); 
 
   return (
-    <Navbar className="bg-green-800" style={{ height: '80px' }}>
-      <div className="w-full flex justify-between items-center header-container px-8 press-start">
+    <>
+    <p>{userEmail}</p>
+    <p>{userName}</p>
+    <p>{stageName}</p>
+    <p>{shooterScore}</p>
+    
+    <Navbar className="bg-green-800 flex w-full" style={{ height: "15%" }}>
+      <div className="w-full flex flex-wrap justify-between items-center header-container px-8 press-start">
         <Nav className="mr-auto">
           {/* Conditionally set the 'to' prop based on isAuthenticated */}
           <Nav.Link as={Link} to={isAuthenticated ? "/game" : "/auth"} className="text-white">
             Play!
           </Nav.Link>
         </Nav>
-        <div className="flex items-center legend-of-dizzy-container">
-          <p className="legend-of-dizzy hyrule text-yellow-600">The Legend of Dizzy</p>
+        <div className="flex text-center  legend-of-dizzy-container">
+        <Nav.Link as={Link} to="/" className="legend-of-dizzy hyrule text-yellow-600">The Legend of Dizzy</Nav.Link>
         </div>
         <Nav>
           {isAuthenticated ? (
@@ -55,6 +66,7 @@ const Header = () => {
         </Nav>
       </div>
     </Navbar>
+    </>
   );
 };
 

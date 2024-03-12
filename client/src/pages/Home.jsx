@@ -7,6 +7,7 @@ import '../assets/css/header.css'
 import {useTypedMessage} from '../hooks'
 
 
+
 const Home = () => {
   return (
     <div>
@@ -27,7 +28,7 @@ const Home = () => {
         </div>
       </div>
       <UserHighScore/>
-    
+      
     </div>
   );
 };

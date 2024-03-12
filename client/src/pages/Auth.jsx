@@ -10,7 +10,7 @@ export default function Auth() {
 
   const [signupData, setSignupData] = useState({});
   const [loginData, setLoginData] = useState({});
-  const [formMessage, setFormMessage] = React.useState("");
+  const [formMessage, setFormMessage] = useState("");
 
   async function submitSignup(e) {
     e.preventDefault();
@@ -22,7 +22,7 @@ export default function Auth() {
           'Content-Type': 'application/json'
         }
       }).catch(err => {
-        setFormMessage("Sorry, we couldn't sign you up. Get a life.")
+        setFormMessage("Sorry1")
       });
 
       const result = await query.json();
@@ -30,7 +30,8 @@ export default function Auth() {
         setFormMessage("Sorry, we couldn't sign you up. Get a life.")
       } else {
         // Dispatch email after successful response
-        dispatch({ type: 'SET_EMAIL', payload: result.email });
+        dispatch({ type: 'SET_EMAIL', payload: signupData.email });
+        dispatch({ type: 'SET_NAME', payload: signupData.name });
 
         navigate("/");
       }
@@ -55,6 +56,7 @@ export default function Auth() {
       } else {
         // Dispatch email after successful response
         dispatch({ type: 'SET_EMAIL', payload: result.payload._doc.email });
+        dispatch({ type: 'SET_NAME', payload: result.payload._doc.name });
 
         navigate("/");
       }
@@ -84,15 +86,15 @@ export default function Auth() {
               <form className="form" onSubmit={submitSignup}>
                 <div className="form-group mb-3">
                   <label className="form-label" htmlFor="name">Name</label>
-                  <input type="text" className="form-control text-black" name="name" value={signupData?.name || ""} onChange={handleSignupChange} />
+                  <input type="text" className="form-control text-black" name="name" placeholder="Name" value={signupData?.name || ""} onChange={handleSignupChange} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="email">Email</label>
-                  <input type="text" className="form-control text-black" name="email" value={signupData?.email || ""} onChange={handleSignupChange} />
+                  <input type="text" className="form-control text-black" name="email" placeholder="Email" value={signupData?.email || ""} onChange={handleSignupChange} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="password">Password</label>
-                  <input type="password" className="form-control text-black" name="password" value={signupData?.password || ""} onChange={handleSignupChange} />
+                  <input type="password" className="form-control text-black" name="password" placeholder="Password" value={signupData?.password || ""} onChange={handleSignupChange} />
                 </div>
                 <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Signup</button>
               </form>
@@ -104,11 +106,11 @@ export default function Auth() {
               <form className="form" onSubmit={submitLogin}>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="email">Email</label>
-                  <input type="text" className="form-control text-black" name="email" value={loginData?.email || ""} onChange={handleLoginChange} />
+                  <input type="text" className="form-control text-black" name="email" placeholder="Email" value={loginData?.email || ""} onChange={handleLoginChange} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="password">Password</label>
-                  <input type="password" className="form-control text-black" name="password" value={loginData?.password || ""} onChange={handleLoginChange} />
+                  <input type="password" className="form-control text-black" name="password" placeholder="Password" value={loginData?.password || ""} onChange={handleLoginChange} />
                 </div>
                 <button type="submit" className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Login</button>
               </form>

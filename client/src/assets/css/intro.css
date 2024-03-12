@@ -7,3 +7,7 @@ body {
 .click-anywhere {
   font-size: 100%;
 }
+
+.evil {
+  color: red;
+}

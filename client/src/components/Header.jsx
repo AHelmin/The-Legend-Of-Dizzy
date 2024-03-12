@@ -17,6 +17,7 @@ const Header = () => {
   const rpgScore = useSelector((state) => state.rpgscore);
   const shooterScore = useSelector((state) => state.shooterScore);
 
+  
  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -29,8 +30,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const authCookie = Cookies.get('auth_cookie');
-    if (authCookie) {
+    if (userName) {
       setIsAuthenticated(true);
     }
   }, []); 
@@ -38,12 +38,7 @@ const Header = () => {
   return (
     <>
     
-    <p>NAME: {userName}</p>
-    <p>EMAIL:{userEmail}</p>
-    <p>STAGE:{stageName}</p>
-    <p>SHOOTERSCORE:{shooterScore}</p>
-    <p>BATTLESCORE:{battleScore}</p>
-    <p>RPGSCORE:{rpgScore}</p>
+    <p>NAME: {userName} &nbsp; EMAIL: {userEmail} &nbsp; STAGE: {stageName}</p>
     <Navbar className="bg-green-800 flex w-full" style={{ height: "15%" }}>
       <div className="w-full flex flex-wrap justify-between items-center header-container px-8 press-start">
         <Nav className="mr-auto">

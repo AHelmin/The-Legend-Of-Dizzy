@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import Contact from '../pages/Contact';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
+import katyDizzy from "../assets/images/sprites/katy-dizzy.png"
 
 
 
@@ -56,18 +57,33 @@ export const GameOver = () => {
   
     return (
       <div>
-        <p className="text-lg mt-2 press-start text-white">
-          {useTypedMessage('Success!!  Katy and Dizzy are reunited.  GAME OVER!!!')}
+        <p className="big-text mt-2 press-start text-white text-center">
+          {useTypedMessage('Success!!  Katy and Dizzy are reunited!!!!!')}
           </p>
-          <p>{userName}'s Score{userFinalScore}</p>
-          <div className="mt-4">
-        <Link to="/home">
-          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule" onClick={changeStageStart}>Home</button>
-        </Link>
-        <Link to="/contact">
-          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule" onClick={changeStageStart}>Contact Us</button>
-        </Link>
-      </div>
+          <img
+          src={katyDizzy}
+          alt="Image of Katy and Dizzy reunited"
+          className="mx-auto h-auto max-w-lg"
+        />
+          <p className="very-big-text mt-2 press-start text-red-700 text-center">
+          {useTypedMessage('GAME OVER!!!!')}
+          </p>
+          <p className="hyrule text-yellow-400 very-big-text text-center">{userName}'s Final Score is {userFinalScore}</p>
+          
+          
+          
+          <div className="mt-4 flex justify-center">
+  <div className="mx-4">
+    <Link to="/home">
+      <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule" onClick={changeStageStart}>Home</button>
+    </Link>
+  </div>
+  <div className="mx-4">
+    <Link to="/contact">
+      <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule" onClick={changeStageStart}>Contact Us</button>
+    </Link>
+  </div>
+</div>
 
       </div>
     );

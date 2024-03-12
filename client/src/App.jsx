@@ -2,11 +2,9 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cookie from "js-cookie";
 import "regenerator-runtime/runtime";
-// import AppProvider from "./providers/AppProvider"
-import Header from "./components/Header"
 import { Home, Game, Level2, Auth, Contact } from "./pages"
 import "./output.css";
-import AppProvider from "./providers/AppProvider";
+
 
 export default function App() {
   function verifyUser() {

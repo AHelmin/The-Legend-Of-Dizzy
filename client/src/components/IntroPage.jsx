@@ -28,7 +28,7 @@ export const IntroPage = ({ onStartClick }) => {
       
         setCurrentSlide(newSlide);
         introImg.setAttribute("src", slideArray[newSlide].image);
-        introText.textContent = slideArray[newSlide].text;
+        introText.innerHTML = slideArray[newSlide].text;
         console.log(newSlide)
       }
 
@@ -43,16 +43,17 @@ export const IntroPage = ({ onStartClick }) => {
 
 
   const text1 =
-    "Once upon a time there was a TA named Katy and her beloved companion Dizzy.  They lived in the shining Capital City in the Golden State.";
+    `Once upon a time, there was a TA named Katy and her beloved companion Dizzy.  They lived in the shining Capital City in the Golden State.`;
 
   let text2 =
-    "Katy’s boss…the Evil Gary…was constantly leaning on her to Concatenate for him because he was scared of it.  He made her do all the heavy lifting and never sent her the Starbucks he promised after she would fix his errors.";
+    `Katy's boss…<span class="text-red-600">The Evil Gary</span>…was constantly leaning on her to Concatenate for him because he was scared of it. He made her do all the heavy lifting and never sent her the Starbucks he promised after she would fix his errors.`;
 
-  let text3 = "Worst of all, Gary was extremely jealous of Dizzy. Gary became so jealous of Dizzy that he took a trek all the way from Crab Wire City to Capital City in the Golden State and KIDNAPPED DIZZY!"
+  let text3 = `Worst of all, Gary was extremely jealous of Dizzy. Gary became so jealous of Dizzy that he took a trek all the way from Crab Wire City to Capital City in the Golden State and KIDNAPPED DIZZY!`;
 
-    let text4 = "Our hero Katy was at a Reggae Festival at the time so Dizzy was all alone (and legally blind), and he was easily taken by the Evil Gary."
+    let text4 = 
+    `Since our hero Katy was at a Reggae Festival at the time, Dizzy was all alone (and legally blind), so he was easily taken by The Evil Gary.`;
 
-    let text5 = "Katy returned home, shook off the fog and realized Dizzy was nowhere to be found!  In his dog bed was this note:"
+    let text5 = `Katy returned home, shook off the fog and realized Dizzy was nowhere to be found!  In his dog bed was this note:`;
 
 const slideArray = [{image: sactownImg, text: text1}, {image: garyImg, text: text2}, {image: garyImg, text: text3}, {image: katyRastaImg, text: text4}, {image: katyRastaImg, text: text5}, {image: noteImg, text: ""},]
 
@@ -68,7 +69,7 @@ const slideArray = [{image: sactownImg, text: text1}, {image: garyImg, text: tex
             id="introImg"
           />
         </div>
-        <div className="container mt-8 px-8 mx-auto max-w-md">
+        <div className="container mt-8 px-8 mx-auto max-w-sm">
           <div
             className="text-lg mt-2 mb-8 mx-auto press-start text-white"
             id="introText"
@@ -80,7 +81,7 @@ const slideArray = [{image: sactownImg, text: text1}, {image: garyImg, text: tex
           </div>
         </div>
       </div>
-      <div className="mt-8">
+      <div className="mt-8 flex flex-col h-screen">
       <p className="mt-8 text-center press-start text-white click-anywhere">-- click anywhere to continue --</p>
       </div>
     </div>

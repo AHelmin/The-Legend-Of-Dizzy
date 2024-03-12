@@ -53,10 +53,16 @@ export const useBattleSequence = sequence => {
               : setPlayerAnimation('damage');
             await wait(1000);
 
-            turn === 0
-              ? setOpponentAnimation('static')
-              : setPlayerAnimation('static');
-            setAnnouncerMessage(`${receiver.name} felt that!`);
+            if (turn === 0) {
+              setOpponentAnimation('static');
+              setAnnouncerMessage(`${receiver.name} felt that!`);
+            } else {
+              setPlayerAnimation('static');
+              setAnnouncerMessage(`I guess ${attacker.name} concatenated...`);
+              await wait(2000);
+              setAnnouncerMessage(`${receiver.name} barely felt that!`);
+            }
+            
             turn === 0
               ? setOpponentHealth(h => (h - damage > 0 ? h - damage : 0))
               : setPlayerHealth(h => (h - damage > 0 ? h - damage : 0)); // We don't want a negative HP.
@@ -77,7 +83,7 @@ export const useBattleSequence = sequence => {
 
           (async () => {
             setInSequence(true);
-            setAnnouncerMessage(`${attacker.name} has fixed the opponent's syntax`);
+            setAnnouncerMessage(`${attacker.name} has fixed ${receiver.name}'s syntax yet again`);
             await wait(1000);
 
             turn === 0

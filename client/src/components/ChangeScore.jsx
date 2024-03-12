@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 export const ChangeScore = (addPoints) => {
 
   let currentScore = JSON.parse(localStorage.getItem("currentScore"));
-  if (!currentScore) {
+  if (!currentScore || addPoints === 0) {
     currentScore = 0;
 }
   let newScore = currentScore += addPoints;

@@ -17,6 +17,7 @@ const Header = () => {
   const rpgScore = useSelector((state) => state.rpgscore);
   const shooterScore = useSelector((state) => state.shooterScore);
 
+  
  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -29,8 +30,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const authCookie = Cookies.get('auth_cookie');
-    if (authCookie) {
+    if (userName) {
       setIsAuthenticated(true);
     }
   }, []); 

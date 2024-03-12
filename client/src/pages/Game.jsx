@@ -5,7 +5,7 @@ import Header from "../components/Header";
 // const GAME_URL = "../../snes-rpg/levels/open-field.html";
 import { AppTurnBattle } from "../components/turnbattle";
 // import { OpenField } from "../../snes-rpg/levels/OpenField";
-// import Canvas from "../components/Canvas";
+import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
 // import Matterjs from '../components/matter'
 import { IntroPage } from "../components/IntroPage";
@@ -41,8 +41,11 @@ export default function Game() {
           <AppTurnBattle />
         )}
 
-
         {stageName === "stage3" && (
+          <Canvas gameUrl={gameUrl}/>
+        )}
+
+        {stageName === "gameOver" && (
           <GameOver />
         )}
       </div>

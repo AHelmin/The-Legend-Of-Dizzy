@@ -14,11 +14,8 @@ const font = new FontFace(
 document.fonts.add(font);
 
 // Create the canvas for the game to display in
-var canvas = document.createElement("canvas");
+var canvas = document.getElementById("demo");
 var ctx = canvas.getContext("2d");
-canvas.width = 800;
-canvas.height = 600;
-document.body.appendChild(canvas);
 
 var bgReady = false;
 var bgImage = new Image();
@@ -30,7 +27,7 @@ bgImage.onload = function () {
   // ctx.fill();
   bgReady = true;
 };
-bgImage.src = "./grasstest.png";
+bgImage.src = "./grass.png";
 
 // Load the background image
 
@@ -44,21 +41,21 @@ playerImage.onload = function () {
 };
 playerImage.src = "character.png";
 
-// Load the enemy image
-var enemyReady = false;
-var enemyImage = new Image();
-enemyImage.onload = function () {
-  // show the enemy image
-  enemyReady = true;
+// Load the bone image
+var boneReady = false;
+var boneImage = new Image();
+boneImage.onload = function () {
+  // show the bone image
+  boneReady = true;
 };
-enemyImage.src = "dogbone.png";
+boneImage.src = "dogbone.png";
 
 // Create the game objects
 var player = {
   speed: 200 // movement speed of player in pixels per second
 };
-var enemy = {};
-var enemiesCaught = 0;
+var bone = {};
+var bonesFound = 0;
 var door = {};
 
 // Handle keyboard controls
@@ -73,7 +70,7 @@ addEventListener("keyup", function (event) {
   delete keysDown[event.key];
 }, false);
 
-// Reset the player and enemy positions when player catches an enemy
+// Reset the player and bone positions when player catches a bone
 var reset = function (round) {
   if (round === 1) {
   // Reset player's position to centre of canvas
@@ -82,9 +79,9 @@ var reset = function (round) {
   round++
   }
 
-  // Place the enemy somewhere on the canvas randomly
-  enemy.x = enemyImage.width - 10 + (Math.random() * (canvas.width - (enemyImage.width*2)));
-  enemy.y = enemyImage.height - 10 + (Math.random() * (canvas.height - (enemyImage.height*2)));
+  // Place the bone somewhere on the canvas randomly
+  bone.x = boneImage.width - 10 + (Math.random() * (canvas.width - (boneImage.width*2)));
+  bone.y = boneImage.height - 10 + (Math.random() * (canvas.height - (boneImage.height*2)));
 };
 
 // Update game objects - change player position based on key pressed
@@ -102,14 +99,14 @@ var update = function (modifier) {
     player.x += player.speed * modifier;
   }
 
-  // Check if player and enemy collide
+  // Check if player and bone collide
   if (
-    player.x <= (enemy.x + enemyImage.width)
-    && enemy.x <= (player.x + playerImage.width)
-    && player.y <= (enemy.y + enemyImage.height)
-    && enemy.y <= (player.y + playerImage.height)
+    player.x <= (bone.x + boneImage.width)
+    && bone.x <= (player.x + playerImage.width)
+    && player.y <= (bone.y + boneImage.height)
+    && bone.y <= (player.y + playerImage.height)
   ) {
-    ++enemiesCaught;
+    ++bonesFound;
     let currentScore = ChangeScore(5);
     reset();
   }
@@ -125,8 +122,8 @@ var render = function () {
     ctx.drawImage(playerImage, player.x, player.y);
   }
 
-  if (enemyReady) {
-    ctx.drawImage(enemyImage, enemy.x, enemy.y);
+  if (boneReady) {
+    ctx.drawImage(boneImage, bone.x, bone.y);
   }
 
 
@@ -135,7 +132,7 @@ var render = function () {
   ctx.font = "18px 'Press Start 2P'";
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
-  ctx.fillText("Bones found: " + enemiesCaught, 20, 20);
+  ctx.fillText("Bones found: " + bonesFound, 20, 20);
   ctx.fillText("Time: " + count, 20, 50);
 
   //Load the font
@@ -146,7 +143,7 @@ font.load().then(
     ctx.font = "24px 'Press Start 2P'";
     ctx.textAlign = "center";
     const x = canvas.width / 2;
-    ctx.fillText(enemiesCaught + " bones found!", x, 220);
+    ctx.fillText(bonesFound + " bones found!", x, 220);
     ctx.fillText("Time to go find Dizzy!", x, 320);
 
     door.x = 300;
@@ -158,7 +155,8 @@ font.load().then(
     && player.y <= (door.y + 32)
     && door.y <= (player.y + playerImage.height)
   ) {
-    document.location.replace("/snes-rpg/levels/open-field.html")
+    // document.location.replace("/snes-rpg/levels/open-field.html")
+    localStorage.setItem("gameOver", JSON.stringify(true));
   }
 };
   },
@@ -168,11 +166,11 @@ font.load().then(
 );
 };
 
-var count = 10; // how many seconds the game lasts for - default 30
+var count = 30; // how many seconds the game lasts for - default 30
 var finished = false;
 var counter =function(){
   count=count-1; // countown by 1 every second
-  // when count reaches 0 clear the timer, hide enemy and player and finish the game
+  // when count reaches 0 clear the timer, hide bone and player and finish the game
   	if (count <= 0)
   	{
   		// stop the timer
@@ -180,8 +178,8 @@ var counter =function(){
      	// set game to finished
      	finished = true;
      	count=0;
-     	// hider enemy and player
-     	enemyReady=false;
+     	// hide bone and player
+     	boneReady=false;
      	// playerReady=false;
   	}
 

@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import useVerifyUser from "../hooks/useVerifyUser";
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { AppTurnBattle } from "../components/turnbattle";
 import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
-// import Matterjs from '../components/matter'
 import { IntroPage } from "../components/IntroPage";
 import { GameOver } from "../components/GameOver";
 import { ChangeScore } from "../components/ChangeScore";

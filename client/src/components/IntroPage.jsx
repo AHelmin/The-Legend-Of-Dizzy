@@ -81,7 +81,7 @@ const slideArray = [{image: sactownImg, text: text1}, {image: garyImg, text: tex
         </div>
       </div>
       <div className="mt-8">
-      <p className="mt-8 text-center press-start text-white">---Click anywhere to continue---</p>
+      <p className="mt-8 text-center press-start text-white click-anywhere">-- click anywhere to continue --</p>
       </div>
     </div>
   );

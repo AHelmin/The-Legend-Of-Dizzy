@@ -286,7 +286,7 @@ export default function Shooter({ onScoreUpdate }) {
 
     return (
         // <div className={styles.backgroundContainer}>          
-        <div className={styles.App} id='App' tabIndex='0' >
+        <div id='App' tabIndex='0' >
             <canvas className={styles.canvas} ref={sceneRef} />
         </div>
         // {/* </div> */}

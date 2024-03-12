@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import useVerifyUser from "../hooks/useVerifyUser";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { AppTurnBattle } from "../components/turnbattle";
 import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
+// import Matterjs from '../components/matter'
 import { IntroPage } from "../components/IntroPage";
 import { GameOver } from "../components/GameOver";
 import { ChangeScore } from "../components/ChangeScore";
@@ -42,18 +45,20 @@ export default function Game() {
         dispatch({ type: 'SET_RPGSCORE', payload: 0 }),
           <IntroPage />
         )}
-
+ 
+  <div className="game-flex">
         {stageName === "stage1" && (
-          <TargetPractice />
+          <TargetPractice className="game-disp"/>
         )}
         
         {stageName === "stage2" && (
-          <AppTurnBattle />
+          <AppTurnBattle className="game-disp" />
         )}
 
         {stageName === "stage3" && (
-          <Canvas gameUrl={gameUrl}/>
+          <Canvas className="game-disp" gameUrl={gameUrl}/>
         )}
+</div>
 
         {stageName === "gameOver" && (
           <GameOver />

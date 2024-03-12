@@ -38,6 +38,10 @@
 font-size: xx-large;
 }
 
+.medium-text{
+  font-size: 30px;
+}
+
 .very-big-text{
   font-size: 75px;
 }
@@ -52,4 +56,24 @@ font-size: xx-large;
   margin: 0;
 }
 
+.katy-run {
+  width: 500px;
+}
+
+.game-flex {
+  display: flex;
+  justify-content: center; /* Center the container horizontally */
+  align-items: center; /* Center the container vertically */
+  margin: 0 auto; /* Center the container horizontally */
+ 
+  
+}
+
+.game-disp{
+  flex: 1; /* Distribute available space evenly among components */
+  min-width: 0; /* Allow components to shrink if necessary */
+  border: 1px solid black; /* Example border */
+  margin: 10px; /* Example margin */
+  padding: 10px; /* Example padding */
+}
 

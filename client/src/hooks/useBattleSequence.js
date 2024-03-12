@@ -62,7 +62,7 @@ export const useBattleSequence = sequence => {
               : setPlayerHealth(h => (h - damage > 0 ? h - damage : 0)); // We don't want a negative HP.
             await wait(2000);
 
-            setAnnouncerMessage(`Now it's ${receiver.name} turn!`);
+            setAnnouncerMessage(`Now it's ${receiver.name}'s turn!`);
             await wait(1500);
 
             setTurn(turn === 0 ? 1 : 0);

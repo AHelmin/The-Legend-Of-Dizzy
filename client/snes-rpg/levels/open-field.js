@@ -4,6 +4,8 @@ import {ChangeScore} from "../../src/components/ChangeScore";
 
 localStorage.setItem("gameOver", JSON.stringify(false));
 
+let currentScore;
+
 var map = {
     cols: 36,
     rows: 28,
@@ -245,7 +247,7 @@ Hero.prototype._door = async function (dirx, diry) {
       openedDoor = true;
       sound.addEventListener("ended", (event) => {
           document.location.replace("/2d-game-concept/index.html")
-          let currentScore = ChangeScore(10);
+          currentScore = ChangeScore(10);
       })
     }
   }
@@ -254,13 +256,13 @@ Hero.prototype._door = async function (dirx, diry) {
 Game.load = function () {
     return [
         Loader.loadImage('tiles', '../assets/mountain_landscape.png'),
-        Loader.loadImage('hero', '../assets/character.png')
+        Loader.loadImage('hero', '../assets/character.png'),
     ];
 };
 
 Game.init = function () {
     Keyboard.listenForEvents(
-        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN, Keyboard.SPACE]);
+        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN, Keyboard.A, Keyboard.D, Keyboard.W, Keyboard.S, Keyboard.SPACE]);
     this.tileAtlas = Loader.getImage('tiles');
 
     this.hero = new Hero(map, 160, 200);
@@ -273,9 +275,13 @@ Game.update = function (delta) {
     var dirx = 0;
     var diry = 0;
     if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }
+    else if (Keyboard.isDown(Keyboard.A)) { dirx = -1; }
     else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
+    else if (Keyboard.isDown(Keyboard.D)) { dirx = 1; }
     else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
+    else if (Keyboard.isDown(Keyboard.W)) { diry = -1; }
     else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
+    else if (Keyboard.isDown(Keyboard.S)) { diry = 1; }
     else if (Keyboard.isDown(Keyboard.SPACE)) {console.log("pew pew!")}
 
     this.hero.move(delta, dirx, diry);

@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import useVerifyUser from "../hooks/useVerifyUser";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-// const GAME_URL = "../../snes-rpg/levels/open-field.html";
 import { AppTurnBattle } from "../components/turnbattle";
-// import { OpenField } from "../../snes-rpg/levels/OpenField";
 import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
 // import Matterjs from '../components/matter'
 import { IntroPage } from "../components/IntroPage";
 import { GameOver } from "../components/GameOver";
+import { ChangeScore } from "../components/ChangeScore";
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -21,8 +21,7 @@ export default function Game() {
   const [currentScore, setCurrentScore] = useState(0)
 
   const stageName = useSelector((state) => state.stagename);
-
-
+  const dispatch = useDispatch();
 
 
   return (
@@ -30,6 +29,10 @@ export default function Game() {
       <Header />
       <div>
       {stageName === "start" && (
+        ChangeScore(0),
+        dispatch({ type: 'SET_SHOOTERSCORE', payload: 0 }),
+        dispatch({ type: 'SET_BATTLESCORE', payload: 0 }),
+        dispatch({ type: 'SET_RPGSCORE', payload: 0 }),
           <IntroPage />
         )}
 

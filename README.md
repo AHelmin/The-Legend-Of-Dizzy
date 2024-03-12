@@ -27,11 +27,11 @@ After signing up or logging in the user will be taken back to the main screen wh
 
 ![game1](./client/public/images/screenshot3.png)
 
-After a short intro the user will be promped to start the first game which has the user trying to shoot a target using 5 arrows as many times as possible within the time limit.  Clicking the left mouse button will shoot an arow.  The player character can move and jump using the arrow keys.  Obstacals in the way must be cleared in order for the target to be hit.  The obstacles can be moved by either shooting them with arrows or pushing them with the player character.  The game ends when all arrows are used or if the timer reaches 0.  A score will once again be calculated based on their performance.  After their victory the user will be taken to an end screen with a prompt to continue.
+After a short intro the user will be promped to start the first game which has the user trying to shoot a target using arrows as many times as possible within the time limit.  Clicking the left mouse button will shoot an arow.  The player character can move and jump using the arrow keys.  Obstacals in the way must be cleared in order for the target to be hit.  The obstacles can be moved by either shooting them with arrows or pushing them with the player character.  The game ends when the timer reaches 0.  A score will once again be calculated based on their performance.  After their victory the user will be taken to an end screen with a prompt to continue.
 
 ![game2](./client/public/images/screenshot4.png)
 
-Another bit of story text will be displayed as well as a button to start the next game.  The next game is turn based battle game where the user can pick moves to try and defet the opponent.  A score will be calculated based on their performance.  After their victory the user will be taken to an end screen with a prompt to continue.
+Another bit of story text will be displayed as well as a button to start the next game.  The next game is turn based battle game where the user can pick moves to try and defeat the opponent.  A score will be calculated based on their performance.  After their victory the user will be taken to an end screen with a prompt to continue.
 
 ![game3](./client/public/images/screenshot5.png)
 
@@ -54,5 +54,13 @@ On the contact page the will be a link to write an e-mail to the site developers
 -Joseph, [j-preim](https://github.com/j-preim)
 
 -Daniel, [dnoon23](https://github.com/dnoon23)
+
+Additional code from:
+
+Chirp Internet: www.chirpinternet.eu
+
+PortEXE: https://www.youtube.com/watch?v=r7Z7R25spkE
+
+
 
 ## License

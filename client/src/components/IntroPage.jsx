@@ -7,25 +7,38 @@ import { wait } from '../shared';
 import garyImg from "../assets/images/gary-pixelated-small.png";
 import sactownImg from "../assets/images/sactown-pixelated.png";
 import noteImg from "../assets/images/note.png";
+import katyRastaImg from "../assets/images/katy-rasta.png";
+
+import { useDispatch } from 'react-redux';
 
 export const IntroPage = ({ onStartClick }) => {
+  const dispatch = useDispatch()
   let [currentSlide, setCurrentSlide] = useState(0);
 
-  let nextScreen = false;
 
   useEffect(() => {
-    document.addEventListener("click", (e) => {
+    const introSlide = document.getElementById("introSlide");
+    introSlide.addEventListener("click", (e) => {
       const introSlide = document.getElementById("introSlide");
       const introImg = document.getElementById("introImg");
       const introText = document.getElementById("introText");
-      let newSlide = currentSlide + 1;
+
+      if (currentSlide !== (slideArray.length - 1)) {
+        let newSlide = currentSlide + 1;
       
-      setCurrentSlide(newSlide);
-      introImg.setAttribute("src", slideArray[newSlide].image);
-      introText.textContent = slideArray[newSlide].text;
-      console.log(newSlide)
-    }),
-      [document];
+        setCurrentSlide(newSlide);
+        introImg.setAttribute("src", slideArray[newSlide].image);
+        introText.textContent = slideArray[newSlide].text;
+        console.log(newSlide)
+      }
+
+      else {
+        dispatch({ type: 'SET_STAGENAME', payload: 'stage1'})
+      }
+      
+    })
+    ,
+      [];
   });
 
 
@@ -41,13 +54,11 @@ export const IntroPage = ({ onStartClick }) => {
 
     let text5 = "Katy returned home, shook off the fog and realized Dizzy was nowhere to be found!  In his dog bed was this note:"
 
-const slideArray = [{image: sactownImg, text: text1}, {image: garyImg, text: text2}, {image: garyImg, text: text3}, {image: garyImg, text: text4}, {image: garyImg, text: text5}, {image: noteImg, text: ""},]
+const slideArray = [{image: sactownImg, text: text1}, {image: garyImg, text: text2}, {image: garyImg, text: text3}, {image: katyRastaImg, text: text4}, {image: katyRastaImg, text: text5}, {image: noteImg, text: ""},]
 
 
   return (
     <div>
-      <Header />
-
       <div className="mx-auto" id="introSlide">
         <div className="mt-8">
           <img

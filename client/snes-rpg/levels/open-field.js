@@ -265,7 +265,7 @@ Game.init = function () {
         [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN, Keyboard.A, Keyboard.D, Keyboard.W, Keyboard.S, Keyboard.SPACE]);
     this.tileAtlas = Loader.getImage('tiles');
 
-    this.hero = new Hero(map, 160, 200);
+    this.hero = new Hero(map, 100, 700);
     this.camera = new Camera(map, 800, 600);
     this.camera.follow(this.hero);
 };

@@ -7,11 +7,35 @@ export const AppTurnBattle = (props) => {
   const [battleScore, setBattleScore] = useState();
   const [mode, setMode] = useState('start');
 
+
+  var music = new Audio();
+    music.volume = 0.1;
+    music.loop = true;
+    music.src = "/battle-theme.mp3";
+
   useEffect(() => {
     if (mode === 'battle') {
       setWinner(undefined);
     }
+    // if (mode !== 'battle') {
+    //   console.log("not battle")
+    //   music.pause();
+    // }
   }, [mode]);
+
+  useEffect(() => {
+    if (winner) {
+      // music.load()
+    }
+  }, [winner]);
+
+  useEffect(() => {
+  window.onload = function () {
+    // play the music
+    // music.play();
+
+  }
+}, []);
 
   return (
     <div className={styles.main}>

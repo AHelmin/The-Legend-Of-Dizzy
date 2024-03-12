@@ -6,6 +6,17 @@ import { ChangeScore } from "../src/components/ChangeScore";
   using graphics purchased from vectorstock.com
 */
 
+// this mp3 taken from https://opengameart.org/content/town-theme-rpg
+const music = new Audio("../assets/openingtheme.mp3");
+music.volume = 0.2;
+music.loop = true;
+
+function playMusic() {
+  if (!music.currentTime) {
+    music.play();
+  }
+}
+
 const font = new FontFace(
   "Press Start 2P",
 
@@ -58,6 +69,27 @@ dizzyImage.onload = function () {
 };
 dizzyImage.src = "dizzy-pixel.png";
 
+
+window.onload = function () {
+  // play the music
+  var music = new Audio();
+  music.volume = 0.2;
+  music.loop = true;
+  music.src = "battle-converted.mp3";
+  music.play();
+
+  let muteButton = document.getElementById("mute");
+  muteButton.addEventListener("click", function () {
+    if (!music.paused) {
+      music.pause();
+      muteButton.textContent = "▶️ Music";
+    } else if (music.paused) {
+      music.play();
+      muteButton.textContent = "⏸️ Music";
+    }
+  });
+};
+
 // Create the game objects
 var player = {
   speed: 200, // movement speed of player in pixels per second
@@ -108,7 +140,9 @@ var reset = function (round) {
 
   // Place the bone somewhere on the canvas randomly
   bone.x =
-    boneImage.width - 10 + Math.random() * (canvas.width - 50 - boneImage.width * 2);
+    boneImage.width -
+    10 +
+    Math.random() * (canvas.width - 50 - boneImage.width * 2);
   bone.y =
     boneImage.height -
     10 +

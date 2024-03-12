@@ -8,7 +8,7 @@ import { AppTurnBattle } from "../components/turnbattle";
 // import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
 // import Matterjs from '../components/matter'
-// import { IntroPage } from "../components/IntroPage";
+import { IntroPage } from "../components/IntroPage";
 import { GameOver } from "../components/GameOver";
 import { useSelector } from 'react-redux';
 
@@ -29,35 +29,22 @@ export default function Game() {
     <>
       <Header />
       <div>
-        {/* {stageName === "start" && (
-          <TargetPractice setStageName={setStageName} onStartClick={() => setStageName("game1") } />
-        )} */}
-
-        {stageName === "start" && (
-          <AppTurnBattle />
+      {stageName === "start" && (
+          <IntroPage />
         )}
 
         {stageName === "stage1" && (
           <TargetPractice />
         )}
-
-        {stageName === "stage2" && (
-          <GameOver />
-        )}
         
         {stageName === "stage2" && (
-          <GameOver />
+          <AppTurnBattle />
         )}
 
-        {/* {stageName === "game3" && (
-          <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} stageName={stageName} setStageName={setStageName} currentScore={currentScore} setCurrentScore={setCurrentScore}/>
-          )} */}
 
-        {/* {stageName === "gameOver" && (
-          <GameOver onStartClick={() => setStageName("game3") } />
-        )} } */}
-
-
+        {stageName === "stage3" && (
+          <GameOver />
+        )}
       </div>
     </>
   );

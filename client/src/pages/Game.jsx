@@ -3,7 +3,7 @@ import useVerifyUser from "../hooks/useVerifyUser";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 // const GAME_URL = "../../snes-rpg/levels/open-field.html";
-import { AppTurnBattle} from "../components/turnbattle";
+import { AppTurnBattle } from "../components/turnbattle";
 // import { OpenField } from "../../snes-rpg/levels/OpenField";
 // import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
@@ -22,28 +22,32 @@ export default function Game() {
 
   const stageName = useSelector((state) => state.stagename);
 
-  
+
 
 
   return (
     <>
-    <Header />
+      <Header />
       <div>
-      {/* {stageName === "start" && (
+        {/* {stageName === "start" && (
           <TargetPractice setStageName={setStageName} onStartClick={() => setStageName("game1") } />
         )} */}
-        
+
         {stageName === "start" && (
           <AppTurnBattle />
         )}
-        
+
         {stageName === "stage1" && (
-          <GameOver />
+          <TargetPractice />
         )}
 
-        {/* {stageName === "game2" && (
-          <AppTurnBattle setCurrentScore={setCurrentScore} onStartClick={() => setStageName("game3") } />
-        )} */}
+        {stageName === "stage2" && (
+          <GameOver />
+        )}
+        
+        {stageName === "stage2" && (
+          <GameOver />
+        )}
 
         {/* {stageName === "game3" && (
           <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} stageName={stageName} setStageName={setStageName} currentScore={currentScore} setCurrentScore={setCurrentScore}/>

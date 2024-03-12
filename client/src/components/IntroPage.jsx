@@ -69,7 +69,7 @@ const slideArray = [{image: sactownImg, text: text1}, {image: garyImg, text: tex
             id="introImg"
           />
         </div>
-        <div className="container mt-8 px-8 mx-auto max-w-md">
+        <div className="container mt-8 px-8 mx-auto max-w-sm">
           <div
             className="text-lg mt-2 mb-8 mx-auto press-start text-white"
             id="introText"

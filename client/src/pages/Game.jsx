@@ -45,9 +45,6 @@ export default function Game() {
           <GameOver />
         )}
         
-        {stageName === "stage2" && (
-          <GameOver />
-        )}
 
         {/* {stageName === "game3" && (
           <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} stageName={stageName} setStageName={setStageName} currentScore={currentScore} setCurrentScore={setCurrentScore}/>

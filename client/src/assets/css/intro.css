@@ -3,3 +3,7 @@ body {
   background-color: black;
   justify-content: center;
 }
+
+.click-anywhere {
+  font-size: 100%;
+}

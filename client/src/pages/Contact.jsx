@@ -5,6 +5,7 @@ import '../output.css';
 import '../assets/css/header.css'
 import { useTypedMessage } from '../hooks'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 
 
@@ -45,6 +46,9 @@ const Contact = () => {
 
     <div className="text-white press-start">
       <Header />
+      <Link to="/home">
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Home</button>
+        </Link>
       <div className="container flex">
         <div className="row">
           <div className="w-1/2 p-5 message">

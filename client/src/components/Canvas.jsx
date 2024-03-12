@@ -15,6 +15,17 @@ export default function Canvas(props) {
           }),[]
     });
 
+    useEffect(() => {
+      window.addEventListener("storage", () => {
+        // When local storage changes, dump the list to
+        // the console.
+        let gameOver = JSON.parse(window.localStorage.getItem("gameOver"));
+        if (gameOver) {
+          dispatch({ type: 'SET_STAGENAME', payload: "gameOver" });
+        }
+            }),[]
+      });
+
   useEffect(() => {
     if (window.location.pathname === "/level2") {
       gameUrl = "../../snes-rpg/levels/dungeon.html";

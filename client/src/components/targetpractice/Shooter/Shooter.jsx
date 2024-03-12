@@ -168,8 +168,6 @@ export default function Shooter({ onScoreUpdate }) {
             let arrow = Bodies.rectangle(350, 600, 100, 20, arrowOptions)
             Matter.Body.setInertia(arrow, Infinity)
             Matter.Body.setAngularVelocity(arrow, 0);
-            // Matter.Body.setInertia(villain, Infinity)
-            // Matter.Body.setInertia(villainArrow, Infinity)
 
             //setup arrow position for firing logic
             let shootingArrow = arrow;

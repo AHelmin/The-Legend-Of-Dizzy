@@ -50,6 +50,15 @@ boneImage.onload = function () {
 };
 boneImage.src = "dogbone.png";
 
+// Load the dizzy image
+var dizzyReady = false;
+var dizzyImage = new Image();
+dizzyImage.onload = function () {
+  // hide the dizzy image
+  dizzyReady = false;
+};
+dizzyImage.src = "dizzy-pixel.png";
+
 // Create the game objects
 var player = {
   speed: 200 // movement speed of player in pixels per second
@@ -57,6 +66,10 @@ var player = {
 var bone = {};
 var bonesFound = 0;
 var door = {};
+var dizzy = {
+  // Place dizzy somewhere on the canvas randomly
+  x: dizzyImage.width - 10 + (Math.random() * (canvas.width - 100 - (dizzyImage.width*2))),
+  y: dizzyImage.height - 10 + (Math.random() * (canvas.height - 100 - (dizzyImage.height*2)))};
 
 // Handle keyboard controls
 var keysDown = {};
@@ -126,6 +139,10 @@ var render = function () {
     ctx.drawImage(boneImage, bone.x, bone.y);
   }
 
+  if (dizzyReady) {
+    ctx.drawImage(dizzyImage, dizzy.x, dizzy.y);
+  }
+
 
   // Display score and time 
   ctx.fillStyle = "rgb(250, 250, 250)";
@@ -144,16 +161,14 @@ font.load().then(
     ctx.textAlign = "center";
     const x = canvas.width / 2;
     ctx.fillText(bonesFound + " bones found!", x, 220);
-    ctx.fillText("Time to go find Dizzy!", x, 320);
-
-    door.x = 300;
-    door.y = 0;
-    // Check if player enters door
+    ctx.fillText("Give them all to Dizzy!", x, 320);
+    
+    // Check if player finds dizzy
   if (
-    player.x <= (door.x + 128)
-    && door.x <= (player.x + playerImage.width)
-    && player.y <= (door.y + 32)
-    && door.y <= (player.y + playerImage.height)
+    player.x <= (dizzy.x + dizzyImage.width)
+    && dizzy.x <= (player.x + playerImage.width)
+    && player.y <= (dizzy.y + dizzyImage.height)
+    && dizzy.y <= (player.y + playerImage.height)
   ) {
     // document.location.replace("/snes-rpg/levels/open-field.html")
     localStorage.setItem("gameOver", JSON.stringify(true));
@@ -166,7 +181,7 @@ font.load().then(
 );
 };
 
-var count = 30; // how many seconds the game lasts for - default 30
+var count = 3; // how many seconds the game lasts for - default 30
 var finished = false;
 var counter =function(){
   count=count-1; // countown by 1 every second
@@ -181,6 +196,7 @@ var counter =function(){
      	// hide bone and player
      	boneReady=false;
      	// playerReady=false;
+      dizzyReady=true;
   	}
 
 }

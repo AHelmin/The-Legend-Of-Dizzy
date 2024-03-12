@@ -242,7 +242,7 @@ Hero.prototype._door = async function (dirx, diry) {
       sound.play();
       openedDoor = true;
       sound.addEventListener("ended", (event) => {
-          document.location.replace("/snes-rpg/levels/dungeon.html")
+          document.location.replace("/2d-game-concept/index.html")
           let currentScore = ChangeScore(10);
       })
     }
@@ -261,7 +261,7 @@ Game.init = function () {
         [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN, Keyboard.SPACE]);
     this.tileAtlas = Loader.getImage('tiles');
 
-    this.hero = new Hero(map, 160, 700);
+    this.hero = new Hero(map, 160, 200);
     this.camera = new Camera(map, 800, 600);
     this.camera.follow(this.hero);
 };

@@ -18,18 +18,20 @@ export const GameOver = () => {
 
   const battleScore = useSelector((state) => state.battlescore);
   const rpgScore = useSelector((state) => state.rpgscore);
-  const arrowScore = useSelector((state) => state.arrowScore);
-  const userFinalScore = battleScore+rpgScore+arrowScore
+  const shooterScore = useSelector((state) => state.shooterScore);
+  const userFinalScore = battleScore + rpgScore + shooterScore
+
   
   //use effect that posts to HighScores DB
   useEffect(() => {
     const postData = {
+      score: userFinalScore,
       name: userName,
-      email: userEmail,
-      score: userFinalScore
+      email: userEmail
+      
     };
 
-    fetch('/api/highscores/', {
+    fetch('/api/highscores', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +46,8 @@ export const GameOver = () => {
       .catch(error => {
         // Handle errors
         console.error('Error posting highscore:', error);
-      });
+      }
+      );
   }, []);
   
     return (
@@ -55,10 +58,10 @@ export const GameOver = () => {
           <p>{userName}'s Score{userFinalScore}</p>
           <div className="mt-4">
         <Link to="/home">
-          <button className="btn btn-primary mr-2">Home</button>
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Home</button>
         </Link>
         <Link to="/contact">
-          <button className="btn btn-primary">Contact Us</button>
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Contact Us</button>
         </Link>
       </div>
 

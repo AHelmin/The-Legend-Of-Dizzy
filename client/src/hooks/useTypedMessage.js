@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 export const useTypedMessage = message => {
   const [typedMessage, setTypedMessage] = useState('');
+  let typingDone = false
 
   useEffect(() => {
     setTypedMessage('');
@@ -18,8 +19,11 @@ export const useTypedMessage = message => {
           setTypedMessage(visibleMessage);
         }
       })();
-    }
+    } 
   }, [message]);
+  if (typedMessage.length === message.length) {
+    typingDone = true;
+  }
 
-  return typedMessage;
+  return [typedMessage, typingDone];
 };

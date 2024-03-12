@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 export const EndMenu = ({ winner }) => {
   const dispatch = useDispatch();
 
-  const changeStage1 = () => {
-    dispatch({ type: 'SET_STAGENAME', payload: "stage2" });
+  const changeStage3 = () => {
+    dispatch({ type: 'SET_STAGENAME', payload: "stage3" });
 
   };
 

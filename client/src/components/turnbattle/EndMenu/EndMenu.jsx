@@ -6,7 +6,7 @@ export const EndMenu = ({ winner }) => {
   const dispatch = useDispatch();
 
   const changeStage1 = () => {
-    dispatch({ type: 'SET_STAGENAME', payload: "stage1" });
+    dispatch({ type: 'SET_STAGENAME', payload: "stage2" });
 
   };
 

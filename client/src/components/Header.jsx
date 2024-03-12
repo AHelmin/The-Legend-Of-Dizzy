@@ -13,6 +13,8 @@ const Header = () => {
   const userEmail = useSelector((state) => state.email);
   const userName = useSelector((state) => state.name);
   const stageName = useSelector((state) => state.stagename);
+  const battleScore = useSelector((state) => state.battlescore);
+  const rpgScore = useSelector((state) => state.rpgscore);
   const shooterScore = useSelector((state) => state.shooterScore);
 
  
@@ -35,11 +37,13 @@ const Header = () => {
 
   return (
     <>
-    <p>{userEmail}</p>
-    <p>{userName}</p>
-    <p>{stageName}</p>
-    <p>{shooterScore}</p>
     
+    <p>NAME: {userName}</p>
+    <p>EMAIL:{userEmail}</p>
+    <p>STAGE:{stageName}</p>
+    <p>SHOOTERSCORE:{shooterScore}</p>
+    <p>BATTLESCORE:{battleScore}</p>
+    <p>RPGSCORE:{rpgScore}</p>
     <Navbar className="bg-green-800 flex w-full" style={{ height: "15%" }}>
       <div className="w-full flex flex-wrap justify-between items-center header-container px-8 press-start">
         <Nav className="mr-auto">

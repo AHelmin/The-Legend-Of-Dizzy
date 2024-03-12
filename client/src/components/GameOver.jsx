@@ -58,10 +58,10 @@ export const GameOver = () => {
           <p>{userName}'s Score{userFinalScore}</p>
           <div className="mt-4">
         <Link to="/home">
-          <button className="btn btn-primary mr-2">Home</button>
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Home</button>
         </Link>
         <Link to="/contact">
-          <button className="btn btn-primary">Contact Us</button>
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Contact Us</button>
         </Link>
       </div>
 

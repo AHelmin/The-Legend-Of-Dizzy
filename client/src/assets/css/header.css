@@ -38,6 +38,10 @@
 font-size: xx-large;
 }
 
+.medium-text{
+  font-size: 30px;
+}
+
 .very-big-text{
   font-size: 75px;
 }
@@ -50,6 +54,12 @@ font-size: xx-large;
 
 .margin-0{
   margin: 0;
+}
+
+.katy-run {
+
+  width: 500px;
+
 }
 
 

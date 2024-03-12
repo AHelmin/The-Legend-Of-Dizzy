@@ -47,10 +47,9 @@ export default function Shooter({ onScoreUpdate }) {
                 canvas: canvas,
                 element: document.querySelector('#App'),
                 engine: engine,
-
                 options: {
-                    width: 1920,
-                    height: 900,
+                    width: window.innerWidth,
+                    height: window.innerHeight,
                     wireframes: false,
                     background: Background
                 }
@@ -259,6 +258,14 @@ export default function Shooter({ onScoreUpdate }) {
 
             // // run the renderer
             Render.run(render);
+
+             //add event listener for window resize
+             window.addEventListener('resize', resizeHandler)
+             function resizeHandler() {
+                 render.options.width = window.innerWidth;
+                 render.options.height = window.innerHeight
+                 console.log('resize')
+             }
 
             // create runner
             var runner = Runner.create();

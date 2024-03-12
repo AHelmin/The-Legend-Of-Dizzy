@@ -33,3 +33,11 @@
   height: 40%;
   width: 80%;
 }
+
+.big-text{
+font-size: xx-large;
+}
+
+.very-big-text{
+  font-size: 75px;
+}

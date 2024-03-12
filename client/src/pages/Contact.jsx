@@ -79,5 +79,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-// bg-black

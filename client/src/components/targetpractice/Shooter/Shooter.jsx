@@ -262,41 +262,6 @@ export default function Shooter({ onScoreUpdate }) {
             // // run the renderer
             Render.run(render);
 
-            //add event listener for window and game object resize
-            window.addEventListener('resize', resizeHandler)
-            function resizeHandler() {
-                const scaleX = selectDiv.getBoundingClientRect().width / startingCanvasWidth
-                const scaleY = selectDiv.getBoundingClientRect().height / startingCanvasHeight
-
-                //update canvas size and renderer size
-                render.bounds.max.x = selectDiv.getBoundingClientRect().width;
-                render.bounds.max.y = selectDiv.getBoundingClientRect().height;
-                render.options.width = selectDiv.getBoundingClientRect().width;
-                render.options.height = selectDiv.getBoundingClientRect().height;
-                render.canvas.width = selectDiv.getBoundingClientRect().width;
-                render.canvas.height = selectDiv.getBoundingClientRect().height;
-
-                // Resize and reposition game objects
-                Matter.Body.scale(floor, scaleX, scaleY);
-                Matter.Body.scale(leftWall, scaleX, scaleY);
-                Matter.Body.scale(rightWall, scaleX, scaleY);
-                Matter.Body.scale(character, scaleX, scaleY);
-                Matter.Body.scale(arrow, scaleX, scaleY);
-                Matter.Body.scale(target, scaleX, scaleY);
-                Matter.Bodies.scale(stack, scaleX, scaleY);
-
-                Matter.Body.setPosition(floor, { x: floor.position.x * scaleX, y: floor.position.y * scaleY });
-                Matter.Body.setPosition(leftWall, { x: leftWall.position.x * scaleX, y: leftWall.position.y * scaleY });
-                Matter.Body.setPosition(rightWall, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
-                Matter.Body.setPosition(character, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
-                Matter.Body.setPosition(arrow, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
-                Matter.Body.setPosition(target, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
-                Matter.Bodies.setPosition(stack, { x: rightWall.position.x * scaleX, y: rightWall.position.y * scaleY });
-
-                Matter.Render.setPixelRatio(render, window.devicePixelRatio);
-                console.log('resize')
-            }
-
             // create runner
             var runner = Runner.create();
 

@@ -7,7 +7,7 @@ import Header from "../components/Header";
 // import { OpenField } from "../../snes-rpg/levels/OpenField";
 import Canvas from "../components/Canvas";
 // import Matterjs from '../components/matter'
-// import { IntroPage } from "../components/IntroPage";
+import { IntroPage } from "../components/IntroPage";
 // import { GameOver } from "../components/GameOver";
 import { useSelector } from 'react-redux';
 
@@ -25,15 +25,16 @@ export default function Game() {
 
   return (
     <>
-    <h5>{stageName} {scoreNow}</h5>
+    <IntroPage />
+    {/* <h5>{stageName} {scoreNow}</h5> */}
       <div>
       {/* {stageName === "start" && (
           <AppTurnBattle setStageName={setStageName} onStartClick={() => setStageName("game1") } />
         )} */}
         
-        {stageName === "start" && (
+        {/* {stageName === "start" && (
           <Canvas gameUrl={gameUrl} setGameUrl={setGameUrl} onStartClick={() => setStageName("game2") } />
-        )}
+        )} */}
         
         {/* {stageName === "game1" && (
           <Matterjs onStartClick={() => setStageName("game2") } />

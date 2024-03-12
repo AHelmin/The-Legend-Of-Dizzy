@@ -6,11 +6,15 @@ import {useTypedMessage} from '../hooks'
 import Home from '../pages/Home';
 import Contact from '../pages/Contact';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 
 
 
 export const GameOver = () => {
-
+  const dispatch = useDispatch()
+  const changeStageStart = () => {
+      dispatch({ type: 'SET_STAGENAME', payload: 'start'})
+  }
   
 
   const userEmail = useSelector((state) => state.email);
@@ -58,10 +62,10 @@ export const GameOver = () => {
           <p>{userName}'s Score{userFinalScore}</p>
           <div className="mt-4">
         <Link to="/home">
-          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Home</button>
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule" onClick={changeStageStart}>Home</button>
         </Link>
         <Link to="/contact">
-          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Contact Us</button>
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule" onClick={changeStageStart}>Contact Us</button>
         </Link>
       </div>
 

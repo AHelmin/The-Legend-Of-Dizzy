@@ -1,6 +1,6 @@
 
 
-import {ChangeScore} from "../../src/components/ChangeScore";
+import {ChangeScore} from "../../../src/components/ChangeScore";
 
 localStorage.setItem("gameOver", JSON.stringify(false));
 

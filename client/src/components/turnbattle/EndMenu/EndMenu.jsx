@@ -11,8 +11,9 @@ export const EndMenu = ({ winner }) => {
   const changeStage3 = () => {
     dispatch({ type: 'SET_STAGENAME', payload: "stage3" });
     console.log("working EndMenu Deploy")
-    // const audioEl = document.getElementById("music");
-    // audioEl.pause();
+    const audioEl = document.getElementById("music");
+    audioEl.pause();
+    console.log("working auido pause")
   };
 
   return (

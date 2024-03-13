@@ -1,4 +1,4 @@
-import { ChangeScore } from "../src/components/ChangeScore";
+import { ChangeScore } from "../../src/components/ChangeScore";
 
 /*  
   Code modified from:

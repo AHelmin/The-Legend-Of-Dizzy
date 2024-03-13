@@ -1,6 +1,7 @@
 
 export const playerStats = {
-  level: 26,
+  level: 44,
+  fakeLevel: 26,
   maxHealth: 100,
   name: 'Katy',
   img: './katy-pixelated.png',
@@ -11,7 +12,8 @@ export const playerStats = {
   magicDefense: 30,
 };
 export const opponentStats = {
-  level: "OLD",
+  level: 44,
+  fakeLevel: "OLD",
   name: 'The Evil Gary',
   maxHealth: 100,
   img: './gary-pixelated.png',

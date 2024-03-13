@@ -1,7 +1,4 @@
 
-
-import {ChangeScore} from "../../src/components/ChangeScore";
-
 localStorage.setItem("gameOver", JSON.stringify(false));
 
 let currentScore;
@@ -246,7 +243,7 @@ Hero.prototype._door = async function (dirx, diry) {
       sound.play();
       openedDoor = true;
       sound.addEventListener("ended", (event) => {
-          document.location.replace("/2d-game-concept/index.html")
+          document.location.replace("./2d-game-concept/index.html")
           currentScore = ChangeScore(10);
       })
     }
@@ -255,8 +252,8 @@ Hero.prototype._door = async function (dirx, diry) {
 
 Game.load = function () {
     return [
-        Loader.loadImage('tiles', '/mountain_landscape.png'),
-        Loader.loadImage('hero', '/character.png'),
+        Loader.loadImage('tiles', './snes-rpg/assets/mountain_landscape.png'),
+        Loader.loadImage('hero', './snes-rpg/assets/character.png'),
     ];
 };
 

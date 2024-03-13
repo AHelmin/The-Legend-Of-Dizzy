@@ -13,8 +13,6 @@ import { useDispatch } from 'react-redux';
 import '../output.css';
 import '../assets/css/header.css';
 
-
-
 export default function Game() {
 
   const [gameUrl, setGameUrl] = useState("../../snes-rpg/levels/open-field.html");

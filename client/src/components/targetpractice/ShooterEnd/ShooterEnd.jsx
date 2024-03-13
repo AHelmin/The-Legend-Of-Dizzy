@@ -12,7 +12,7 @@ export default function ShooterEnd({ score }) {
     return (
         <>
             <div className="container mx-auto">
-                <p className="mt-2 press-start big-text text-white text-center">
+                <p className="mt-2 press-start medium-text text-white text-center">
                     {useTypedMessage(`"Impressive!", yells Gary. "You managed to hit the target ${score / 5} times! But no matter how much you try, you'll never get Dizzy back!"`)}
                 </p>
                 <div className="flex justify-center">

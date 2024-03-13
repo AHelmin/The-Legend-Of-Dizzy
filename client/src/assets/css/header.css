@@ -77,3 +77,16 @@ font-size: xx-large;
   padding: 10px; /* Example padding */
 }
 
+.leaderboards {
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: space-around;
+}
+
+@media (max-width: 500px) {
+  .leaderboards {
+    display: block;
+    font-size: 0.8rem;
+  }
+}

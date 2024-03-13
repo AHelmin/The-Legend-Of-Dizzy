@@ -22,7 +22,7 @@ export default function ShooterEnd({ score }) {
                     />
                 </div>
                 <p className="mt-2 press-start medium-text text-white text-center">
-                   Katy, now confident, continues her journey to find Dizzy.
+                   Katy, now a little more confident, continues her journey to find Dizzy.
                 </p>
                 <div className="flex justify-center">
                     <img

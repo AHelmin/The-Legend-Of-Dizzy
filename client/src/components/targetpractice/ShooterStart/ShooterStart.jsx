@@ -7,7 +7,10 @@ export default function StartMenu({ onStartClick }) {
     <>
       <div className="container mx-auto mt-4">
         <p className="mt-2 press-start small-text text-white text-center">
-          {useTypedMessage(`Gary, now infuriated with his loss, reminds Katy of his many years of experience with coding. So Katy challenges Gary, reminding him that while he may have more experience with coding, she can still outshine him.`)}
+          {useTypedMessage(`Upon embarking on her journey, our hero Katy and all of her surroundings immediately turned medieval including her clothes and the background!  She came to a passing and there was a troll blocking her way.
+          She could tell she was on the right track and that Gary had been there prior because he left a pile of Jonathan Heads in his wake.
+          Our hero must defeat the troll to continue her journey!
+          `)}
         </p>
         <div className="flex justify-center mt-2">
           <img
@@ -16,7 +19,7 @@ export default function StartMenu({ onStartClick }) {
           />
         </div>
         <p className="mt-4 press-start small-text text-white text-center">
-          Katy decides to show off her archery skills!
+          Katy must first pass a test of her archery skill!
         </p>
         <div className={styles.main}>
           <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 mt-4 rounded hyrule" onClick={onStartClick}>

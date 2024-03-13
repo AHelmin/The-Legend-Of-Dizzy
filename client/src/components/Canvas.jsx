@@ -26,12 +26,9 @@ export default function Canvas(props) {
       });
 
   useEffect(() => {
-    if (window.location.pathname === "/level2") {
-      gameUrl = "../../snes-rpg/levels/dungeon.html";
-    } else {
-      gameUrl = props.gameUrl;
-    }
-  });
+    const audioEl = document.getElementById("music");
+    
+  }, []);
 
 
   return (
@@ -41,7 +38,6 @@ export default function Canvas(props) {
         width={900}
         height={700}
         id="iframe"
-        data-state={props.stageName}
       ></iframe>
     </>
   );

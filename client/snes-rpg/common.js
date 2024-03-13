@@ -143,14 +143,10 @@ function pauseMusic(muteButton) {
 // 
 
 window.onload = function () {
-  let muteButton = document.getElementById("mute");
-  muteButton.addEventListener("click", function () {
-    // pauseMusic(muteButton);
-  });
   var context = document.getElementById("demo").getContext("2d");
   Game.run(context);
 };
 
 window.onfocus = function () {
-    // playMusic();
+    playMusic();
 }

@@ -72,14 +72,14 @@ export const Battle = ({ onGameEnd }) => {
             main={true}
             health={playerHealth}
             name={playerStats.name}
-            level={playerStats.level}
+            level={playerStats.fakeLevel}
             maxHealth={playerStats.maxHealth}
           />
           <PlayerSummary
             main={false}
             health={opponentHealth}
             name={opponentStats.name}
-            level={opponentStats.level}
+            level={opponentStats.fakeLevel}
             maxHealth={opponentStats.maxHealth}
           />
         </div>

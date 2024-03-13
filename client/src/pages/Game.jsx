@@ -27,19 +27,24 @@ export default function Game() {
   const shooterScore = useSelector((state) => state.shooterScore);
   const dispatch = useDispatch();
 
-  const audioTrackList = ["battle-theme.mp3", "openingtheme.mp3"]
+  const audioTrackList = ["battle-theme.mp3", "openingtheme.mp3", "bonegame.mp3"]
   const audioEl = new Audio(audioTrackList)
   let currentMusic = audioTrackList[0];
 
-function changeTrack() {
-  audioEl.src = audioTrackList[1];
+  let test = 1;
+function changeTrack(track) {
+  audioEl.src = audioTrackList[track];
   audioEl.volume = 0.1;
-  audioEl.play();
+  console.log(audioEl.currentTime)
+  console.log(audioEl.currentTime)
+  if (!audioEl.currentTime) {
+    audioEl.play();
+    }
 }
 
   return (
     <>
-    <audio src={currentMusic} id="music"></audio>
+    <audio src={currentMusic} id="music" loop></audio>
       <Header />
       {(stageName === "stage1" || stageName === "stage2"|| stageName === "stage3") && (
       <div className="text-center mt-2 flex press-start">
@@ -65,7 +70,7 @@ function changeTrack() {
         )}
 
         {stageName === "stage3" && (
-          changeTrack(),
+          // changeTrack(1),
           <Canvas className="game-disp" gameUrl={gameUrl}/>
         )}
 </div>

@@ -7,15 +7,15 @@ import { ChangeScore } from "../src/components/ChangeScore";
 */
 
 // this mp3 taken from https://opengameart.org/content/town-theme-rpg
-const music = new Audio("../assets/openingtheme.mp3");
-music.volume = 0.2;
-music.loop = true;
+// const music = new Audio("../assets/openingtheme.mp3");
+// music.volume = 0.2;
+// music.loop = true;
 
-function playMusic() {
-  if (!music.currentTime) {
-    music.play();
-  }
-}
+// function playMusic() {
+//   if (!music.currentTime) {
+//     music.play();
+//   }
+// }
 
 const font = new FontFace(
   "Press Start 2P",
@@ -75,20 +75,9 @@ window.onload = function () {
   var music = new Audio();
   music.volume = 0.2;
   music.loop = true;
-  music.src = "battle-converted.mp3";
+  music.src = "bone-game.mp3";
   music.play();
-
-  let muteButton = document.getElementById("mute");
-  muteButton.addEventListener("click", function () {
-    if (!music.paused) {
-      music.pause();
-      muteButton.textContent = "▶️ Music";
-    } else if (music.paused) {
-      music.play();
-      muteButton.textContent = "⏸️ Music";
-    }
-  });
-};
+}
 
 // Create the game objects
 var player = {

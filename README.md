@@ -72,8 +72,8 @@ Open Are AI: openart.ai
 
 Special thanks to:
 
-[Kai Petersonh](https://www.linkedin.com/in/kai-peterson?original_referer=https%3A%2F%2Fwww.google.com%2F) for suggesting trying ReDux! 
+[Kai Peterson](https://www.linkedin.com/in/kai-peterson?original_referer=https%3A%2F%2Fwww.google.com%2F) for suggesting trying ReDux! 
 
 Gary Almes, Katy Vincent and Jonathon Blom for allowing their likeness to be used.
 
-## License
+

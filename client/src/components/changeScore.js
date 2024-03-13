@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
-
-export const ChangeScore = (addPoints) => {
+export const changeScore = (addPoints) => {
 
   let currentScore = JSON.parse(localStorage.getItem("currentScore"));
   if (!currentScore || addPoints === 0) {

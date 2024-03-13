@@ -2,6 +2,7 @@ body {
   color: white;
   background-color: black;
   justify-content: center;
+  font-size: 120%;
 }
 
 .click-anywhere {

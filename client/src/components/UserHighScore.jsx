@@ -34,9 +34,9 @@ const UserHighScore = () => {
   }, [userEmail]); 
 
   return (
-    <div>
+    <div className='leaderboards'>
       {userTopScores.length > 0 && (
-        <div className="text-center">
+        <div className="text-center mt-8">
           <h2 className="text-4xl font-bold hyrule text-yellow-600">{userName}'s TOP SCORES</h2>
           <ul className="press-start text-white text-lg">
             {userTopScores.map((score, index) => (
@@ -47,7 +47,7 @@ const UserHighScore = () => {
       )}
 
       {globalTopScores.length > 0 && (
-        <div  className="text-center">
+        <div  className="text-center mt-8">
           <h2 className="text-4xl font-bold hyrule text-yellow-600">LEADERBOARD</h2>
           <ul>
             {globalTopScores.map((item, index) => (

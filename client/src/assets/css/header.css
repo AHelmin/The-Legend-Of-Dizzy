@@ -90,3 +90,7 @@ font-size: xx-large;
     font-size: 0.8rem;
   }
 }
+
+.contact-buttons{
+min-width: 10px;
+}

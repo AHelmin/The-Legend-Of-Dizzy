@@ -16,6 +16,7 @@ const Contact = () => {
   const [message, setMessage] = useState({ email: userEmail, message: '' })
   const [formMessage, setFormMessage] = useState("");
 
+
   const submitMessage = async (e) => {
     e.preventDefault();
     try {
@@ -54,7 +55,6 @@ const Contact = () => {
             <div className="text-white press-start">
               <form className="form" onSubmit={submitMessage}>
                 <div className="mb-3">
-                  {/* <p>{userEmail}</p> */}
                   
                   <label className="form-label" htmlFor="email">Email</label>
                   <input type="text" className="form-control text-black" name="email" placeholder="Email" value={message?.email || ""} onChange={handleMessageChange} />
@@ -71,7 +71,7 @@ const Contact = () => {
 
         {formMessage && formMessage.length > 0 && (
           <div className="row">
-            <div className="col-12">
+            <div className="col-12 press-start">
               {formMessage}
             </div>
           </div>

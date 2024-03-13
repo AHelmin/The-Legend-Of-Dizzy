@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 export default function Timer({ onEnd }) {
 
-    const [seconds, setSeconds] = useState(2)
+    const [seconds, setSeconds] = useState(30)
 
     useEffect(() => {
 

@@ -69,7 +69,7 @@ var map = {
         54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65,
         116, 4, 4, 0, 0, 3, 4, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 4, 3, 4, 3, 3, 4, 3, 3, 4, 3, 18
     ]],
-    music: "../assets/openingtheme.mp3",
+    music: "/snes-rpg/assets/openingtheme.mp3",
     getTile: function (layer, col, row) {
         return this.layers[layer][row * map.cols + col];
     },
@@ -241,7 +241,7 @@ Hero.prototype._door = async function (dirx, diry) {
     return;
   } else {
     if (!openedDoor) {
-      const sound = new Audio((src = "../assets/doorOpen.mp3"));
+      const sound = new Audio((src = "/snes-rpg/assets/doorOpen.mp3"));
       sound.volume = 0.2;
       sound.play();
       openedDoor = true;
@@ -255,8 +255,8 @@ Hero.prototype._door = async function (dirx, diry) {
 
 Game.load = function () {
     return [
-        Loader.loadImage('tiles', '../assets/mountain_landscape.png'),
-        Loader.loadImage('hero', '../assets/character.png'),
+        Loader.loadImage('tiles', '/snes-rpg/assets/mountain_landscape.png'),
+        Loader.loadImage('hero', '/snes-rpg/assets/character.png'),
     ];
 };
 

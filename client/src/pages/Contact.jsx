@@ -43,19 +43,19 @@ const Contact = () => {
   }
 
   return (
-
-    <div className="text-white press-start">
+<>
+    
       <Header />
-      <Link to="/home">
-          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule">Home</button>
-        </Link>
+      
       <div className="container flex">
         <div className="row">
           <div className="w-1/2 p-5 message">
             <div>
+            <div className="text-white press-start">
               <form className="form" onSubmit={submitMessage}>
                 <div className="mb-3">
-                  <p>{userEmail}</p>
+                  {/* <p>{userEmail}</p> */}
+                  
                   <label className="form-label" htmlFor="email">Email</label>
                   <input type="text" className="form-control text-black" name="email" placeholder="Email" value={message?.email || ""} onChange={handleMessageChange} />
                 </div>
@@ -76,9 +76,17 @@ const Contact = () => {
             </div>
           </div>
         )}
+        <div className='w-1/2 p-5'>
+        <Link to="/home">
+          <button className="bg-green-800 hover:bg-green-700 text-yellow-400 font-bold py-2 px-4 rounded hyrule mx-5">Home</button>
+        </Link>
+        </div>
     </div>
-
+    <p className="big-text mt-2 press-start text-white text-center">
+          {useTypedMessage('Feel free to send us a message about our project!  Or click on the home button and play again!!')}
+          </p>
     </div>
+    </>
   );
 };
 

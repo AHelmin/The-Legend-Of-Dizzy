@@ -55,19 +55,21 @@ function changeTrack() {
         dispatch({ type: 'SET_RPGSCORE', payload: 0 }),
           <IntroPage />
         )}
-
+ 
+  <div className="game-flex">
         {stageName === "stage1" && (
-          <TargetPractice />
+          <TargetPractice className="game-disp"/>
         )}
         
         {stageName === "stage2" && (
-          <AppTurnBattle />
+          <AppTurnBattle className="game-disp" />
         )}
 
         {stageName === "stage3" && (
           changeTrack(),
-          <Canvas gameUrl={gameUrl}/>
+          <Canvas className="game-disp" gameUrl={gameUrl}/>
         )}
+</div>
 
         {stageName === "gameOver" && (
           <GameOver />

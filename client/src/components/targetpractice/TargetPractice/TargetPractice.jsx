@@ -30,12 +30,15 @@ export default function TargetPractice() {
 
       {mode === 'shoot' && (
         <>
+    <div className="flex justify-center">
           <Shooter
             onScoreUpdate={shootingScore => {
               setScore(shootingScore);
             }}
           />
+          </div>
           <Timer duration={45} onEnd={handletimer} />
+          
         </>
       )}
 

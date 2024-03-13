@@ -34,7 +34,7 @@ export default function Canvas(props) {
   return (
     <>
       <iframe
-        src={gameUrl}
+        src='../../snes-rpg/levels/open-field.html'
         width={900}
         height={700}
         id="iframe"

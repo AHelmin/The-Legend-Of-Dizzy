@@ -1,10 +1,19 @@
 
-
-import {changeScore} from "../../src/components/changeScore";
-
 localStorage.setItem("gameOver", JSON.stringify(false));
 
 let currentScore;
+
+export const changeScore = (addPoints) => {
+
+    let currentScore = JSON.parse(localStorage.getItem("currentScore"));
+    if (!currentScore || addPoints === 0) {
+      currentScore = 0;
+  }
+    let newScore = currentScore += addPoints;
+    localStorage.setItem("currentScore", JSON.stringify(newScore));
+  
+    return newScore;
+  };
 
 var map = {
     cols: 36,
@@ -247,7 +256,7 @@ Hero.prototype._door = async function (dirx, diry) {
       openedDoor = true;
       sound.addEventListener("ended", (event) => {
           document.location.replace("/2d-game-concept/index.html")
-          currentScore = ChangeScore(10);
+          currentScore = changeScore(10);
       })
     }
   }

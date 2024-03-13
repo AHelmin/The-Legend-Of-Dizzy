@@ -1,8 +1,18 @@
 import styles from './styles.module.css';
 import { useTypedMessage } from '../../../hooks/useTypedMessage'
 import katyArchery from '../../../assets/images/sprites/katy_archery.jpg'
+import { useEffect } from 'react';
 
 export default function StartMenu({ onStartClick }) {
+
+  useEffect(() => {
+      const audioEl = document.getElementById("music");
+      audioEl.volume = 0.2;
+      audioEl.loop = true;
+      audioEl.currentTime = 2;
+      audioEl.play();
+  }, []);
+
   return (
     <>
       <div className="container mx-auto mt-4">

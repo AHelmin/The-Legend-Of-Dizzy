@@ -3,12 +3,19 @@ import { useDispatch } from 'react-redux';
 import angryGary from '../../../assets/images/sprites/angry_gary.png'
 import { useTypedMessage } from '../../../hooks'
 import runningKaty from '../../../assets/images/sprites/runniing_katy.jpg'
+import { useEffect } from 'react';
 
 export default function ShooterEnd({ score }) {
     const dispatch = useDispatch()
     const changeStage2 = () => {
         dispatch({ type: 'SET_STAGENAME', payload: 'stage2' })
     }
+
+    useEffect(() => {
+        const audioEl = document.getElementById("music");
+        audioEl.pause();
+    }, []);
+
     return (
         <>
             <div className="container mx-auto">

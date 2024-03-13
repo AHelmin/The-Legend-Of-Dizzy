@@ -1,5 +1,3 @@
-import { ChangeScore } from "../../src/components/ChangeScore";
-
 /*  
   Code modified from:
   http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
@@ -16,6 +14,18 @@ import { ChangeScore } from "../../src/components/ChangeScore";
 //     music.play();
 //   }
 // }
+
+export const changeScore = (addPoints) => {
+
+  let currentScore = JSON.parse(localStorage.getItem("currentScore"));
+  if (!currentScore || addPoints === 0) {
+    currentScore = 0;
+}
+  let newScore = currentScore += addPoints;
+  localStorage.setItem("currentScore", JSON.stringify(newScore));
+
+  return newScore;
+};
 
 const font = new FontFace(
   "Press Start 2P",
@@ -165,7 +175,7 @@ var update = function (modifier) {
     bone.y <= player.y + playerImage.height
   ) {
     ++bonesFound;
-    let currentScore = ChangeScore(5);
+    let currentScore = changeScore(5);
     reset();
   }
 };

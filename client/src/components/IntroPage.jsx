@@ -45,7 +45,7 @@ export const IntroPage = ({ onStartClick }) => {
     `Once upon a time, there was a TA named Katy and her beloved companion Dizzy.  They lived in the shining Capital City in the Golden State.`;
 
   let text2 =
-    `Katy's boss…<span class="text-red-600">The Evil Gary</span>…was constantly leaning on her to Concatenate for him because he was scared of it. He made her do all the heavy lifting and never sent her the Starbucks he promised after she would fix his errors.`;
+    `Katy's boss…The Evil Gary…was constantly leaning on her to Concatenate for him because he was scared of it. He made her do all the heavy lifting and never sent her the Starbucks he promised after she would fix his errors.`;
 
   let text3 = `Worst of all, Gary was extremely jealous of Dizzy. Gary became so jealous of Dizzy that he took a trek all the way from Crab Wire City to Capital City in the Golden State and KIDNAPPED DIZZY!`;
 

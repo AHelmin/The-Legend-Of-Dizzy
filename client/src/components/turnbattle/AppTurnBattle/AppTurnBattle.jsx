@@ -10,6 +10,7 @@ export const AppTurnBattle = (props) => {
   useEffect(() => {
     if (mode === "battle") {
       const audioEl = document.getElementById("music");
+      audioEl.setAttribute("src", "battle-theme.mp3")
       audioEl.volume = 0.2;
       audioEl.loop = true;
       audioEl.play();

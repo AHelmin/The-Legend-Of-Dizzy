@@ -13,8 +13,6 @@ import { useDispatch } from 'react-redux';
 import '../output.css';
 import '../assets/css/header.css';
 
-
-
 export default function Game() {
 
   const [gameUrl, setGameUrl] = useState("../../snes-rpg/levels/open-field.html");
@@ -27,16 +25,15 @@ export default function Game() {
   const shooterScore = useSelector((state) => state.shooterScore);
   const dispatch = useDispatch();
 
-  const audioTrackList = ["battle-theme.mp3", "openingtheme.mp3", "bonegame.mp3"]
+  const audioTrackList = ["the-bards-tale.mp3", "battle-theme.mp3",]
   const audioEl = new Audio(audioTrackList)
   let currentMusic = audioTrackList[0];
 
-  let test = 1;
+
 function changeTrack(track) {
   audioEl.src = audioTrackList[track];
+  audioEl.preload = "";
   audioEl.volume = 0.1;
-  console.log(audioEl.currentTime)
-  console.log(audioEl.currentTime)
   if (!audioEl.currentTime) {
     audioEl.play();
     }

@@ -42,7 +42,7 @@ Once more story text will be displayed and a promped will be given to continue t
 
 A congradulations screen and the final score will be presented.  Last, there will be prompts to either return to the home page or go to the contact page.
 
-![GameOver](https://github.com/AHelmin/the-legend-of-dizzy/assets/75902133/9c6fd9a4-c344-48e6-ab6c-f344bd5dce46)
+![contact us](https://github.com/AHelmin/the-legend-of-dizzy/assets/75902133/4c4dfca4-1ecf-4315-a499-ec1acb171a94)
 
 On the contact page the will be a link to write an e-mail to the site developers.
 

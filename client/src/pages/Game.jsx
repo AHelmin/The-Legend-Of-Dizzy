@@ -50,7 +50,7 @@ function changeTrack(track) {
       )}
       <div>
       {stageName === "start" && (
-        ChangeScore(0),
+        changeScore(0),
         dispatch({ type: 'SET_SHOOTERSCORE', payload: 0 }),
         dispatch({ type: 'SET_BATTLESCORE', payload: 0 }),
         dispatch({ type: 'SET_RPGSCORE', payload: 0 }),

@@ -35,13 +35,9 @@ Loader.getImage = function (key) {
 var Keyboard = {};
 
 Keyboard.LEFT = 37;
-Keyboard.A = 65;
 Keyboard.RIGHT = 39;
-Keyboard.D = 68;
 Keyboard.UP = 38;
-Keyboard.W = 87;
 Keyboard.DOWN = 40;
-Keyboard.S = 83;
 Keyboard.SPACE = 32;
 
 Keyboard._keys = {};
@@ -149,12 +145,12 @@ function pauseMusic(muteButton) {
 window.onload = function () {
   let muteButton = document.getElementById("mute");
   muteButton.addEventListener("click", function () {
-    pauseMusic(muteButton);
+    // pauseMusic(muteButton);
   });
   var context = document.getElementById("demo").getContext("2d");
   Game.run(context);
 };
 
 window.onfocus = function () {
-    playMusic();
+    // playMusic();
 }

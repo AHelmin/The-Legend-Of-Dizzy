@@ -78,6 +78,7 @@ export default function Shooter({ onScoreUpdate }) {
                     }
                 }
             }
+
             const rightWallOptions = {
                 isStatic: true,
                 render: {
@@ -102,6 +103,7 @@ export default function Shooter({ onScoreUpdate }) {
 
             //create the floor
             let floor = Bodies.rectangle(417.19, 487.41,834.38, 23.15, floorOptions)
+            let roof = Bodies.rectangle(417.19, 10,834.38, 23.15, floorOptions)
             let leftWall = Bodies.rectangle(0, 228.33,18.54, 416.67, leftWallOptions)
             let rightWall = Bodies.rectangle(890, 228.33,18.54, 416.67, rightWallOptions)
             let mouse = Matter.Mouse.create(render.canvas)
@@ -190,6 +192,8 @@ export default function Shooter({ onScoreUpdate }) {
 
             //add listeners for touch and click
             selectDiv.addEventListener('click', shootArrow)
+            selectDiv.addEventListener('mousedown', shootArrow)
+            selectDiv.addEventListener('mouseup', shootArrow)
             selectDiv.addEventListener('touchstart', shootArrow)
             //add listener for click to shoot arrow
             function shootArrow(e) {
@@ -220,6 +224,7 @@ export default function Shooter({ onScoreUpdate }) {
                         shootingArrow.isShot = false;
                     }, 2000);
                 }
+                
             };
 
             //listen for collision between arrow and villain
@@ -257,7 +262,7 @@ export default function Shooter({ onScoreUpdate }) {
             });
 
             // add all of the bodies to the world
-            Composite.add(engine.world, [stack, arrow, mouseConstraint, character, target, leftWall, rightWall, floor]);
+            Composite.add(engine.world, [stack, arrow, mouseConstraint, character, target, leftWall, rightWall, floor, roof]);
 
             // // run the renderer
             Render.run(render);

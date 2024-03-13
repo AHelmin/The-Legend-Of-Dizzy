@@ -23,6 +23,9 @@ export default function StartMenu({ onStartClick }) {
             Start Shooting!
           </button>
         </div>
+        <p className="mt-2 press-start medium-text text-white text-center">
+          (To move use the left and right arrows or the a and d keys. To jump press the space bar. To shoot click the mouse, remember waiting to click the mouse lowers your accuracy! Hit the target as many times as possible.)
+        </p>
       </div>
     </>
   );

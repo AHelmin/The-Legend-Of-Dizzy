@@ -10,7 +10,6 @@ export default function Canvas(props) {
       // When local storage changes, dump the list to
       // the console.
       let newScore = JSON.parse(window.localStorage.getItem("currentScore"));
-      console.log(newScore);
           dispatch({ type: 'SET_RPGSCORE', payload: newScore });
           }),[]
     });
@@ -33,6 +32,7 @@ export default function Canvas(props) {
       gameUrl = props.gameUrl;
     }
   });
+
 
   return (
     <>

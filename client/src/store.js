@@ -6,7 +6,7 @@ const initialState = {
   battlescore: 0,
   rpgscore: 0,
   shooterScore: 0,
-  stagename: "stage1"
+  stagename: "start"
 };
 
 // Reducer

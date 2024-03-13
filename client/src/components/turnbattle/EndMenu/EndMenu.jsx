@@ -10,7 +10,8 @@ export const EndMenu = ({ winner }) => {
 
   const changeStage3 = () => {
     dispatch({ type: 'SET_STAGENAME', payload: "stage3" });
-
+    const audioEl = document.getElementById("music");
+    audioEl.pause();
   };
 
   return (

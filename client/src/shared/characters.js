@@ -12,7 +12,7 @@ export const playerStats = {
 };
 export const opponentStats = {
   level: "OLD",
-  name: 'Gary',
+  name: 'The Evil Gary',
   maxHealth: 100,
   img: './gary-pixelated.png',
 

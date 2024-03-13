@@ -54,12 +54,9 @@ export default function Shooter({ onScoreUpdate }) {
                     height: 500,
                     wireframes: false,
                     background: Background,
-                    pixelRatio: window.devicePixelRatio
+                    // pixelRatio: window.devicePixelRatio
                 }
             });
-
-            const startingCanvasWidth = selectDiv.clientWidth
-            const startingCanvasHeight = selectDiv.clientHeight
 
             //define bitfields
             const defaultCategory = 0x0001
@@ -290,11 +287,11 @@ export default function Shooter({ onScoreUpdate }) {
     }, [])
 
     return (
-        // <div className={styles.backgroundContainer}>          
+             
         <div id='App' tabIndex='0' >
             <canvas className={styles.canvas} ref={sceneRef} />
         </div>
-        // {/* </div> */}
+       
     )
 }
 

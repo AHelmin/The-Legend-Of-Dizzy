@@ -61,5 +61,7 @@ Chirp Internet: www.chirpinternet.eu
 
 PortEXE: https://www.youtube.com/watch?v=r7Z7R25spkE
 
+Zelda Universe: https://zeldauniverse.net/media/fonts/
+
 
 ## License

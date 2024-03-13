@@ -29,7 +29,6 @@ export const IntroPage = ({ onStartClick }) => {
         setCurrentSlide(newSlide);
         introImg.setAttribute("src", slideArray[newSlide].image);
         introText.innerHTML = slideArray[newSlide].text;
-        console.log(newSlide)
       }
 
       else {

@@ -8,7 +8,7 @@ export default function TargetPractice() {
   const [mode, setMode] = useState('start');
 
   useEffect(() => {
-    console.log(score)
+    // console.log(score)
   }, [score])
 
   useEffect(() => {

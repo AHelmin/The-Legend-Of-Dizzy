@@ -63,7 +63,7 @@ export const GameOver = () => {
           <img
           src={katyDizzy}
           alt="Image of Katy and Dizzy reunited"
-          className="mx-auto h-auto max-w-lg"
+          className="mx-auto h-auto max-w-md"
         />
           <p className="very-big-text mt-2 press-start text-red-700 text-center">
           {useTypedMessage('GAME OVER!!!!')}

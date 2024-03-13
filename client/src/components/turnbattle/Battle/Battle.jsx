@@ -40,23 +40,10 @@ export const Battle = ({ onGameEnd }) => {
 
   useEffect(()=> {
   dispatch({ type: 'SET_BATTLESCORE', payload: playerHealth });
-  console.log(playerHealth)
   }),[playerHealth]
 
   return (
     <>
-      <div className={styles.opponent}>
-        <div className={styles.summary}>
-          <PlayerSummary
-            main={false}
-            health={opponentHealth}
-            name={opponentStats.name}
-            level={opponentStats.level}
-            maxHealth={opponentStats.maxHealth}
-          />
-        </div>
-      </div>
-
       <div className={styles.characters}>
         <div className={styles.gameHeader}>
           {playerStats.name} vs {opponentStats.name}
@@ -88,8 +75,16 @@ export const Battle = ({ onGameEnd }) => {
             level={playerStats.level}
             maxHealth={playerStats.maxHealth}
           />
+          <PlayerSummary
+            main={false}
+            health={opponentHealth}
+            name={opponentStats.name}
+            level={opponentStats.level}
+            maxHealth={opponentStats.maxHealth}
+          />
         </div>
 
+      
         <div className={styles.hud}>
           <div className={styles.hudChild}>
             <BattleAnnouncer

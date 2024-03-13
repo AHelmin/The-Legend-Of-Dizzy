@@ -36,7 +36,7 @@ export const useBattleSequence = sequence => {
           (async () => {
             setInSequence(true);
             setAnnouncerMessage(`${attacker.name} has chosen to concatenate!`);
-            await wait(1000);
+            await wait(3000);
 
             turn === 0
               ? setPlayerAnimation('attack')
@@ -59,7 +59,7 @@ export const useBattleSequence = sequence => {
             } else {
               setPlayerAnimation('static');
               setAnnouncerMessage(`I guess ${attacker.name} concatenated...`);
-              await wait(2000);
+              await wait(4000);
               setAnnouncerMessage(`${receiver.name} barely felt that!`);
             }
             
@@ -69,7 +69,7 @@ export const useBattleSequence = sequence => {
             await wait(2000);
 
             setAnnouncerMessage(`Now it's ${receiver.name}'s turn!`);
-            await wait(1500);
+            await wait(3000);
 
             setTurn(turn === 0 ? 1 : 0);
             setInSequence(false);
@@ -84,7 +84,7 @@ export const useBattleSequence = sequence => {
           (async () => {
             setInSequence(true);
             setAnnouncerMessage(`${attacker.name} has fixed ${receiver.name}'s syntax yet again`);
-            await wait(1000);
+            await wait(3000);
 
             turn === 0
               ? setPlayerAnimation('magic')
@@ -113,7 +113,7 @@ export const useBattleSequence = sequence => {
             await wait(2500);
 
             setAnnouncerMessage(`Now it's ${receiver.name}'s turn!`);
-            await wait(1500);
+            await wait(3000);
 
             setTurn(turn === 0 ? 1 : 0);
             setInSequence(false);

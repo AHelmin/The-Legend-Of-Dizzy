@@ -30,7 +30,7 @@ export const Battle = ({ onGameEnd }) => {
   useEffect(() => {
     if (playerHealth === 0 || opponentHealth === 0) {
       (async () => {
-        await wait(1000);
+        await wait(1500);
         onGameEnd(playerHealth === 0 ? opponentStats : playerStats);
       })();
     }

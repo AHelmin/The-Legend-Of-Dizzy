@@ -45,7 +45,7 @@ const Header = () => {
             Play!
           </Nav.Link>
         </Nav>
-        <div className="flex text-center  legend-of-dizzy-container">
+        <div className="flex text-center legend-of-dizzy-container">
         <Nav.Link as={Link} to="/" className="legend-of-dizzy hyrule text-yellow-600">The Legend of Dizzy</Nav.Link>
         </div>
         <Nav>

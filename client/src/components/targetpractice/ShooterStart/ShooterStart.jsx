@@ -7,12 +7,10 @@ export default function StartMenu({ onStartClick }) {
     <>
       <div className="container mx-auto mt-4">
         <p className="mt-2 press-start small-text text-white text-center">
-          {useTypedMessage(`Upon emarking on her journey, Our Hero Katy and all of her surroundings immediately turned medieval including her clothes and the background!  She came to a passing and there was a troll blocking her way.
-
-She could tell she was on the right track and that Gary had been there prior because he left a pile of Jonathan Heads in his wake.
-
-Our hero must defeat the troll to continue her journey!
-`)}
+          {useTypedMessage(`Upon embarking on her journey, our hero Katy and all of her surroundings immediately turned medieval including her clothes and the background!  She came to a passing and there was a troll blocking her way.
+          She could tell she was on the right track and that Gary had been there prior because he left a pile of Jonathan Heads in his wake.
+          Our hero must defeat the troll to continue her journey!
+          `)}
         </p>
         <div className="flex justify-center mt-2">
           <img

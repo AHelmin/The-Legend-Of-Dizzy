@@ -58,8 +58,10 @@ On the contact page the will be a link to write an e-mail to the site developers
 
 Additional code from:
 
+2D Game
 Chirp Internet: www.chirpinternet.eu
 
+Turn Battle Game
 PortEXE: https://www.youtube.com/watch?v=r7Z7R25spkE
 
 Font and assets from:

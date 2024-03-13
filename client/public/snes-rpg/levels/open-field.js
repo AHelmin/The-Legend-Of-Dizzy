@@ -255,8 +255,8 @@ Hero.prototype._door = async function (dirx, diry) {
 
 Game.load = function () {
     return [
-        Loader.loadImage('tiles', './snes-rpg/assets/mountain_landscape.png'),
-        Loader.loadImage('hero', './snes-rpg/assets/character.png'),
+        Loader.loadImage('tiles', '/mountain_landscape.png'),
+        Loader.loadImage('hero', '/character.png'),
     ];
 };
 

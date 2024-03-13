@@ -7,7 +7,7 @@ import Canvas from "../components/Canvas";
 import TargetPractice from '../components/targetpractice/TargetPractice/TargetPractice'
 import { IntroPage } from "../components/IntroPage";
 import { GameOver } from "../components/GameOver";
-import { ChangeScore } from "../components/ChangeScore";
+import { changeScore } from "../components/changeScore";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import '../output.css';
@@ -50,7 +50,7 @@ function changeTrack(track) {
       )}
       <div>
       {stageName === "start" && (
-        ChangeScore(0),
+        changeScore(0),
         dispatch({ type: 'SET_SHOOTERSCORE', payload: 0 }),
         dispatch({ type: 'SET_BATTLESCORE', payload: 0 }),
         dispatch({ type: 'SET_RPGSCORE', payload: 0 }),

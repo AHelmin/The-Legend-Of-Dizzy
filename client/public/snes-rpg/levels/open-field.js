@@ -3,6 +3,18 @@ localStorage.setItem("gameOver", JSON.stringify(false));
 
 let currentScore;
 
+export const changeScore = (addPoints) => {
+
+    let currentScore = JSON.parse(localStorage.getItem("currentScore"));
+    if (!currentScore || addPoints === 0) {
+      currentScore = 0;
+  }
+    let newScore = currentScore += addPoints;
+    localStorage.setItem("currentScore", JSON.stringify(newScore));
+  
+    return newScore;
+  };
+
 var map = {
     cols: 36,
     rows: 28,
@@ -243,8 +255,8 @@ Hero.prototype._door = async function (dirx, diry) {
       sound.play();
       openedDoor = true;
       sound.addEventListener("ended", (event) => {
-          document.location.replace("./2d-game-concept/index.html")
-          currentScore = ChangeScore(10);
+          document.location.replace("/2d-game-concept/index.html")
+          currentScore = changeScore(10);
       })
     }
   }
@@ -252,8 +264,8 @@ Hero.prototype._door = async function (dirx, diry) {
 
 Game.load = function () {
     return [
-        Loader.loadImage('tiles', './snes-rpg/assets/mountain_landscape.png'),
-        Loader.loadImage('hero', './snes-rpg/assets/character.png'),
+        Loader.loadImage('tiles', '/snes-rpg/assets/mountain_landscape.png'),
+        Loader.loadImage('hero', '/snes-rpg/assets/character.png'),
     ];
 };
 
